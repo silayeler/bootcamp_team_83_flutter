@@ -1,2 +1,10 @@
 # bootcamp-team-83-flutter
-Oyun ve Uygulama Akademisi Flutter Takım 83 
+ÜRÜN BİLGİLERİ 
+
+
+TAKIM ÜYELERİ
+1)Sevim Büşra GÜL
+2)Sıla Buse CAN
+3)Muhammet İkbal SAĞDIÇ
+4)Sıla YELER
+5) -yok-
