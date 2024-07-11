@@ -121,21 +121,21 @@ class SignupView extends StackedView<SignupViewModel> {
                 ),
                 const SizedBox(height: 20),
 
-                // //ŞİFRE TEKRARI
-                // TextField(
-                //   controller: confirmpasswordController,
-                //   obscureText: true,
-                //   decoration: InputDecoration(
-                //     filled: true,
-                //     fillColor: Colors.white,
-                //     hintText: 'Şifrenizi tekrar giriniz',
-                //     prefixIcon: const Icon(Icons.lock),
-                //     border: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(10.0),
-                //       borderSide: BorderSide.none,
-                //     ),
-                //   ),
-                // ),
+                // ŞİFRE TEKRARI
+                TextField(
+                  controller: confirmpasswordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Şifrenizi tekrar giriniz',
+                    prefixIcon: const Icon(Icons.lock),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 10),
                 // Giriş Butonu
                 SizedBox(

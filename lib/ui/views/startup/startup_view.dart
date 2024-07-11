@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
 
@@ -14,16 +15,17 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return const Scaffold(
+    return  Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            Lottie.asset('assets/splash.json'),
+            const Text(
               'KOD CANAVARI',
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
             ),
-            Row(
+            const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text('Loading ...', style: TextStyle(fontSize: 16)),
