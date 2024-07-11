@@ -679,7 +679,7 @@ class MockDialogService extends _i1.Mock implements _i2.DialogService {
 class MockAuthenticationService extends _i1.Mock
     implements _i7.AuthenticationService {
   @override
-  bool userLoggedIn() => (super.noSuchMethod(
+  _i5.Future<bool> userLoggedIn() async => (super.noSuchMethod(
         Invocation.method(
           #userLoggedIn,
           [],

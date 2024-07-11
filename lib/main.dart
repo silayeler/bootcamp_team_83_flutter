@@ -1,3 +1,5 @@
+import 'package:bootcamp_team_83_flutter/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:bootcamp_team_83_flutter/app/app.bottomsheets.dart';
 import 'package:bootcamp_team_83_flutter/app/app.dialogs.dart';
@@ -7,9 +9,13 @@ import 'package:stacked_services/stacked_services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();
+
   runApp(const MainApp());
 }
 

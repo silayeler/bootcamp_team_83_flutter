@@ -10,13 +10,13 @@ class StartupViewModel extends BaseViewModel {
 
   // Uygulamaya girmeden önce gerçekleşmesi gereken her şey buraya yazılır.
   Future runStartupLogic() async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 5));
 
     // 2. Kullanıcının oturum açıp açmadığını kontrol et
 
-    if (_authenticationService.userLoggedIn()) {
+    if (await _authenticationService.userLoggedIn()) {
       // 3. HomeView'e yönlendir
-      _navigationService.replaceWith(Routes.loginView);
+      _navigationService.replaceWith(Routes.homeView);
     } else {
       // 4. ya da LoginView'e yönlendir
       _navigationService.replaceWith(Routes.loginView);
