@@ -1,18 +1,14 @@
 import 'dart:async';
-
 import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
 import 'package:bootcamp_team_83_flutter/app/app.router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class AuthenticationService {
-
-
   // Fieldlar
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   User? get currentUser => _firebaseAuth.currentUser;
   static const int snackbarDuration = 2000;
-
 
   // Servisler
   final _snackbarService = locator<SnackbarService>();
@@ -22,29 +18,32 @@ class AuthenticationService {
     return _firebaseAuth.currentUser != null;
   }
 
-  //SİGNUP FONKSİYONU
-
+  // Signup Fonksiyonu
   Future<User?> signUpWithEmailAndPassword(String email, String password,
       String confirmPassword, String name, String surname) async {
-    if (password != confirmPassword) {
+    if (name.isEmpty || surname.isEmpty || email.isEmpty ) {
       _snackbarService.showSnackbar(
-        title: 'Kayıt Başarısız',
-        message: 'Şifreler uyuşmuyor.',
+        message: 'Bir alan boş bırakılamaz',
+        duration: const Duration(milliseconds: snackbarDuration),
       );
-      Timer(const Duration(milliseconds: snackbarDuration), () {
-        _snackbarService.closeSnackbar();
-      });
       return null;
     }
 
-    if (password.length < 6) {
+    if (password.isNotEmpty && password != confirmPassword) {
+      _snackbarService.showSnackbar(
+        title: 'Kayıt Başarısız',
+        message: 'Şifreler uyuşmuyor.',
+        duration: const Duration(milliseconds: snackbarDuration),
+      );
+      return null;
+    }
+
+    if (password.isNotEmpty && password.length < 6) {
       _snackbarService.showSnackbar(
         title: 'Kayıt Başarısız',
         message: 'Şifre en az 6 karakter olmalı.',
+        duration: const Duration(milliseconds: snackbarDuration),
       );
-      Timer(const Duration(milliseconds: snackbarDuration), () {
-        _snackbarService.closeSnackbar();
-      });
       return null;
     }
 
@@ -58,16 +57,20 @@ class AuthenticationService {
       User? user = userCredential.user;
 
       if (user != null) {
-
         _snackbarService.showSnackbar(
           title: 'Kayıt Başarılı',
           message: 'Merhaba $name',
+          duration: const Duration(milliseconds: snackbarDuration),
         );
-        Timer(const Duration(milliseconds: snackbarDuration), () {
-          _snackbarService.closeSnackbar();
-        });
 
         return user;
+      } else {
+        _snackbarService.showSnackbar(
+          title: 'Kayıt Başarısız',
+          message: 'Kullanıcı oluşturulamadı.',
+          duration: const Duration(milliseconds: snackbarDuration),
+        );
+        return null;
       }
     } on FirebaseAuthException catch (e) {
       String errorMessage;
@@ -83,34 +86,28 @@ class AuthenticationService {
           errorMessage = 'Zayıf şifre, lütfen daha güçlü bir şifre kullanın.';
           break;
         default:
-          errorMessage = 'Kayıt başarısız. Hata: ${e.message}';
+          errorMessage = 'Hata: ${e.message}';
       }
-
       _snackbarService.showSnackbar(
         title: 'Kayıt Başarısız',
         message: errorMessage,
+        duration: const Duration(milliseconds: snackbarDuration),
       );
-      Timer(const Duration(milliseconds: snackbarDuration), () {
-        _snackbarService.closeSnackbar();
-      });
 
       return null;
     } catch (e) {
       _snackbarService.showSnackbar(
         title: 'Kayıt Başarısız',
         message: 'Bir hata oluştu: $e',
+        duration: const Duration(milliseconds: snackbarDuration),
       );
-      Timer(const Duration(milliseconds: snackbarDuration), () {
-        _snackbarService.closeSnackbar();
-      });
 
       return null;
     }
   }
 
-  //LOGİN FONKSİYONU
-  Future<User?> signInWithEmailAndPassword(
-      String email, String password) async {
+  // Login Fonksiyonu
+  Future<User?> signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential userCredential =
       await _firebaseAuth.signInWithEmailAndPassword(
@@ -120,10 +117,8 @@ class AuthenticationService {
       _snackbarService.showSnackbar(
         title: 'Giriş Başarılı',
         message: 'Hoşgeldin',
+        duration: const Duration(milliseconds: snackbarDuration),
       );
-      Timer(const Duration(milliseconds: snackbarDuration), () {
-        _snackbarService.closeSnackbar();
-      });
       _navigationService.replaceWithHomeView();
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
@@ -150,21 +145,16 @@ class AuthenticationService {
       _snackbarService.showSnackbar(
         title: 'Giriş Başarısız',
         message: errorMessage,
+        duration: const Duration(milliseconds: snackbarDuration),
       );
-      Timer(const Duration(milliseconds: snackbarDuration), () {
-        _snackbarService.closeSnackbar();
-      });
       return null;
     } catch (e) {
       _snackbarService.showSnackbar(
         title: 'Giriş Başarısız',
         message: 'Bir hata oluştu: $e',
+        duration: const Duration(milliseconds: snackbarDuration),
       );
-      Timer(const Duration(milliseconds: snackbarDuration), () {
-        _snackbarService.closeSnackbar();
-      });
       return null;
     }
   }
-
 }

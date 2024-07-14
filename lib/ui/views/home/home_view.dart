@@ -15,14 +15,17 @@ class HomeView extends StackedView<HomeViewModel> {
     Widget? child,
   ) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Center(
             child: Column(
+
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+
                 verticalSpaceLarge,
                 Column(
                   children: [
@@ -45,9 +48,9 @@ class HomeView extends StackedView<HomeViewModel> {
                     MaterialButton(
                       color: Colors.black,
                       onPressed: viewModel.cikisyap,
-                      child: Text(
+                      child: const Text(
                         "Çıkış Yap",
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ],
