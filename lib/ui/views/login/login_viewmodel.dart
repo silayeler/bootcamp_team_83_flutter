@@ -12,6 +12,7 @@ class LoginViewModel extends BaseViewModel {
 
   static const int snackbarDuration = 2000; // 2 saniye örnek olarak
 
+
   Future<void> signIn(String email, String password) async {
     setBusy(true);
     try {
@@ -29,5 +30,11 @@ class LoginViewModel extends BaseViewModel {
 
   void goToRegister() {
     _navigationService.replaceWithSignupView();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }
