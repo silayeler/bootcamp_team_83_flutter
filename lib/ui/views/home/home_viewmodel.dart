@@ -1,45 +1,38 @@
-import 'package:bootcamp_team_83_flutter/app/app.bottomsheets.dart';
-import 'package:bootcamp_team_83_flutter/app/app.dialogs.dart';
 import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
 import 'package:bootcamp_team_83_flutter/app/app.router.dart';
-import 'package:bootcamp_team_83_flutter/ui/common/app_strings.dart';
+import 'package:bootcamp_team_83_flutter/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends BaseViewModel {
-  final _dialogService = locator<DialogService>();
-  final _bottomSheetService = locator<BottomSheetService>();
 
-  final _navigationService=locator<NavigationService>();
+  final _navigationService = locator<NavigationService>();
+  final _firestoreService = locator<FirestoreService>();
 
-  String get counterLabel => 'Counter is: $_counter';
+  String _userName = "";
+  String get userName => _userName;
 
-  int _counter = 0;
-
-  void incrementCounter() {
-    _counter++;
+  Future<void> fetchUserName() async {
+    setBusy(true);
+    _userName = await _firestoreService.getUserNameSurname();
+    setBusy(false);
     rebuildUi();
   }
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Stacked Rocks!',
-      description: 'Give stacked $_counter stars on Github',
-    );
-  }
 
-  void showBottomSheet() {
-    _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
-    );
-  }
-
-  Future<void> cikisyap() async {
+  Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
     _navigationService.replaceWithLoginView();
   }
+
+
 }
+
+
+
+
+// void incrementCounter() {
+//   _counter++;
+//   rebuildUi();
+// }

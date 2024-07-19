@@ -6,12 +6,10 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class LoginViewModel extends BaseViewModel {
-
   final _authenticationService = locator<AuthenticationService>();
   final _navigationService = locator<NavigationService>();
 
   static const int snackbarDuration = 2000; // 2 saniye örnek olarak
-
 
   Future<void> signIn(String email, String password) async {
     setBusy(true);

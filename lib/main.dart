@@ -30,20 +30,20 @@ class MainApp extends StatelessWidget {
       textTheme: GoogleFonts.courierPrimeTextTheme(baseTheme.textTheme),
     );
   }
+
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.loginView,
+      initialRoute: Routes.homeView,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
       navigatorObservers: [
         StackedService.routeObserver,
       ],
-      theme:  _buildTheme(Brightness.dark),
-
+      theme: _buildTheme(Brightness.light),
 
       // theme: ThemeData(
       //   primarySwatch: Colors.blue,
@@ -75,8 +75,5 @@ class MainApp extends StatelessWidget {
       //   ),
       // ),
     );
-
   }
-
 }
-

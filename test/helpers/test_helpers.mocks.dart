@@ -8,6 +8,9 @@ import 'dart:ui' as _i6;
 
 import 'package:bootcamp_team_83_flutter/services/authentication_service.dart'
     as _i7;
+import 'package:bootcamp_team_83_flutter/services/firestore_service.dart'
+    as _i9;
+import 'package:firebase_auth/firebase_auth.dart' as _i8;
 import 'package:flutter/material.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
@@ -679,12 +682,57 @@ class MockDialogService extends _i1.Mock implements _i2.DialogService {
 class MockAuthenticationService extends _i1.Mock
     implements _i7.AuthenticationService {
   @override
-  _i5.Future<bool> userLoggedIn() async => (super.noSuchMethod(
+  _i5.Future<bool> userLoggedIn() => (super.noSuchMethod(
         Invocation.method(
           #userLoggedIn,
           [],
         ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<_i8.User?> signUpWithEmailAndPassword(
+    String? email,
+    String? password,
+    String? confirmPassword,
+    String? name,
+    String? surname,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signUpWithEmailAndPassword,
+          [
+            email,
+            password,
+            confirmPassword,
+            name,
+            surname,
+          ],
+        ),
+        returnValue: _i5.Future<_i8.User?>.value(),
+        returnValueForMissingStub: _i5.Future<_i8.User?>.value(),
+      ) as _i5.Future<_i8.User?>);
+
+  @override
+  _i5.Future<_i8.User?> signInWithEmailAndPassword(
+    String? email,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signInWithEmailAndPassword,
+          [
+            email,
+            password,
+          ],
+        ),
+        returnValue: _i5.Future<_i8.User?>.value(),
+        returnValueForMissingStub: _i5.Future<_i8.User?>.value(),
+      ) as _i5.Future<_i8.User?>);
 }
+
+/// A class which mocks [FirestoreService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFirestoreService extends _i1.Mock implements _i9.FirestoreService {}
