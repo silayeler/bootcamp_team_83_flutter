@@ -7,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/login/login_view.dart';
 import 'package:bootcamp_team_83_flutter/services/authentication_service.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/signup/signup_view.dart';
+import 'package:bootcamp_team_83_flutter/services/firestore_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -22,6 +23,7 @@ import 'package:bootcamp_team_83_flutter/ui/views/signup/signup_view.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthenticationService),
+    LazySingleton(classType: FirestoreService),
 // @stacked-service
   ],
   bottomsheets: [

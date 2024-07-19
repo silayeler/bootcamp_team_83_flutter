@@ -6,17 +6,16 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class SignupViewModel extends BaseViewModel {
-
-  final _navigationService =locator<NavigationService>();
-  final _authenticationService =locator<AuthenticationService>();
+  final _navigationService = locator<NavigationService>();
+  final _authenticationService = locator<AuthenticationService>();
 
   Future<void> signUp(
-      String email,
-      String password,
-      String confirmpassword,
-      String name,
-      String surname,
-      ) async {
+    String email,
+    String password,
+    String confirmpassword,
+    String name,
+    String surname,
+  ) async {
     setBusy(true);
     try {
       User? user = await _authenticationService.signUpWithEmailAndPassword(
