@@ -28,8 +28,11 @@ class UserModel {
     );
   }
 
+<<<<<<< HEAD
   get nameController => null;
 
+=======
+>>>>>>> 702b2a817d2274767e75a51103a9f43537e02c20
   Map<String, dynamic> toMap() {
     return {
       'name': name,

@@ -13,8 +13,11 @@ class HomeViewModel extends BaseViewModel {
   String _userName = "";
   String get userName => _userName;
 
+<<<<<<< HEAD
   get counterLabel => null;
 
+=======
+>>>>>>> 702b2a817d2274767e75a51103a9f43537e02c20
   Future<void> fetchUserName() async {
     setBusy(true);
     _userName = await _firestoreService.getUserNameSurname();
@@ -28,10 +31,13 @@ class HomeViewModel extends BaseViewModel {
     _navigationService.replaceWithLoginView();
   }
 
+<<<<<<< HEAD
   void incrementCounter() {}
 
   void showBottomSheet() {}
 
+=======
+>>>>>>> 702b2a817d2274767e75a51103a9f43537e02c20
 
 }
 
