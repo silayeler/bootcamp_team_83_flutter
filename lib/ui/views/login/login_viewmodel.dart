@@ -1,6 +1,7 @@
 import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
 import 'package:bootcamp_team_83_flutter/app/app.router.dart';
 import 'package:bootcamp_team_83_flutter/services/authentication_service.dart';
+import 'package:bootcamp_team_83_flutter/services/storage_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -8,7 +9,9 @@ import 'package:stacked_services/stacked_services.dart';
 class LoginViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _navigationService = locator<NavigationService>();
+  final _storageService = locator<StorageService>();
 
+  static const String _keySeenStory = 'seenStory';
   static const int snackbarDuration = 2000; // 2 saniye örnek olarak
 
   Future<void> signIn(String email, String password) async {
@@ -16,8 +19,11 @@ class LoginViewModel extends BaseViewModel {
     try {
       User? user = await _authenticationService.signInWithEmailAndPassword(
           email, password);
-      if (user != null) {
+      bool hasSeenStory = await _storageService.hasSeenStory();
+      if (hasSeenStory && user != null) {
         _navigationService.replaceWithHomeView();
+      } else {
+        _navigationService.replaceWithStoryView();
       }
     } catch (e) {
       print('Beklenmedik bir hata oluştu: $e');
@@ -28,11 +34,5 @@ class LoginViewModel extends BaseViewModel {
 
   void goToRegister() {
     _navigationService.replaceWithSignupView();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
   }
 }
