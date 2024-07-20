@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "448536356167",
+    "project_id": "bootcamp-760bf",
+    "storage_bucket": "bootcamp-760bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448536356167:android:48c09ac161e1aa496d1862",
+        "android_client_info": {
+          "package_name": "com.example.bootcamp_team_83_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448536356167-icut847tcbd8rousj39hiiv9v3ddkqce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgS4ml41R20P3PQYfI5VMHXXUCsYgjDvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448536356167-icut847tcbd8rousj39hiiv9v3ddkqce.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "448536356167-k0cmmqeioppdacpo4kbd53gd8hdf2b6m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bootcampTeam83Flutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
