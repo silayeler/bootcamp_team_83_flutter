@@ -2,7 +2,7 @@ import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/login/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class LoginView extends StackedView<LoginViewModel> {
   LoginView({super.key});
@@ -33,14 +33,14 @@ class LoginView extends StackedView<LoginViewModel> {
                 const SizedBox(height: 15),
                 Text(
                   "HOŞ  GELDİN!",
-                  style: GoogleFonts.courierPrime(
-                    textStyle: const TextStyle(
+                  style:
+                      TextStyle(
                       color: Color(0xFFD7EAF8),
                       letterSpacing: .5,
                       fontSize: 35,
                     ),
                   ),
-                ),
+
                 const SizedBox(height: 20),
                 // Resim
                 Image.asset(
@@ -160,3 +160,4 @@ class LoginView extends StackedView<LoginViewModel> {
     return LoginViewModel();
   }
 }
+

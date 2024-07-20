@@ -1,5 +1,6 @@
 
-import 'package:denemefirebase/ucuncu.dart';
+
+import 'package:bootcamp_team_83_flutter/ucuncu.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

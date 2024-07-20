@@ -12,9 +12,10 @@ dependencies:
   firebase_core: ^3.2.0
   flutter:
     sdk: flutter
+  flutter_code_editor: ^0.3.2
   flutter_dotenv: ^5.1.0
-  google_fonts: ^6.2.1
   lottie: ^3.1.2
+  shared_preferences: ^2.2.3
   stacked: ^3.4.0
   stacked_services: ^1.1.0
 
