@@ -3,11 +3,20 @@
 
 
 ## TAKIM ÜYELERİ
+| İsim        | LinkedIn                                      | GitHub                                     |
+|-------------|-----------------------------------------------|--------------------------------------------|
+| Sıla YELER    | [Sıla YELER LinkedIn](https://www.linkedin.com/in/s%C4%B1layeler/) | [Sıla YELER GitHub](https://github.com/silayeler) | 
+| Sevim Büşra GÜL | [Sevim Büşra GÜL LinkedIn](https://www.linkedin.com/in/sevimbusra/) | [Sevim Büşra GÜL](https://github.com/SevimBusraGul78) |
+| Sıla Buse CAN | [Sıla Buse CAN LinkedIn](https://www.linkedin.com/in/s%C4%B1la-buse-can-250b83245/) | [Sıla Buse CAN](https://github.com/SlaBuse) |
+| Muhammet İkbal SAĞDIÇ  | [Muhammet İkbal SAĞDIÇ LinkedIn](https://www.linkedin.com/in/muhammet-ikbal-sa%C4%9Fd%C4%B1%C3%A7-38515a178/) | [Muhammet İkbal SAĞDIÇ GitHub](https://github.com/misagdic) |
+| Oğuzhan DOĞDU| [Oğuzhan DOĞDU LinkedIn](https://www.linkedin.com/in/oguzhan-dogdu-62415023a/) | [Oğuzhan DOĞDU](https://github.com/oguzdgd) |
+
+
 1. *Sevim Büşra GÜL* : Developer
 2. *Sıla Buse CAN* : Product Owner
 3. *Muhammet İkbal SAĞDIÇ* : Developer
 4. *Sıla YELER* : Scrum Master
-5. *Oğuzhan DOĞDU* : Developer
+5. *Oğuzhan DOĞDU* : Developer
 
 ## ÜRÜN İSMİ
 --Kod Canavarı--
@@ -42,7 +51,7 @@ Eğitimciler ve öğretmenler
 ## HEDEF KİTLE 
 Yazılıma ve Yeni Teknolojilere açık herkes uygulamayı kullanabilir. 
 
-## Sprint 1
+# Sprint 1
 Sprint içinde tamamlanması tahmin edilen puan: 50 Puan
 ![sprint1](https://github.com/silayeler/bootcamp_team_83_flutter/assets/116757374/4e445c45-2f73-4847-9eed-9e80937b203f)
 ![qqqq](https://github.com/silayeler/bootcamp_team_83_flutter/assets/116757374/cfd15876-a2c2-4a5f-99b7-6f4f8ec8a639)
@@ -66,5 +75,107 @@ State Management: Uygulama için stacked state management kütüphanesi kullanı
 
 
 
+# Sprint 2
+
+## Sprint Planlama
+- **Sprint içinde tamamlanması tahmin edilen puan:** 50 Puan
+- **Takım üyeleri için puan dağılımı:** Her kişi toplamda 10 puan
+
+## Daily Scrum
+### Toplantı Formatı:
+- Daily Scrumlarımız Discord ve WhatsApp kanalı üzerinden sesli ve yazılı olarak gerçekleştirilmiştir.
+- Toplantılarda uygulamanın gidişatı, fikir değişiklikleri ve yeni ekleyeceğimiz şeyler üzerine konuşulmuştur.
+
+### Daily Scrum toplantılarından görseller:
+- ![Trello](assets/sprint_2/trello.jpg)
+- ![Discord](assets/sprint_2/dailydc.jpg)
+- ![Discord](assets/sprint_2/dc.jpg)
+- ![Whatsapp](assets/sprint_2/dailywp2.jpg)
+- ![Whatsapp](assets/sprint_2/dailywp.jpg)
+
+### Proje Takip Şablonu:
+- ![Şablon](assets/sprint_2/proje_takip.png)
 
 
+## Uygulama Görselleri:
+### Projemizin Canva tasarımları için [buraya tıklayın](https://www.canva.com/design/DAGKdM0RhcI/x22FwtBlt2O1hlOweNXbYQ/edit).
+
+## Sprint Review
+### Alınan Kararlar:
+- Uygulama logosu oluşturuldu.
+  -![Logo](assets/sprint_2/logo.jpg)
+- Uygulamaya yeni tasarımlar eklendi.
+- Eklenen tasarımların kodları yazıldı.
+- Ekibin fikir birliğiyle belirlenen yeni özellikler tartışıldı ve kararlaştırıldı.
+
+
+### Sprint Review Katılımcıları
+- Sıla YELER
+- Sıla Buse CAN
+- Sevim Büşra GÜL
+- Muhammet İkbal SAĞDIÇ
+- Oğuzhan DOĞDU
+
+ ## Gelecek Sprint Planlaması
+### Hedefler:
+- Uygulamanın tüm tasarımlarını bitirmek
+- Tasarımı biten sayfaların kodlarını yazmak
+- Ürüne animasyon eklemek
+- Dil seçeneği eklemek 
+
+
+
+## Sprint Retrospective
+### Katıkımcılar
+- Sıla YELER
+- Sıla Buse CAN
+- Sevim Büşra GÜL
+- Muhammet İkbal SAĞDIÇ
+- Oğuzhan DOĞDU
+  
+
+## Geçmiş Sprintin Değerlendirilmesi ve Sprint Notları
+- İyi Gidenler
+  - Uygulama logosunun başarılı bir şekilde oluşturulması
+  - Yeni tasarımların eklenmesi ve kodlanması
+  - Yapay zekanın uygulamada nasıl kullanılacağının kararlaştırılması
+  - Takım çalışması süreci değerlendirilmesi
+  - Ekip içi iletişim güçlendi
+  - Zaman planlaması yapıldı
+  - Takımın daha etkin ve verimli çalışabilmesi için takım üyeleri birbirine önerilerde bulundu
+  - İlk sprintte elde edinilen bilgilerden ders çıkarıldı
+  - Git komutları kullanımında yeni bilgiler edinildi
+
+- Geliştirilmesi Gerekenler
+  - Tasarım ve Kodlama süreçlerinde zaman yönetimi
+    
+- Sorunlar ve Engeller
+  - Takım üyelerimizden stajda olanlar, yaz okulunda olanlar ve büt haftasında olanlar olduğu için ayırılan zamanın kısaltılması
+  - İnternet yetersizliği problemi
+
+- Veri Toplama ve Analiz
+  - Sprint boyunca takım üyelerince toplanan veriler takım içinde paylaşılıp beyin fırtınası yapılarak üzerine konuşuldu.
+
+- Geliştirme Alanlarının Belirlenmesi
+  - İletişim süreçlerini geliştirme
+  - Zaman yönetimi ve planlama iyileştirmeleri
+  - Takım bu süreçten sonra nasıl zaman ayırması gerektiğine daha iyi karar verdi.
+  
+- Kapanış ve Özet
+  - Gelecek sprint hedeflerinin gözden geçirilmesi
+
+### Özet
+- Başarılar:
+  - Uygulama logosunun ve yeni tasarımların başarılı bir şekilde oluşturulması ve kodlanması
+  - Yapay zekanın uygulamada nasıl kullanılacağına dair net bir plan oluşturulması
+  - Takım ürün hikayesini netleştirdi, ürüne logo buldu ve sprint 2'de sprint 1'den neyi farklı yapacağına karar verdi.
+  - Ekip zaman yönetimi konusunda daha çok ustalaştı.
+
+- Geliştirilmesi Gereken Noktalar:
+  - Zaman yönetimi ve planlama konusunda daha dikkatli olunması
+
+- Eylem Planları
+  - Ürünün 3. sprintte nelerinin tamamlanacağına karar verilmesi
+  - Uygulama bitişi ve kontrolleri
+  - Uygulama tasarımlarının ve kodlarının bitirilmesi
+  
