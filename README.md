@@ -19,7 +19,7 @@
 5. *Oğuzhan DOĞDU* : Developer
 
 ## ÜRÜN İSMİ
---Kod Canavarı--
+### --CodeMania--
 
 ## ÜRÜN AÇIKLAMASI
 Ürün Açıklaması
@@ -77,65 +77,95 @@ State Management: Uygulama için stacked state management kütüphanesi kullanı
 
 # Sprint 2
 
-## Sprint Planlama
-- **Sprint içinde tamamlanması tahmin edilen puan:** 50 Puan
-- **Takım üyeleri için puan dağılımı:** Her kişi toplamda 10 puan
+<details>
+  <summary><h2>Sprint Planlama</h2></summary>
 
-## Daily Scrum
-### Toplantı Formatı:
-- Daily Scrumlarımız Discord ve WhatsApp kanalı üzerinden sesli ve yazılı olarak gerçekleştirilmiştir.
-- Toplantılarda uygulamanın gidişatı, fikir değişiklikleri ve yeni ekleyeceğimiz şeyler üzerine konuşulmuştur.
+  - **Sprint içinde tamamlanması tahmin edilen puan:** 50 Puan
+  - **Takım üyeleri için puan dağılımı:** Her kişi toplamda 10 puan
+</details>
 
-### Daily Scrum toplantılarından görseller:
-- ![Trello](assets/sprint_2/trello.jpg)
-- ![Discord](assets/sprint_2/dailydc.jpg)
-- ![Discord](assets/sprint_2/dc.jpg)
-- ![Whatsapp](assets/sprint_2/dailywp2.jpg)
-- ![Whatsapp](assets/sprint_2/dailywp.jpg)
+<details>
+  <summary><h2>Daily Scrum</h2></summary>
 
-### Proje Takip Şablonu:
-- ![Şablon](assets/sprint_2/proje_takip.png)
-
-
-## Uygulama Görselleri:
-### Projemizin Canva tasarımları için [buraya tıklayın](https://www.canva.com/design/DAGKdM0RhcI/x22FwtBlt2O1hlOweNXbYQ/edit).
-
-## Sprint Review
-### Alınan Kararlar:
-- Uygulama logosu oluşturuldu.
-  -![Logo](assets/sprint_2/logo.jpg)
-- Uygulamaya yeni tasarımlar eklendi.
-- Eklenen tasarımların kodları yazıldı.
-- Ekibin fikir birliğiyle belirlenen yeni özellikler tartışıldı ve kararlaştırıldı.
-
-
-### Sprint Review Katılımcıları
-- Sıla YELER
-- Sıla Buse CAN
-- Sevim Büşra GÜL
-- Muhammet İkbal SAĞDIÇ
-- Oğuzhan DOĞDU
-
- ## Gelecek Sprint Planlaması
-### Hedefler:
-- Uygulamanın tüm tasarımlarını bitirmek
-- Tasarımı biten sayfaların kodlarını yazmak
-- Ürüne animasyon eklemek
-- Dil seçeneği eklemek 
-
-
-
-## Sprint Retrospective
-### Katıkımcılar
-- Sıla YELER
-- Sıla Buse CAN
-- Sevim Büşra GÜL
-- Muhammet İkbal SAĞDIÇ
-- Oğuzhan DOĞDU
+  ### Toplantı Formatı:
+  - Daily Scrumlarımız Discord ve WhatsApp kanalı üzerinden sesli ve yazılı olarak gerçekleştirilmiştir.
+  - Toplantılarda uygulamanın gidişatı, fikir değişiklikleri ve yeni ekleyeceğimiz şeyler üzerine konuşulmuştur.
   
+  ### Daily Scrum toplantılarından görseller:
+  <blockquote>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <img src="assets/sprint_2/trello.jpg" alt="Trello" style="width: 900px; height: auto;margin: 20px;">
+      <img src="assets/sprint_2/dailydc.jpg" alt="Discord 1" style="width: 900px; height: auto;margin: 20px;">
+      <img src="assets/sprint_2/dc.jpg" alt="Discord 2" style="width: 900px; height: auto;margin: 20px;">
+      <img src="https://github.com/user-attachments/assets/79b50149-acc5-495c-a68d-9db454941bce" alt="Whatsapp 1" style="width: 400px; height: auto;margin: 20px;">
+      <img src="https://github.com/user-attachments/assets/0bfb5a0f-82ce-4094-ac47-b1b4d26b8b8d" alt="Whatsapp 2" style="width: 400px; height: auto;margin: 10px;">
+    </div>
+  </blockquote>
+  
+  ### Proje Takip Şablonu:
+  ![Şablon](assets/sprint_2/proje_takip.png)
+</details>
 
-## Geçmiş Sprintin Değerlendirilmesi ve Sprint Notları
-- İyi Gidenler
+<details>
+  <summary><h2>Uygulama Görselleri Ve Hazırlanan Tasarımlar</h2></summary>
+
+  <div style="display: flex; gap: 10px;">
+    <img src="https://github.com/user-attachments/assets/d4a1b8a2-b554-427a-a0bd-edf36acd8b2a" alt="login" style="width: 300px; height: auto;">
+    <img src="https://github.com/user-attachments/assets/2016e935-5838-46b5-9b82-72dfb60de4a4" alt="anasayfa" style="width: 300px; height: auto;">
+    <img src="https://github.com/user-attachments/assets/c8a1174e-c614-4be7-acc5-b4ffbea7763c" alt="gorev_yolu" style="width: 300px; height: auto;">
+    <img src="https://github.com/user-attachments/assets/c78886fe-444e-4808-a6ac-13eaf79bb1e6" alt="gorev_yolu" style="width: 300px; height: auto;">
+    <img src="https://github.com/user-attachments/assets/36f09be9-669c-44b4-9d28-867d60d9fc0e" alt="gorev_yolu" style="width: 300px; height: auto;">
+            <img src="https://github.com/user-attachments/assets/f3cca550-bcab-4698-9b1a-d12fe8d8e217" alt="gorev_yolu" style="width: 300px; height: auto;">
+
+
+
+    
+
+  </div>
+
+  ### Projemizin Canva tasarımları için [buraya tıklayın](https://www.canva.com/design/DAGKdM0RhcI/x22FwtBlt2O1hlOweNXbYQ/edit).
+</details>
+
+<details>
+  <summary><h2>Sprint Review</h2></summary>
+  
+  ### Alınan Kararlar:
+  - Uygulama logosu oluşturuldu.
+  - ![Logo](assets/sprint_2/logo.jpg)
+  - Uygulamaya yeni tasarımlar eklendi.
+  - Eklenen tasarımların kodları yazıldı.
+  - Ekibin fikir birliğiyle belirlenen yeni özellikler tartışıldı ve kararlaştırıldı.
+  
+  ### Sprint Review Katılımcıları
+  - Sıla YELER
+  - Sıla Buse CAN
+  - Sevim Büşra GÜL
+  - Muhammet İkbal SAĞDIÇ
+  - Oğuzhan DOĞDU
+</details>
+
+<details>
+  <summary><h2>Gelecek Sprint Planlaması</h2></summary>
+  
+  ### Hedefler:
+  - Uygulamanın tüm tasarımlarını bitirmek
+  - Tasarımı biten sayfaların kodlarını yazmak
+  - Ürüne animasyon eklemek
+  - Dil seçeneği eklemek 
+</details>
+
+<details>
+  <summary><h2>Sprint Retrospective</h2></summary>
+  
+  ### Katılımcılar
+  - Sıla YELER
+  - Sıla Buse CAN
+  - Sevim Büşra GÜL
+  - Muhammet İkbal SAĞDIÇ
+  - Oğuzhan DOĞDU
+  
+  ### Geçmiş Sprintin Değerlendirilmesi ve Sprint Notları
+  **İyi Gidenler**
   - Uygulama logosunun başarılı bir şekilde oluşturulması
   - Yeni tasarımların eklenmesi ve kodlanması
   - Yapay zekanın uygulamada nasıl kullanılacağının kararlaştırılması
@@ -145,37 +175,49 @@ State Management: Uygulama için stacked state management kütüphanesi kullanı
   - Takımın daha etkin ve verimli çalışabilmesi için takım üyeleri birbirine önerilerde bulundu
   - İlk sprintte elde edinilen bilgilerden ders çıkarıldı
   - Git komutları kullanımında yeni bilgiler edinildi
-
-- Geliştirilmesi Gerekenler
+  
+  **Geliştirilmesi Gerekenler**
   - Tasarım ve Kodlama süreçlerinde zaman yönetimi
-    
-- Sorunlar ve Engeller
+  
+  **Sorunlar ve Engeller**
   - Takım üyelerimizden stajda olanlar, yaz okulunda olanlar ve büt haftasında olanlar olduğu için ayırılan zamanın kısaltılması
   - İnternet yetersizliği problemi
-
-- Veri Toplama ve Analiz
+  
+  **Veri Toplama ve Analiz**
   - Sprint boyunca takım üyelerince toplanan veriler takım içinde paylaşılıp beyin fırtınası yapılarak üzerine konuşuldu.
-
-- Geliştirme Alanlarının Belirlenmesi
+  
+  **Geliştirme Alanlarının Belirlenmesi**
   - İletişim süreçlerini geliştirme
   - Zaman yönetimi ve planlama iyileştirmeleri
   - Takım bu süreçten sonra nasıl zaman ayırması gerektiğine daha iyi karar verdi.
   
-- Kapanış ve Özet
+  **Kapanış ve Özet**
   - Gelecek sprint hedeflerinin gözden geçirilmesi
+</details>
 
-### Özet
-- Başarılar:
+<details>
+  <summary><h2>Özet</h2></summary>
+  
+  **Başarılar:**
   - Uygulama logosunun ve yeni tasarımların başarılı bir şekilde oluşturulması ve kodlanması
   - Yapay zekanın uygulamada nasıl kullanılacağına dair net bir plan oluşturulması
   - Takım ürün hikayesini netleştirdi, ürüne logo buldu ve sprint 2'de sprint 1'den neyi farklı yapacağına karar verdi.
   - Ekip zaman yönetimi konusunda daha çok ustalaştı.
-
-- Geliştirilmesi Gereken Noktalar:
+  
+  **Geliştirilmesi Gereken Noktalar:**
   - Zaman yönetimi ve planlama konusunda daha dikkatli olunması
-
-- Eylem Planları
+  
+  **Eylem Planları:**
   - Ürünün 3. sprintte nelerinin tamamlanacağına karar verilmesi
   - Uygulama bitişi ve kontrolleri
   - Uygulama tasarımlarının ve kodlarının bitirilmesi
+</details>
+
+<details>
+  <summary><h2>Uygulama Videosu</h2></summary>
+  
+  [Video](https://github.com/user-attachments/assets/74c7c7c7-e1c9-4df7-a67b-81057277f55f)
+  
+</details>
+
   
