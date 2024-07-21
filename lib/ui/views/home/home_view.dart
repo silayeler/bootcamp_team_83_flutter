@@ -1,4 +1,6 @@
 import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/home/account/account_screen.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/home/success/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'home_viewmodel.dart';
@@ -57,6 +59,11 @@ class HomeView extends StackedView<HomeViewModel> {
                 text: 'Hesabım',
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AccountScreen()),
+                  );
+                  
                 },
               ),
               buildCustomListTile(
@@ -65,6 +72,10 @@ class HomeView extends StackedView<HomeViewModel> {
                 text: 'Başarılar',
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SuccessScreen()),
+                  );
                 },
               ),
               buildCustomListTile(
