@@ -17,6 +17,24 @@ class FirestoreService {
     return "User not found";
   }
 
+  Future<String> getUserProfileImageUrl() async {
+    if (user != null) {
+      DocumentSnapshot doc =
+          await _firestore.collection('users').doc(user!.uid).get();
+      return doc['profileImageUrl'];
+    }
+    return "User not found";
+  }
+
+  Future<void> updateUserProfileImageUrl(String imageUrl) async {
+    if (user != null) {
+      await _firestore
+          .collection('users')
+          .doc(user!.uid)
+          .update({'profileImageUrl': imageUrl});
+    }
+  }
+
   Future<void> saveUserData(UserModel userModel) async {
     await _firestore
         .collection('users')
