@@ -4,19 +4,21 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'
 
 dependencies:
   cloud_firestore: ^5.1.0
   firebase_auth: ^5.1.2
   firebase_core: ^3.2.0
   firebase_storage: ^12.1.1
+  audioplayers: ^6.0.0
   flutter:
     sdk: flutter
-  flutter_code_editor: ^0.3.2
+  animated_text_kit: ^4.2.1
+  flutter_code_editor: ^0.3.2  # Eski sürüm
   flutter_dotenv: ^5.1.0
   image_picker: ^0.8.5+3  
-  lottie: ^3.1.2
+  lottie: ^3.0.1  # Eski sürüm
   shared_preferences: ^2.2.3
   stacked: ^3.4.0
   stacked_services: ^1.1.0

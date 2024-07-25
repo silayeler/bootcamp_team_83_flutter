@@ -32,6 +32,28 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
+  Future<void> guestSignIn() async {
+    setBusy(true);
+    try {
+      // Misafir olarak giriş yapacak kullanıcıyı oluştur
+      UserCredential userCredential =
+          (await _authenticationService.signInAnonymously()) as UserCredential;
+      User? user = userCredential.user;
+
+      // Misafir kullanıcının belirli bir ekrana yönlendirilmesi
+      bool hasSeenStory = await _storageService.hasSeenStory();
+      if (hasSeenStory && user != null) {
+        _navigationService.replaceWithHomeView();
+      } else {
+        _navigationService.replaceWithStoryView();
+      }
+    } catch (e) {
+      print('Misafir girişi sırasında bir hata oluştu: $e');
+    } finally {
+      setBusy(false);
+    }
+  }
+
   void goToRegister() {
     _navigationService.replaceWithSignupView();
   }
