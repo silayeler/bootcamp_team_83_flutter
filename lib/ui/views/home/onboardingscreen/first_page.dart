@@ -1,8 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/onboardingscreen/second_page.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/onboardingscreen/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-
 
 class FirstPage extends StatefulWidget {
   @override
@@ -11,33 +10,55 @@ class FirstPage extends StatefulWidget {
 
 class _FirstPageState extends State<FirstPage> {
   final AudioPlayer _audioPlayer = AudioPlayer();
+  bool _isSoundPlaying = false;
+  double _volume = 1.0; // Ses seviyesi
 
   @override
   void initState() {
     super.initState();
-    _playBackgroundSound();
+    _playBackgroundSoundForDuration();
   }
 
   @override
   void dispose() {
+    _stopSound(); // Sayfa kapanırken sesi durdur
     _audioPlayer.dispose();
     super.dispose();
   }
 
-  void _playBackgroundSound() async {
+  void _playBackgroundSoundForDuration() async {
     try {
-      await _audioPlayer.setSource(AssetSource('assets/ses_klavye.mp3'));
+      await _audioPlayer.setSource(AssetSource('ses_klavye.mp3'));
       _audioPlayer.setReleaseMode(ReleaseMode.loop);
+      _audioPlayer.setVolume(_volume);
       _audioPlayer.resume();
+      _isSoundPlaying = true;
+
+      await Future.delayed(Duration(seconds: 10)); // Sesin azalması için bekle
+
+      // Ses yavaşça azalacak
+      for (double i = _volume; i >= 0; i -= 0.05) {
+        await Future.delayed(Duration(milliseconds: 100));
+        if (!_isSoundPlaying) break;
+        _audioPlayer.setVolume(i);
+      }
+      _audioPlayer.stop(); // Ses tamamen durduktan sonra stop et
     } catch (e) {
       print("Error playing audio: $e");
+    }
+  }
+
+  void _stopSound() {
+    if (_isSoundPlaying) {
+      _audioPlayer.stop();
+      _isSoundPlaying = false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey, // Arka plan rengini ayarla
+      backgroundColor: Colors.blueGrey,
       body: Stack(
         children: [
           Positioned.fill(
@@ -62,12 +83,13 @@ class _FirstPageState extends State<FirstPage> {
                             'Sen de bu akademiye kabul edilen seçilmiş zihinlerden birisin.\n\n'
                             'Akademide, kodlama becerilerini kullanarak uzayı keşfedeceksin.',
                         textStyle: TextStyle(
-                          fontSize: 25, // Daha büyük yazı boyutu
+                          fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
-                        duration: Duration(
-                            milliseconds: 50), // Daha hızlı yazma süresi
+                        duration: Duration(milliseconds: 50),
+                        onTypingStart: () {},
+                        onTypingComplete: () {},
                       ),
                     ),
                   ),
@@ -79,6 +101,7 @@ class _FirstPageState extends State<FirstPage> {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
+                    _stopSound(); // Ses durduruluyor
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => SecondPage()),
@@ -86,11 +109,10 @@ class _FirstPageState extends State<FirstPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor:
-                        Colors.transparent, // Butonun arka plan rengi
+                    backgroundColor: Colors.transparent,
                     side: BorderSide(
-                      color: Colors.white, // Şerit rengi
-                      width: 2, // Şerit kalınlığı
+                      color: Colors.white,
+                      width: 2,
                     ),
                     padding: EdgeInsets.symmetric(vertical: 16, horizontal: 40),
                     shape: RoundedRectangleBorder(
@@ -100,7 +122,7 @@ class _FirstPageState extends State<FirstPage> {
                   child: Text(
                     'DEVAM',
                     style: TextStyle(
-                      fontSize: 20, // Daha büyük yazı boyutu
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
