@@ -3,7 +3,6 @@ import 'package:bootcamp_team_83_flutter/ui/views/login/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-
 class LoginView extends StackedView<LoginViewModel> {
   LoginView({super.key});
 
@@ -33,14 +32,12 @@ class LoginView extends StackedView<LoginViewModel> {
                 const SizedBox(height: 15),
                 Text(
                   "HOŞ  GELDİN!",
-                  style:
-                      TextStyle(
-                      color: Color(0xFFD7EAF8),
-                      letterSpacing: .5,
-                      fontSize: 35,
-                    ),
+                  style: TextStyle(
+                    color: Color(0xFFD7EAF8),
+                    letterSpacing: .5,
+                    fontSize: 35,
                   ),
-
+                ),
                 const SizedBox(height: 20),
                 // Resim
                 Image.asset(
@@ -49,6 +46,7 @@ class LoginView extends StackedView<LoginViewModel> {
                   height: 350,
                   width: 370,
                 ),
+                const SizedBox(height: 20),
                 // Email
                 _buildTextField(
                   controller: emailController,
@@ -64,7 +62,7 @@ class LoginView extends StackedView<LoginViewModel> {
                   obscureText: true,
                 ),
                 const SizedBox(height: 20),
-                // Buton
+                // Giriş Butonu
                 Align(
                   alignment: Alignment.centerRight,
                   child: _buildElevatedButton(
@@ -78,11 +76,22 @@ class LoginView extends StackedView<LoginViewModel> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                // Misafir Girişi Butonu
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: _buildElevatedButton(
+                    onPressed: () async {
+                      await viewModel.guestSignIn();
+                    },
+                    text: 'Misafir Girişi',
+                  ),
+                ),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Aramizda yeni misin?',
+                      'Aramızda yeni misin?',
                       style: TextStyle(color: Color(0xFFAAACAF), fontSize: 18),
                     ),
                     TextButton(
@@ -137,6 +146,7 @@ class LoginView extends StackedView<LoginViewModel> {
     required String text,
   }) {
     return SizedBox(
+      width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -160,4 +170,3 @@ class LoginView extends StackedView<LoginViewModel> {
     return LoginViewModel();
   }
 }
-

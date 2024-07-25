@@ -1,5 +1,8 @@
+import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
+import 'package:bootcamp_team_83_flutter/app/app.router.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/account/account_screen.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/home/profile/profile_photo_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/success/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -7,7 +10,9 @@ import 'home_viewmodel.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/app_colors.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
-  const HomeView({Key? key}) : super(key: key);
+  final bool isGuestLogin;
+
+  const HomeView({Key? key, required this.isGuestLogin}) : super(key: key);
 
   @override
   Widget builder(
@@ -34,75 +39,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            builder: (BuildContext context) {
-                              return Container(
-                                width:
-                                    double.infinity, // Ekran genişliğini kapla
-                                padding: EdgeInsets.all(16.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.white, // Arka planı beyaz yap
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(16)),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      'Profil Resmini Yönet',
-                                      style: TextStyle(
-                                          color: drawerTextColor,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    _buildTransparentButton(
-                                      onPressed: () {
-                                        viewModel.pickAndUploadImage();
-                                        Navigator.of(context).pop();
-                                      },
-                                      icon: Icons.edit,
-                                      label: 'Profil Resmini Değiştir',
-                                    ),
-                                    const SizedBox(height: 10),
-                                    _buildTransparentButton(
-                                      onPressed: () {
-                                        viewModel.removeProfileImage();
-                                        Navigator.of(context).pop();
-                                      },
-                                      icon: Icons.delete,
-                                      label: 'Profil Resmini Kaldır',
-                                    ),
-                                    const SizedBox(height: 10),
-                                    _buildTransparentButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      icon: Icons.cancel,
-                                      label: 'İptal',
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: CircleAvatar(
-                          radius: 40,
-                          backgroundImage: viewModel.profileImageUrl.isNotEmpty
-                              ? NetworkImage(viewModel.profileImageUrl)
-                              : null,
-                          child: viewModel.profileImageUrl.isEmpty
-                              ? const Icon(Icons.add_a_photo,
-                                  size: 40, color: Colors.grey)
-                              : null,
-                        ),
-                      ),
+                      const ProfilePhotoView(),
                       viewModel.isBusy
                           ? const CircularProgressIndicator()
                           : Text(
@@ -169,7 +106,11 @@ class HomeView extends StackedView<HomeViewModel> {
 
   @override
   void onViewModelReady(HomeViewModel viewModel) {
-    viewModel.fetchUserName();
+    if (isGuestLogin) {
+      viewModel.loginAsGuest();
+    } else {
+      viewModel.fetchUserName();
+    }
     super.onViewModelReady(viewModel);
   }
 
@@ -183,13 +124,13 @@ class HomeView extends StackedView<HomeViewModel> {
       icon: Icon(icon, color: drawerTextColor),
       label: Text(label, style: TextStyle(color: drawerTextColor)),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent, // Butonun arka planı saydam
-        foregroundColor: drawerTextColor, // Buton üzerindeki metin rengi
-        elevation: 0, // Gölgeyi kaldır
+        backgroundColor: Colors.transparent,
+        foregroundColor: drawerTextColor,
+        elevation: 0,
         padding: EdgeInsets.symmetric(horizontal: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
-          side: BorderSide(color: Colors.transparent), // Kenarlık
+          side: BorderSide(color: Colors.transparent),
         ),
       ),
     );

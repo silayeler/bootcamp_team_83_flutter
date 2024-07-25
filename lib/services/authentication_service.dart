@@ -20,7 +20,6 @@ class AuthenticationService {
   final _navigationService = locator<NavigationService>();
   final _firestoreService = locator<FirestoreService>();
 
-
   Future<bool> userLoggedIn() async {
     return _firebaseAuth.currentUser != null;
   }
@@ -80,8 +79,7 @@ class AuthenticationService {
           );
 
           await _firestoreService.saveUserData(userModel);
-
-        }else{
+        } else {
           _snackbarService.showSnackbar(
             title: 'Giriş Başarılı!',
             message: "Ama kullanıcı database'e kaydedilemedi",
@@ -162,6 +160,42 @@ class AuthenticationService {
           break;
         default:
           errorMessage = 'Giriş başarısız. Hata: ${e.message}';
+      }
+      _snackbarService.showSnackbar(
+        title: 'Giriş Başarısız',
+        message: errorMessage,
+        duration: const Duration(milliseconds: snackbarDuration),
+      );
+      return null;
+    } catch (e) {
+      _snackbarService.showSnackbar(
+        title: 'Giriş Başarısız',
+        message: 'Bir hata oluştu: $e',
+        duration: const Duration(milliseconds: snackbarDuration),
+      );
+      return null;
+    }
+  }
+
+  // Anonim Login Function
+  Future<User?> signInAnonymously() async {
+    try {
+      UserCredential userCredential = await _firebaseAuth.signInAnonymously();
+      _snackbarService.showSnackbar(
+        title: 'Giriş Başarılı',
+        message: 'Misafir olarak giriş yapıldı.',
+        duration: const Duration(milliseconds: snackbarDuration),
+      );
+      _navigationService.replaceWithHomeView();
+      return userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      switch (e.code) {
+        case 'operation-not-allowed':
+          errorMessage = 'Anonim giriş şu anda etkin değil.';
+          break;
+        default:
+          errorMessage = 'Anonim giriş başarısız. Hata: ${e.message}';
       }
       _snackbarService.showSnackbar(
         title: 'Giriş Başarısız',

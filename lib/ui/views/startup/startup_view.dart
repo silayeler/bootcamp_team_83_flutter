@@ -3,8 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
-
-import 'startup_viewmodel.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/startup/startup_viewmodel.dart';
 
 class StartupView extends StackedView<StartupViewModel> {
   const StartupView({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return  Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -53,6 +52,9 @@ class StartupView extends StackedView<StartupViewModel> {
       StartupViewModel();
 
   @override
-  void onViewModelReady(StartupViewModel viewModel) => SchedulerBinding.instance
-      .addPostFrameCallback((timeStamp) => viewModel.runStartupLogic());
+  void onViewModelReady(StartupViewModel viewModel) {
+    SchedulerBinding.instance.addPostFrameCallback(
+      (timeStamp) => viewModel.runStartupLogic(),
+    );
+  }
 }
