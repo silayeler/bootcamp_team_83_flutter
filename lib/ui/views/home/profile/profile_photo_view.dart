@@ -21,15 +21,15 @@ class ProfilePhotoView extends StackedView<ProfilePhotoViewModel> {
           builder: (BuildContext context) {
             return Container(
               width: double.infinity,
-              padding: EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(16.0),
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     'Profil Resmini Yönet',
                     style: TextStyle(
                         color: drawerTextColor,
@@ -98,15 +98,15 @@ class ProfilePhotoView extends StackedView<ProfilePhotoViewModel> {
     return ElevatedButton.icon(
       onPressed: onPressed,
       icon: Icon(icon, color: drawerTextColor),
-      label: Text(label, style: TextStyle(color: drawerTextColor)),
+      label: Text(label, style: const TextStyle(color: drawerTextColor)),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.transparent,
         foregroundColor: drawerTextColor,
         elevation: 0,
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
-          side: BorderSide(color: Colors.transparent),
+          side: const BorderSide(color: Colors.transparent),
         ),
       ),
     );

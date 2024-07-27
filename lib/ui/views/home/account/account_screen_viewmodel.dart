@@ -70,19 +70,19 @@ class AccountScreenViewModel {
                 // Save action
                 Navigator.of(context).pop();
               },
-              child: const Text('Gönder'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFD7DADD),
               ),
+              child: const Text('Gönder'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('İptal'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFD7DADD),
               ),
+              child: const Text('İptal'),
             ),
           ],
         );

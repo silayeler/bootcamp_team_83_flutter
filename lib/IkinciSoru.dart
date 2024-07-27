@@ -1,19 +1,18 @@
-
-
 import 'package:bootcamp_team_83_flutter/ucuncu.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'IkinciSoru.dart'; // Bu sayfanın adı Sorumenü olacak
 
 class IkinciSoru extends StatefulWidget {
+  const IkinciSoru({super.key});
+
   @override
   _IkinciSoruState createState() => _IkinciSoruState();
 }
 
 class _IkinciSoruState extends State<IkinciSoru> {
   late Future<void> _questionDataFuture;
-  int _currentQuestionIndex = 2; // Başlangıçta 1. sorudayız
+  final int _currentQuestionIndex = 2; // Başlangıçta 1. sorudayız
   final int _totalQuestions = 3;
   String question = "";
   List<String> options = [];
@@ -70,11 +69,11 @@ class _IkinciSoruState extends State<IkinciSoru> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
+              SizedBox(
                 width: 400,
                 height: 270,
                 child: Image.asset(
@@ -86,11 +85,11 @@ class _IkinciSoruState extends State<IkinciSoru> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Devam', style: TextStyle(fontSize: 20)),
+              child: const Text('Devam', style: TextStyle(fontSize: 20)),
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => Ucuncu()), // Bu satırı güncelleyin
+                  MaterialPageRoute(builder: (context) => const Ucuncu()), // Bu satırı güncelleyin
                 );
               },
             ),
@@ -105,11 +104,11 @@ class _IkinciSoruState extends State<IkinciSoru> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
+              SizedBox(
                 width: 400,
                 height: 270,
                 child: Image.asset(
@@ -121,7 +120,7 @@ class _IkinciSoruState extends State<IkinciSoru> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Devam', style: TextStyle(fontSize: 20)),
+              child: const Text('Devam', style: TextStyle(fontSize: 20)),
               onPressed: () {
                 Navigator.of(context).pop();
                 setState(() {
@@ -162,7 +161,7 @@ class _IkinciSoruState extends State<IkinciSoru> {
                   );
                 },
               ),
-              Positioned(
+              const Positioned(
                 right: 0,
                 child: Icon(
                   Icons.bolt,
@@ -172,10 +171,10 @@ class _IkinciSoruState extends State<IkinciSoru> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             'Soru $_currentQuestionIndex / $_totalQuestions',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -186,7 +185,7 @@ class _IkinciSoruState extends State<IkinciSoru> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("images/arkaplan.png"),
             fit: BoxFit.cover,
@@ -194,26 +193,26 @@ class _IkinciSoruState extends State<IkinciSoru> {
         ),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 120),
+            const SizedBox(height: 120),
             _buildProgressBar(),
             Expanded(
               child: FutureBuilder<void>(
                 future: _questionDataFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return Center(child: Text('Error loading question'));
+                    return const Center(child: Text('Error loading question'));
                   } else {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
                           isCorrect ? '"$correctAnswer" $question' : '_______ $question',
-                          style: TextStyle(fontSize: 25),
+                          style: const TextStyle(fontSize: 25),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 40),
+                        const SizedBox(height: 40),
                         Wrap(
                           spacing: 10,
                           children: options.map((option) {

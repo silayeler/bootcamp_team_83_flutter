@@ -5,6 +5,8 @@ import 'package:bootcamp_team_83_flutter/ui/common/app_colors.dart';
 class SuccessScreen extends StatelessWidget {
   final SuccessScreenViewModel viewModel = SuccessScreenViewModel();
 
+  SuccessScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,11 +51,11 @@ class AchievementCard extends StatelessWidget {
         ),
         title: Text(
           achievement.title,
-          style: TextStyle(fontWeight: FontWeight.bold, color: drawerTextColor),
+          style: const TextStyle(fontWeight: FontWeight.bold, color: drawerTextColor),
         ),
         subtitle: Text(
           achievement.description,
-          style: TextStyle(color: drawerTextColor),
+          style: const TextStyle(color: drawerTextColor),
         ),
       ),
     );

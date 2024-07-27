@@ -3,7 +3,6 @@ import 'package:mockito/mockito.dart';
 import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:bootcamp_team_83_flutter/services/authentication_service.dart';
-import 'package:bootcamp_team_83_flutter/services/firestore_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -13,7 +12,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<AuthenticationService>(onMissingStub: OnMissingStub.returnDefault),
-  MockSpec<FirestoreService>(onMissingStub: OnMissingStub.returnDefault),
+
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -21,7 +20,7 @@ void registerServices() {
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
   getAndRegisterAuthenticationService();
-  getAndRegisterFirestoreService();
+
 // @stacked-mock-register
 }
 
@@ -82,12 +81,7 @@ MockAuthenticationService getAndRegisterAuthenticationService() {
   return service;
 }
 
-MockFirestoreService getAndRegisterFirestoreService() {
-  _removeRegistrationIfExists<FirestoreService>();
-  final service = MockFirestoreService();
-  locator.registerSingleton<FirestoreService>(service);
-  return service;
-}
+
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {

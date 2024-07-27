@@ -1,12 +1,13 @@
-import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
-import 'package:bootcamp_team_83_flutter/app/app.router.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/chapter/chapter_view.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/forms/chapter_form_view.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/forms/pathway_form_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/account/account_screen.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/home/home_viewmodel.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/profile/profile_photo_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/success/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'home_viewmodel.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/app_colors.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
@@ -16,10 +17,10 @@ class HomeView extends StackedView<HomeViewModel> {
 
   @override
   Widget builder(
-    BuildContext context,
-    HomeViewModel viewModel,
-    Widget? child,
-  ) {
+      BuildContext context,
+      HomeViewModel viewModel,
+      Widget? child,
+      ) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: acikMavi,
@@ -43,13 +44,13 @@ class HomeView extends StackedView<HomeViewModel> {
                       viewModel.isBusy
                           ? const CircularProgressIndicator()
                           : Text(
-                              viewModel.userName,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: drawerTextColor,
-                                fontSize: 24,
-                              ),
-                            ),
+                        viewModel.userName,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: drawerTextColor,
+                          fontSize: 24,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -62,7 +63,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AccountScreen()),
+                    MaterialPageRoute(builder: (context) => const AccountScreen()),
                   );
                 },
               ),
@@ -74,10 +75,35 @@ class HomeView extends StackedView<HomeViewModel> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SuccessScreen()),
+                    MaterialPageRoute(builder: (context) =>  SuccessScreen()),
                   );
                 },
               ),
+              buildCustomListTile(
+                color: drawerContainerColor,
+                icon: Icons.task_alt_sharp,
+                text: 'Bölüm Formu',
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ChapterFormView()),
+                  );
+                },
+              ),
+              buildCustomListTile(
+                color: drawerContainerColor,
+                icon: Icons.task,
+                text: 'Görev Yolu Formu',
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const PathWayFormView(sectionId: "sectionId")),
+                  );
+                },
+              ),
+
               buildCustomListTile(
                 color: Colors.lightGreen,
                 icon: Icons.logout,
@@ -89,13 +115,8 @@ class HomeView extends StackedView<HomeViewModel> {
             ],
           ),
         ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              viewModel.signOut();
-            },
-            child: const Text("Sign Out"),
-          ),
+        body: const Center(
+          child: ChapterView(userId: 'userId',),
         ),
       ),
     );
@@ -111,51 +132,23 @@ class HomeView extends StackedView<HomeViewModel> {
     } else {
       viewModel.fetchUserName();
     }
-    super.onViewModelReady(viewModel);
   }
 
-  Widget _buildTransparentButton({
-    required VoidCallback onPressed,
-    required IconData icon,
-    required String label,
-  }) {
-    return ElevatedButton.icon(
-      onPressed: onPressed,
-      icon: Icon(icon, color: drawerTextColor),
-      label: Text(label, style: TextStyle(color: drawerTextColor)),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        foregroundColor: drawerTextColor,
-        elevation: 0,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: BorderSide(color: Colors.transparent),
-        ),
+  Widget buildCustomListTile(
+      {required Color color,
+        required IconData icon,
+        required String text,
+        required VoidCallback onTap}) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8.0),
       ),
-    );
-  }
-
-  Widget buildCustomListTile({
-    required IconData icon,
-    required String text,
-    required VoidCallback onTap,
-    Color? color,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        child: ListTile(
-          leading: Icon(icon, color: drawerIconColor),
-          title: Text(text,
-              style: const TextStyle(
-                  color: drawerTextColor, fontWeight: FontWeight.bold)),
-          onTap: onTap,
-        ),
+      child: ListTile(
+        leading: Icon(icon, color: drawerTextColor),
+        title: Text(text, style: const TextStyle(color: drawerTextColor)),
+        onTap: onTap,
       ),
     );
   }

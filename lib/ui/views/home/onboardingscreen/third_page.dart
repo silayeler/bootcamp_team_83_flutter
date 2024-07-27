@@ -3,6 +3,8 @@ import 'package:bootcamp_team_83_flutter/ui/views/login/login_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/onboardingscreen/widgets.dart';
 
 class ThirdPage extends StatelessWidget {
+  const ThirdPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,7 @@ class ThirdPage extends StatelessWidget {
                   child: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: TypewriterEffect(
+                      child: const TypewriterEffect(
                         text:
                             '\t Her kodlama görevini tamamladığında uzay geminin eksik bir parçasını bulacaksın. Eksik olan parçaları tamamladığında uzay gemini kullanarak yeni gezegenlere doğru yol alacaksın. Evrenin gizemini çözmek için maceraya hazır mısın? Öyleyse başlayalım!',
                         textStyle: TextStyle(
@@ -39,11 +41,11 @@ class ThirdPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: CustomProgressBar(currentPage: 3),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -55,16 +57,16 @@ class ThirdPage extends StatelessWidget {
                     foregroundColor: Colors.white,
                     backgroundColor:
                         Colors.transparent, // Butonun arka plan rengi
-                    side: BorderSide(
+                    side: const BorderSide(
                       color: Colors.white, // Şerit rengi
                       width: 2, // Şerit kalınlığı
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'BAŞLA!',
                     style: TextStyle(
                       fontSize: 20, // Daha büyük yazı boyutu

@@ -84,7 +84,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: drawerContainerColor.withOpacity(0.85),
-                  textStyle: TextStyle(color: drawerTextColor),
+                  textStyle: const TextStyle(color: drawerTextColor),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   minimumSize: const Size(double.infinity, 50),
@@ -103,7 +103,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: drawerContainerColor.withOpacity(0.85),
-                  textStyle: TextStyle(color: drawerTextColor),
+                  textStyle: const TextStyle(color: drawerTextColor),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   minimumSize: const Size(double.infinity, 50),
@@ -141,7 +141,7 @@ class _AccountScreenState extends State<AccountScreen> {
               TextField(
                 controller: oldPasswordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Eski Şifre',
                   hintStyle: TextStyle(color: drawerTextColor),
                 ),
@@ -149,7 +149,7 @@ class _AccountScreenState extends State<AccountScreen> {
               TextField(
                 controller: newPasswordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Yeni Şifre',
                   hintStyle: TextStyle(color: drawerTextColor),
                 ),
@@ -157,7 +157,7 @@ class _AccountScreenState extends State<AccountScreen> {
               TextField(
                 controller: confirmPasswordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Yeni Şifre (Tekrar)',
                   hintStyle: TextStyle(color: drawerTextColor),
                 ),
@@ -203,19 +203,19 @@ class _AccountScreenState extends State<AccountScreen> {
                   );
                 }
               },
-              child: const Text('Güncelle'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: drawerContainerColor,
               ),
+              child: const Text('Güncelle'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('İptal'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: drawerContainerColor,
               ),
+              child: const Text('İptal'),
             ),
           ],
         );
@@ -236,7 +236,7 @@ class _AccountScreenState extends State<AccountScreen> {
           content: TextField(
             controller: feedbackController,
             maxLines: 5,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Görüş ve önerilerinizi buraya yazın...',
               hintStyle: TextStyle(color: drawerTextColor),
             ),
@@ -257,19 +257,19 @@ class _AccountScreenState extends State<AccountScreen> {
                   );
                 }
               },
-              child: const Text('Gönder'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: drawerContainerColor,
               ),
+              child: const Text('Gönder'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('İptal'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: drawerContainerColor,
               ),
+              child: const Text('İptal'),
             ),
           ],
         );
@@ -296,7 +296,7 @@ class AccountItem extends StatelessWidget {
       onPressed: () => onEdit(),
       style: ElevatedButton.styleFrom(
         backgroundColor: drawerContainerColor.withOpacity(0.85),
-        textStyle: TextStyle(color: drawerTextColor),
+        textStyle: const TextStyle(color: drawerTextColor),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
       child: Row(

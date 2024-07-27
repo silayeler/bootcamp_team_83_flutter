@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Ucuncu extends StatefulWidget {
+  const Ucuncu({super.key});
+
   @override
   _UcuncuState createState() => _UcuncuState();
 }
@@ -63,11 +65,11 @@ class _UcuncuState extends State<Ucuncu> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
+              SizedBox(
                 width: 400,
                 height: 270,
                 child: Image.asset(
@@ -79,7 +81,7 @@ class _UcuncuState extends State<Ucuncu> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Devam', style: TextStyle(fontSize: 20)),
+              child: const Text('Devam', style: TextStyle(fontSize: 20)),
               onPressed: () {
                 Navigator.of(context).pop(); // Diyaloğu kapat
                /* Navigator.push(
@@ -99,11 +101,11 @@ class _UcuncuState extends State<Ucuncu> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
+              SizedBox(
                 width: 400,
                 height: 270,
                 child: Image.asset(
@@ -115,7 +117,7 @@ class _UcuncuState extends State<Ucuncu> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Devam', style: TextStyle(fontSize: 20)),
+              child: const Text('Devam', style: TextStyle(fontSize: 20)),
               onPressed: () {
                 Navigator.of(context).pop(); // Diyaloğu kapat
               },
@@ -145,13 +147,13 @@ class _UcuncuState extends State<Ucuncu> {
           style: ElevatedButton.styleFrom(
             backgroundColor: buttonColor,
             shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.black, width: 4),
+              side: const BorderSide(color: Colors.black, width: 4),
               borderRadius: BorderRadius.circular(8),
             ),
           ),
           child: Text(
             text,
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
           ),
         ),
       ),
@@ -165,11 +167,11 @@ class _UcuncuState extends State<Ucuncu> {
         future: _questionDataFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Bir hata oluştu: ${snapshot.error}'));
           } else if (!snapshot.hasData) {
-            return Center(child: Text('Veri bulunamadı.'));
+            return const Center(child: Text('Veri bulunamadı.'));
           } else {
             var data = snapshot.data!;
             var question = data['question'] ?? 'Soru bulunamadı';
@@ -192,7 +194,7 @@ class _UcuncuState extends State<Ucuncu> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           IconButton(
-                            icon: Icon(Icons.arrow_back, color: Colors.black),
+                            icon: const Icon(Icons.arrow_back, color: Colors.black),
                             iconSize: 40,
                             onPressed: () {
                               Navigator.of(context).pop();
@@ -200,7 +202,7 @@ class _UcuncuState extends State<Ucuncu> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       // İlerleme çubuğu
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -227,7 +229,7 @@ class _UcuncuState extends State<Ucuncu> {
                                 );
                               },
                             ),
-                            Positioned(
+                            const Positioned(
                               right: 0,
                               child: Icon(
                                 Icons.bolt, // Şimşek ikonu
@@ -238,31 +240,31 @@ class _UcuncuState extends State<Ucuncu> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                         'Soru $_currentQuestionIndex / $_totalQuestions',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       SizedBox(
                         width: 300,
                         height: 200,
                         child: Card(
                           color: Colors.white,
                           shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Colors.black, width: 4),
+                            side: const BorderSide(color: Colors.black, width: 4),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
                               question,
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Column(
                         children: [
                           ...options.map((option) => buildButton(option)).toList(),

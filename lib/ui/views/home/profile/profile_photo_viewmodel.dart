@@ -1,14 +1,13 @@
 import 'dart:io';
-
 import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
-import 'package:bootcamp_team_83_flutter/services/firestore_service.dart';
+import 'package:bootcamp_team_83_flutter/services/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stacked/stacked.dart';
 
 class ProfilePhotoViewModel extends BaseViewModel {
-  final _firestoreService = locator<FirestoreService>();
+  final _userService = locator<UserService>();
   final _imagePicker = ImagePicker();
 
   String _profileImageUrl = "";
@@ -16,7 +15,7 @@ class ProfilePhotoViewModel extends BaseViewModel {
 
   Future<void> fetchUserProfileImage() async {
     setBusy(true);
-    _profileImageUrl = await _firestoreService.getUserProfileImageUrl();
+    _profileImageUrl = await _userService.getUserProfileImageUrl();
     setBusy(false);
     rebuildUi();
   }
@@ -32,7 +31,7 @@ class ProfilePhotoViewModel extends BaseViewModel {
       String downloadUrl = await _uploadImageToFirebase(imageFile);
 
       // Firestore'da kullanıcı profil resmi URL'sini güncelle
-      await _firestoreService.updateUserProfileImageUrl(downloadUrl);
+      await _userService.updateUserProfileImageUrl(downloadUrl);
 
       // Görüntüyü ViewModel'de güncelle
       _profileImageUrl = downloadUrl;
@@ -46,7 +45,7 @@ class ProfilePhotoViewModel extends BaseViewModel {
         FirebaseStorage.instance.ref().child("profile_images/$userId");
 
     await storageReference.delete();
-    await _firestoreService.updateUserProfileImageUrl("");
+    await _userService.updateUserProfileImageUrl("");
 
     _profileImageUrl = "";
     rebuildUi();

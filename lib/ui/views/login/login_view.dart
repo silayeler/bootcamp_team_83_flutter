@@ -30,7 +30,7 @@ class LoginView extends StackedView<LoginViewModel> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 15),
-                Text(
+                const Text(
                   "HOŞ  GELDİN!",
                   style: TextStyle(
                     color: Color(0xFFD7EAF8),
