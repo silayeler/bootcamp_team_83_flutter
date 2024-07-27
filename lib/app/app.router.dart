@@ -24,9 +24,9 @@ import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i9;
 
 class Routes {
-  static const FirstPage = '/first-page'; 
-  static const SecondPage = '/second-page'; 
-  static const ThirdPage = '/third-page'; 
+  static const firstPage = '/first-page';
+  static const secondPage = '/second-page';
+  static const thirdPage = '/third-page';
   static const homeView = '/home-view';
   static const startupView = '/startup-view';
   static const loginView = '/login-view';
@@ -34,9 +34,9 @@ class Routes {
   static const storyView = '/story-view';
 
   static const all = <String>{
-    FirstPage,
-    SecondPage,
-    ThirdPage,
+    firstPage,
+    secondPage,
+    thirdPage,
     homeView,
     startupView,
     loginView,
@@ -47,9 +47,9 @@ class Routes {
 
 class StackedRouter extends _i1.RouterBase {
   final _routes = <_i1.RouteDef>[
-    _i1.RouteDef(Routes.FirstPage, page: _i7.FirstPage), 
-    _i1.RouteDef(Routes.SecondPage, page: _i8.SecondPage), 
-    _i1.RouteDef(Routes.ThirdPage, page: _i9.ThirdPage), 
+    _i1.RouteDef(Routes.firstPage, page: _i7.FirstPage),
+    _i1.RouteDef(Routes.secondPage, page: _i8.SecondPage),
+    _i1.RouteDef(Routes.thirdPage, page: _i9.ThirdPage),
     _i1.RouteDef(Routes.homeView, page: _i2.HomeView),
     _i1.RouteDef(Routes.startupView, page: _i3.StartupView),
     _i1.RouteDef(Routes.loginView, page: _i4.LoginView),
@@ -66,7 +66,7 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i2.HomeView: (data) {
       final args = data.getArgs<HomeViewArguments>(
-        orElse: () => HomeViewArguments(isGuestLogin: false),
+        orElse: () => const HomeViewArguments(isGuestLogin: false),
       );
       return _i8.MaterialPageRoute<dynamic>(
         builder: (context) => _i2.HomeView(isGuestLogin: args.isGuestLogin),
@@ -186,7 +186,7 @@ extension NavigatorStateExtension on _i9.NavigationService {
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo<dynamic>(Routes.FirstPage,
+    return navigateTo<dynamic>(Routes.firstPage,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -276,7 +276,7 @@ extension NavigatorStateExtension on _i9.NavigationService {
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.FirstPage,
+    return replaceWith<dynamic>(Routes.firstPage,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

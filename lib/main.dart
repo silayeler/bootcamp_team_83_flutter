@@ -8,8 +8,6 @@ import 'package:bootcamp_team_83_flutter/app/app.router.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'ui/views/home/onboardingscreen/first_page.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
@@ -30,7 +28,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.FirstPage, // İlk sayfa olarak FirstPage ayarlandı
+      initialRoute: Routes.firstPage, // İlk sayfa olarak FirstPage ayarlandı
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
       navigatorObservers: [

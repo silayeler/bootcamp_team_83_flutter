@@ -1,5 +1,10 @@
+import 'package:bootcamp_team_83_flutter/services/chapter_service.dart';
+import 'package:bootcamp_team_83_flutter/services/storage_service.dart';
+import 'package:bootcamp_team_83_flutter/services/user_service.dart';
 import 'package:bootcamp_team_83_flutter/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:bootcamp_team_83_flutter/ui/dialogs/info_alert/info_alert_dialog.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/forms/chapter_form_view.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/forms/pathway_form_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/home_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/startup/startup_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/story/story_view.dart';
@@ -8,8 +13,6 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/login/login_view.dart';
 import 'package:bootcamp_team_83_flutter/services/authentication_service.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/signup/signup_view.dart';
-import 'package:bootcamp_team_83_flutter/services/firestore_service.dart';
-// @stacked-import
 
 @StackedApp(
   routes: [
@@ -18,15 +21,19 @@ import 'package:bootcamp_team_83_flutter/services/firestore_service.dart';
     MaterialRoute(page: LoginView),
     MaterialRoute(page: SignupView),
     MaterialRoute(page: StoryView),
-// @stacked-route
+    MaterialRoute(page: PathWayFormView),
+    MaterialRoute(page: ChapterFormView),
+    // @stacked-route
   ],
   dependencies: [
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthenticationService),
-    LazySingleton(classType: FirestoreService),
-// @stacked-service
+    LazySingleton(classType: UserService),
+    LazySingleton(classType: ChapterService),
+    LazySingleton(classType: StorageService),
+    // @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),

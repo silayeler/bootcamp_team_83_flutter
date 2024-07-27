@@ -1,16 +1,13 @@
-import 'dart:async';
 import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
 import 'package:bootcamp_team_83_flutter/app/app.router.dart';
 import 'package:bootcamp_team_83_flutter/models/user_model.dart';
-import 'package:bootcamp_team_83_flutter/services/firestore_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bootcamp_team_83_flutter/services/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class AuthenticationService {
   // Fields
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   User? get currentUser => _firebaseAuth.currentUser;
   static const int snackbarDuration = 2000;
@@ -18,15 +15,19 @@ class AuthenticationService {
   // Services
   final _snackbarService = locator<SnackbarService>();
   final _navigationService = locator<NavigationService>();
-  final _firestoreService = locator<FirestoreService>();
+  final _userService = locator<UserService>();
 
   Future<bool> userLoggedIn() async {
     return _firebaseAuth.currentUser != null;
   }
 
   // Signup Function
-  Future<User?> signUpWithEmailAndPassword(String email, String password,
-      String confirmPassword, String name, String surname) async {
+  Future<User?> signUpWithEmailAndPassword(
+      String email,
+      String password,
+      String confirmPassword,
+      String name,
+      String surname) async {
     if (name.isEmpty || surname.isEmpty || email.isEmpty) {
       _snackbarService.showSnackbar(
         message: 'Bir alan boş bırakılamaz',
@@ -55,7 +56,7 @@ class AuthenticationService {
 
     try {
       UserCredential userCredential =
-          await _firebaseAuth.createUserWithEmailAndPassword(
+      await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -69,23 +70,15 @@ class AuthenticationService {
           duration: const Duration(milliseconds: snackbarDuration),
         );
 
-        if (user != null) {
-          final userModel = UserModel(
-            id: user.uid,
-            name: name,
-            surname: surname,
-            email: email,
-            createdAt: DateTime.now(),
-          );
+        final userModel = UserModel(
+          id: user.uid,
+          name: name,
+          surname: surname,
+          email: email,
+          createdAt: DateTime.now(),
+        );
 
-          await _firestoreService.saveUserData(userModel);
-        } else {
-          _snackbarService.showSnackbar(
-            title: 'Giriş Başarılı!',
-            message: "Ama kullanıcı database'e kaydedilemedi",
-            duration: const Duration(milliseconds: snackbarDuration),
-          );
-        }
+        await _userService.saveUserData(userModel);
       } else {
         _snackbarService.showSnackbar(
           title: 'Kayıt Başarısız',
@@ -132,7 +125,7 @@ class AuthenticationService {
       String email, String password) async {
     try {
       UserCredential userCredential =
-          await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -177,7 +170,7 @@ class AuthenticationService {
     }
   }
 
-  // Anonim Login Function
+  // Anonymous Login Function
   Future<User?> signInAnonymously() async {
     try {
       UserCredential userCredential = await _firebaseAuth.signInAnonymously();

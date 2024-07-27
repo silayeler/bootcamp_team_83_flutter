@@ -735,4 +735,4 @@ class MockAuthenticationService extends _i1.Mock
 /// A class which mocks [FirestoreService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFirestoreService extends _i1.Mock implements _i9.FirestoreService {}
+

@@ -59,6 +59,9 @@ class _ThirdPageState extends State<ThirdPage> {
     }
   }
 
+class ThirdPage extends StatelessWidget {
+  const ThirdPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +84,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   child: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: TypewriterEffect(
+                      child: const TypewriterEffect(
                         text:
                             '\t Her kodlama görevini tamamladığında uzay geminin eksik bir parçasını bulacaksın. Eksik olan parçaları tamamladığında uzay gemini kullanarak yeni gezegenlere doğru yol alacaksın. Evrenin gizemini çözmek için maceraya hazır mısın? Öyleyse başlayalım!',
                         textStyle: TextStyle(
@@ -96,11 +99,11 @@ class _ThirdPageState extends State<ThirdPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: CustomProgressBar(currentPage: 3),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     _stopSound(); // Ses durduruluyor
@@ -111,17 +114,20 @@ class _ThirdPageState extends State<ThirdPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.transparent,
-                    side: BorderSide(
-                      color: Colors.white,
-                      width: 2,
+
+                    backgroundColor:
+                        Colors.transparent, // Butonun arka plan rengi
+                    side: const BorderSide(
+                      color: Colors.white, // Şerit rengi
+                      width: 2, // Şerit kalınlığı
+
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'BAŞLA!',
                     style: TextStyle(
                       fontSize: 20,

@@ -59,6 +59,11 @@ class _SecondPageState extends State<SecondPage> {
     }
   }
 
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +86,7 @@ class _SecondPageState extends State<SecondPage> {
                   child: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: TypewriterEffect(
+                      child: const TypewriterEffect(
                         text: "CodeMania Beyond the Space",
                         textStyle: TextStyle(
                           fontSize: 25,
@@ -95,32 +100,35 @@ class _SecondPageState extends State<SecondPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: CustomProgressBar(currentPage: 2),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     _stopSound(); // Ses durduruluyor
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ThirdPage()),
+                      MaterialPageRoute(builder: (context) => const ThirdPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.transparent,
-                    side: BorderSide(
-                      color: Colors.white,
-                      width: 2,
+
+                    backgroundColor:
+                        Colors.transparent, // Butonun arka plan rengi
+                    side: const BorderSide(
+                      color: Colors.white, // Şerit rengi
+                      width: 2, // Şerit kalınlığı
+
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'DEVAM',
                     style: TextStyle(
                       fontSize: 20,

@@ -11,7 +11,6 @@ class LoginViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _storageService = locator<StorageService>();
 
-  static const String _keySeenStory = 'seenStory';
   static const int snackbarDuration = 2000; // 2 saniye örnek olarak
 
   Future<void> signIn(String email, String password) async {
