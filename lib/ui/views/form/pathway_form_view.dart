@@ -7,7 +7,7 @@ class PathwayFormView extends StackedView<PathwayFormViewModel> {
 
   @override
   Widget builder(BuildContext context, PathwayFormViewModel viewModel, Widget? child) {
-    final _pathwayFormKey = GlobalKey<FormState>();
+    final pathwayFormKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Create Pathway')),
@@ -16,7 +16,7 @@ class PathwayFormView extends StackedView<PathwayFormViewModel> {
           : Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: _pathwayFormKey,
+          key: pathwayFormKey,
           child: Column(
             children: [
               DropdownButtonFormField<String>(
@@ -56,7 +56,7 @@ class PathwayFormView extends StackedView<PathwayFormViewModel> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  if (_pathwayFormKey.currentState?.validate() ?? false) {
+                  if (pathwayFormKey.currentState?.validate() ?? false) {
                     await viewModel.createPathway();
                     Navigator.pop(context);
                   }

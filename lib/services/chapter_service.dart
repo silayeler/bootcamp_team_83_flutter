@@ -60,28 +60,6 @@ class ChapterService {
     }
   }
 
-  // Kullanıcı ilerlemesini alma
-  Future<UserProgress?> getUserProgress(String userId) async {
-    try {
-      DocumentSnapshot doc = await _firestore.collection('userProgress').doc(userId).get();
-      if (doc.exists) {
-        return UserProgress.fromMap(doc.data() as Map<String, dynamic>);
-      }
-      return null;
-    } catch (e) {
-      print('Error getting user progress: $e');
-      return null;
-    }
-  }
-
-  // Kullanıcı ilerlemesini güncelleme
-  Future<void> updateUserProgress(String userId, UserProgress userProgress) async {
-    try {
-      await _firestore.collection('userProgress').doc(userId).set(userProgress.toMap());
-    } catch (e) {
-      print('Error updating user progress: $e');
-    }
-  }
 
   // Tüm bölümleri alma
   Future<QuerySnapshot> getSections() async {

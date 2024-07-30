@@ -50,6 +50,7 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
         _output = output;
       });
 
+
       if (_output == 'Merhaba Ben Maria') {
         _showAlertDialog();
       }

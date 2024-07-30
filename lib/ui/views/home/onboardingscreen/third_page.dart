@@ -59,8 +59,7 @@ class _ThirdPageState extends State<ThirdPage> {
     }
   }
 
-class ThirdPage extends StatelessWidget {
-  const ThirdPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +83,10 @@ class ThirdPage extends StatelessWidget {
                   child: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: const TypewriterEffect(
+                      child:  TypewriterEffect(
                         text:
                             '\t Her kodlama görevini tamamladığında uzay geminin eksik bir parçasını bulacaksın. Eksik olan parçaları tamamladığında uzay gemini kullanarak yeni gezegenlere doğru yol alacaksın. Evrenin gizemini çözmek için maceraya hazır mısın? Öyleyse başlayalım!',
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -143,3 +142,5 @@ class ThirdPage extends StatelessWidget {
     );
   }
 }
+
+

@@ -34,10 +34,10 @@ class _SecondPageState extends State<SecondPage> {
       _audioPlayer.resume();
       _isSoundPlaying = true;
 
-      await Future.delayed(Duration(seconds: 3)); // Sesin azalması için bekle
+      await Future.delayed(const Duration(seconds: 3)); // Sesin azalması için bekle
 
       // Ses yavaşça azalacak
-      final decreaseDuration = Duration(seconds: 1);
+      final decreaseDuration = const Duration(seconds: 1);
       final decreaseStep =
           decreaseDuration.inMilliseconds ~/ 20; // 20 adımda azaltma
 
@@ -58,10 +58,6 @@ class _SecondPageState extends State<SecondPage> {
       _isSoundPlaying = false;
     }
   }
-
-
-class SecondPage extends StatelessWidget {
-  const SecondPage({super.key});
 
 
   @override
@@ -86,14 +82,14 @@ class SecondPage extends StatelessWidget {
                   child: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: const TypewriterEffect(
+                      child:  TypewriterEffect(
                         text: "CodeMania Beyond the Space",
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
-                        duration: Duration(milliseconds: 100),
+                        duration: const Duration(milliseconds: 100),
                         onTypingStart: () {},
                         onTypingComplete: () {},
                       ),
@@ -110,7 +106,7 @@ class SecondPage extends StatelessWidget {
                     _stopSound(); // Ses durduruluyor
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ThirdPage()),
+                      MaterialPageRoute(builder: (context) =>  ThirdPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

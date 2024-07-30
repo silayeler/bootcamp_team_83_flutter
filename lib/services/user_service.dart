@@ -1,4 +1,5 @@
 import 'package:bootcamp_team_83_flutter/models/user_model.dart';
+import 'package:bootcamp_team_83_flutter/models/user_progress_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -50,4 +51,30 @@ class UserService{
   Future<bool> isGuestLogin() async {
     return user == null || user!.isAnonymous;
   }
+
+
+
+  // Kullanıcı ilerlemesini alma
+  Future<UserProgress?> getUserProgress(String userId) async {
+    try {
+      DocumentSnapshot doc = await _firestore.collection('userProgress').doc(userId).get();
+      if (doc.exists) {
+        return UserProgress.fromMap(doc.data() as Map<String, dynamic>);
+      }
+      return null;
+    } catch (e) {
+      print('Error getting user progress: $e');
+      return null;
+    }
+  }
+
+  // Kullanıcı ilerlemesini güncelleme
+  Future<void> updateUserProgress(String userId, UserProgress userProgress) async {
+    try {
+      await _firestore.collection('userProgress').doc(userId).set(userProgress.toMap());
+    } catch (e) {
+      print('Error updating user progress: $e');
+    }
+  }
+
 }
