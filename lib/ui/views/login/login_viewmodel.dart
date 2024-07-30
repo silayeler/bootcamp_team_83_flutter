@@ -10,6 +10,7 @@ class LoginViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _navigationService = locator<NavigationService>();
   final _storageService = locator<StorageService>();
+  final _snackbarService=locator<SnackbarService>();
 
   static const int snackbarDuration = 2000; // 2 saniye örnek olarak
 
@@ -20,6 +21,11 @@ class LoginViewModel extends BaseViewModel {
           email, password);
       bool hasSeenStory = await _storageService.hasSeenStory();
       if (hasSeenStory && user != null) {
+        _snackbarService.showSnackbar(
+          title: 'Giriş Başarılı',
+          message: 'Hoşgeldin',
+          duration: const Duration(milliseconds: snackbarDuration),
+        );
         _navigationService.replaceWithHomeView();
       } else {
         _navigationService.replaceWithStoryView();
@@ -43,7 +49,7 @@ class LoginViewModel extends BaseViewModel {
       bool hasSeenStory = await _storageService.hasSeenStory();
       if (hasSeenStory && user != null) {
         _navigationService.replaceWithHomeView();
-      } else {
+      } else  {
         _navigationService.replaceWithStoryView();
       }
     } catch (e) {

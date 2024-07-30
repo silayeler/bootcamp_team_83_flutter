@@ -3,6 +3,7 @@ import 'package:bootcamp_team_83_flutter/app/app.router.dart';
 import 'package:bootcamp_team_83_flutter/models/user_model.dart';
 import 'package:bootcamp_team_83_flutter/services/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class AuthenticationService {
@@ -69,7 +70,6 @@ class AuthenticationService {
           message: 'Merhaba $name',
           duration: const Duration(milliseconds: snackbarDuration),
         );
-
         final userModel = UserModel(
           id: user.uid,
           name: name,
@@ -79,6 +79,7 @@ class AuthenticationService {
         );
 
         await _userService.saveUserData(userModel);
+
       } else {
         _snackbarService.showSnackbar(
           title: 'Kayıt Başarısız',
@@ -87,6 +88,8 @@ class AuthenticationService {
         );
         return null;
       }
+      return user;
+
     } on FirebaseAuthException catch (e) {
       String errorMessage;
 
@@ -129,12 +132,7 @@ class AuthenticationService {
         email: email,
         password: password,
       );
-      _snackbarService.showSnackbar(
-        title: 'Giriş Başarılı',
-        message: 'Hoşgeldin',
-        duration: const Duration(milliseconds: snackbarDuration),
-      );
-      _navigationService.replaceWithHomeView();
+
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       String errorMessage;

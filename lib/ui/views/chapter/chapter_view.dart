@@ -1,17 +1,18 @@
+import 'package:bootcamp_team_83_flutter/ui/common/app_colors.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/chapter/chapter_viewmodel.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/pathway/pathway_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class ChapterView extends StackedView<ChapterViewModel>{
+class ChapterView extends StackedView<ChapterViewModel> {
   final String userId;
 
   const ChapterView({super.key, required this.userId});
 
-
   @override
-  Widget builder(BuildContext context, ChapterViewModel viewModel, Widget? child) {
+  Widget builder(
+      BuildContext context, ChapterViewModel viewModel, Widget? child) {
     return FutureBuilder(
       future: FirebaseFirestore.instance.collection('sections').get(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -52,7 +53,7 @@ class ChapterView extends StackedView<ChapterViewModel>{
                     onTap: isCompleted || isFirstSection
                         ? () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => StarPagesPage(
+                              builder: (context) => PathwayView(
                                   sectionId: sectionId, userId: userId),
                             ));
                           }
@@ -69,39 +70,54 @@ class ChapterView extends StackedView<ChapterViewModel>{
                               fit: BoxFit.cover,
                               colorFilter: isCompleted || isFirstSection
                                   ? null
-                                  : const ColorFilter.mode(
-                                      Colors.grey, BlendMode.saturation),
+                                  : ColorFilter.mode(
+                                      Colors.white.withOpacity(0.7),
+                                      BlendMode.luminosity),
                             ),
                             borderRadius: BorderRadius.circular(100),
                           ),
                         ),
-                        if (!isCompleted && !isFirstSection)
-                          const Positioned(
-                            child: Icon(Icons.lock,
-                                color: Colors.grey, size: 50),
-                          ),
+
                         Positioned(
-                          top: 10,
+                          bottom: 10,
                           child: Column(
                             children: [
-                              Text(
-                                section['title'],
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+                              if (!isCompleted && !isFirstSection)
+                                Icon(Icons.lock,
+                                    color: Colors.grey.shade700, size: 50),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                color: chapterTextContainerColor,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 8),
+                                  child: Text(
+                                    section['title'],
+                                    style: const TextStyle(
+                                      color: chapterTextColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                child: Text(
-                                  section['description'],
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
+                                color: chapterTextContainerColor,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 8),
+                                  child: Text(
+                                    section['description'],
+                                    style: const TextStyle(
+                                      color: chapterTextColor,
+                                      fontSize: 16,
+
+                                    ),
                                   ),
                                 ),
                               ),
@@ -122,9 +138,6 @@ class ChapterView extends StackedView<ChapterViewModel>{
 
   @override
   ChapterViewModel viewModelBuilder(BuildContext context) {
-    // TODO: implement viewModelBuilder
     return ChapterViewModel();
   }
-
-
 }

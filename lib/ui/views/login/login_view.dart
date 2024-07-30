@@ -16,7 +16,7 @@ class LoginView extends StackedView<LoginViewModel> {
       child: Scaffold(
         backgroundColor: Colors.black,
         body: Container(
-          padding: const EdgeInsets.all(16.0),
+          //padding: const EdgeInsets.all(16.0),
           width: screenWidth(context),
           height: screenHeight(context),
           decoration: const BoxDecoration(
