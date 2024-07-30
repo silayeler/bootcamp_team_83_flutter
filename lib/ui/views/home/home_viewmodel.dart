@@ -33,13 +33,13 @@ class HomeViewModel extends BaseViewModel {
     setBusy(true);
     _userName = await _userService.getUserNameSurname() ?? "";
     setBusy(false);
-    notifyListeners();
+    rebuildUi();
   }
 
   void loginAsGuest() {
     isGuestLogin = true;
     _userName = 'Misafir';
-    notifyListeners();
+    rebuildUi();
   }
 
   Future<void> signOut() async {

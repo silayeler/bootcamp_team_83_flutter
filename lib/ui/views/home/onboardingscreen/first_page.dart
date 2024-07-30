@@ -36,11 +36,11 @@ class _FirstPageState extends State<FirstPage> {
       _audioPlayer.resume();
       _isSoundPlaying = true;
 
-      await Future.delayed(Duration(seconds: 10)); // Sesin azalması için bekle
+      await Future.delayed(const Duration(seconds: 10)); // Sesin azalması için bekle
 
       // Ses yavaşça azalacak
       for (double i = _volume; i >= 0; i -= 0.05) {
-        await Future.delayed(Duration(milliseconds: 100));
+        await Future.delayed(const Duration(milliseconds: 100));
         if (!_isSoundPlaying) break;
         _audioPlayer.setVolume(i);
       }
@@ -79,17 +79,17 @@ class _FirstPageState extends State<FirstPage> {
                   child: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: const TypewriterEffect(
+                      child:  TypewriterEffect(
                         text:
                             '\t Yıl 2249. İnsanlık, uzayın sırrını çözmek ve yeni gezegenler keşfetmek için “Uzay Keşfi Akademisi”ni kurdu.\n\n'
                             'Sen de bu akademiye kabul edilen seçilmiş zihinlerden birisin.\n\n'
                             'Akademide, kodlama becerilerini kullanarak uzayı keşfedeceksin.',
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
-                        duration: Duration(milliseconds: 50),
+                        duration: const Duration(milliseconds: 50),
                         onTypingStart: () {},
                         onTypingComplete: () {},
                       ),

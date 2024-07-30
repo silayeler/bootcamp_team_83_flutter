@@ -7,7 +7,7 @@ class ChapterFormView extends StackedView<ChapterFormViewmodel> {
 
   @override
   Widget builder(BuildContext context, ChapterFormViewmodel viewModel, Widget? child) {
-    final _chapterFormKey = GlobalKey<FormState>();
+    final chapterFormKey = GlobalKey<FormState>();
     String title = '';
     String description = '';
     String imageUrl = '';
@@ -17,7 +17,7 @@ class ChapterFormView extends StackedView<ChapterFormViewmodel> {
       body: viewModel.isBusy
           ? const Center(child: CircularProgressIndicator())
           : Form(
-        key: _chapterFormKey,
+        key: chapterFormKey,
         child: Column(
           children: [
             TextFormField(
@@ -46,7 +46,7 @@ class ChapterFormView extends StackedView<ChapterFormViewmodel> {
             ),
             ElevatedButton(
               onPressed: () async {
-                if (_chapterFormKey.currentState?.validate() ?? false) {
+                if (chapterFormKey.currentState?.validate() ?? false) {
                   await viewModel.createSection(title, description, imageUrl);
                   Navigator.pop(context);
                 }

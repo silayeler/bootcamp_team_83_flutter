@@ -48,12 +48,13 @@ class PathwayView extends StackedView<PathwayViewModel> {
             ),
             child: Stack(
               children: List.generate(numberOfStars, (index) {
+                var pathwayDocId = pathwayDocs.first.id; // pathway doc id
                 return _buildStar(
-                    context,
-                    index + 1,
-                    pathwayDocs.first.id,
-                    top: 700 - (index * 70),
-                    left: 90 + (index % 2) * 150
+                  context,
+                  pathwayDocId,
+                  index + 1,
+                  top: 700 - (index * 70),
+                  left: 90 + (index % 2) * 150,
                 );
               }),
             ),
@@ -63,19 +64,31 @@ class PathwayView extends StackedView<PathwayViewModel> {
     );
   }
 
-  Widget _buildStar(BuildContext context, int itemNumber, String pathwayId, {required double top, required double left}) {
+  Widget _buildStar(BuildContext context, String pathwayId, int itemNumber, {required double top, required double left}) {
     return Positioned(
       top: top,
       left: left,
       child: GestureDetector(
         onTap: () async {
+          var itemsSnapshot = await FirebaseFirestore.instance
+              .collection('sections')
+              .doc(sectionId)
+              .collection('pathways')
+              .doc(pathwayId)
+              .collection('items')
+              .get();
+
+          var itemDoc = itemsSnapshot.docs.firstWhere(
+                  (doc) => doc['title'] == 'Star $itemNumber',
+              orElse: () => throw Exception('Item not found'));
+
           var starSnapshot = await FirebaseFirestore.instance
               .collection('sections')
               .doc(sectionId)
               .collection('pathways')
               .doc(pathwayId)
               .collection('items')
-              .doc(itemNumber.toString())
+              .doc(itemDoc.id)
               .collection('questions')
               .get();
 
