@@ -205,7 +205,9 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i13.ProfilePhotoView: (data) {
       return _i14.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i13.ProfilePhotoView(),
+        builder: (context) => const _i13.ProfilePhotoView(
+          photoUrl: '',
+        ),
         settings: data,
       );
     },

@@ -10,7 +10,7 @@ class LoginViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _navigationService = locator<NavigationService>();
   final _storageService = locator<StorageService>();
-  final _snackbarService=locator<SnackbarService>();
+  final _snackbarService = locator<SnackbarService>();
 
   static const int snackbarDuration = 2000; // 2 saniye örnek olarak
 
@@ -40,16 +40,15 @@ class LoginViewModel extends BaseViewModel {
   Future<void> guestSignIn() async {
     setBusy(true);
     try {
-      // Misafir olarak giriş yapacak kullanıcıyı oluştur
-      UserCredential userCredential =
-          (await _authenticationService.signInAnonymously()) as UserCredential;
-      User? user = userCredential.user;
+      UserCredential? userCredential =
+          await _authenticationService.signInAnonymously();
+      User? user = userCredential?.user; // UserCredential'dan User'a erişim
 
       // Misafir kullanıcının belirli bir ekrana yönlendirilmesi
       bool hasSeenStory = await _storageService.hasSeenStory();
       if (hasSeenStory && user != null) {
         _navigationService.replaceWithHomeView();
-      } else  {
+      } else {
         _navigationService.replaceWithStoryView();
       }
     } catch (e) {

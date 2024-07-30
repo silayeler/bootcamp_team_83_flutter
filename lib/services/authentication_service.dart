@@ -7,13 +7,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class AuthenticationService {
-  // Fields
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   User? get currentUser => _firebaseAuth.currentUser;
   static const int snackbarDuration = 2000;
 
-  // Services
   final _snackbarService = locator<SnackbarService>();
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
@@ -22,13 +20,8 @@ class AuthenticationService {
     return _firebaseAuth.currentUser != null;
   }
 
-  // Signup Function
-  Future<User?> signUpWithEmailAndPassword(
-      String email,
-      String password,
-      String confirmPassword,
-      String name,
-      String surname) async {
+  Future<User?> signUpWithEmailAndPassword(String email, String password,
+      String confirmPassword, String name, String surname) async {
     if (name.isEmpty || surname.isEmpty || email.isEmpty) {
       _snackbarService.showSnackbar(
         message: 'Bir alan boş bırakılamaz',
@@ -57,7 +50,7 @@ class AuthenticationService {
 
     try {
       UserCredential userCredential =
-      await _firebaseAuth.createUserWithEmailAndPassword(
+          await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -79,7 +72,6 @@ class AuthenticationService {
         );
 
         await _userService.saveUserData(userModel);
-
       } else {
         _snackbarService.showSnackbar(
           title: 'Kayıt Başarısız',
@@ -89,7 +81,6 @@ class AuthenticationService {
         return null;
       }
       return user;
-
     } on FirebaseAuthException catch (e) {
       String errorMessage;
 
@@ -123,12 +114,11 @@ class AuthenticationService {
     }
   }
 
-  // Login Function
   Future<User?> signInWithEmailAndPassword(
       String email, String password) async {
     try {
       UserCredential userCredential =
-      await _firebaseAuth.signInWithEmailAndPassword(
+          await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -168,8 +158,7 @@ class AuthenticationService {
     }
   }
 
-  // Anonymous Login Function
-  Future<User?> signInAnonymously() async {
+  Future<UserCredential?> signInAnonymously() async {
     try {
       UserCredential userCredential = await _firebaseAuth.signInAnonymously();
       _snackbarService.showSnackbar(
@@ -178,7 +167,7 @@ class AuthenticationService {
         duration: const Duration(milliseconds: snackbarDuration),
       );
       _navigationService.replaceWithHomeView();
-      return userCredential.user;
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       switch (e.code) {
@@ -201,6 +190,25 @@ class AuthenticationService {
         duration: const Duration(milliseconds: snackbarDuration),
       );
       return null;
+    }
+  }
+
+  signOut() async {
+    try {
+      await _firebaseAuth.signOut();
+      _snackbarService.showSnackbar(
+        title: 'Çıkış Yapıldı',
+        message: 'Başarıyla çıkış yapıldı.',
+        duration: const Duration(milliseconds: snackbarDuration),
+      );
+      _navigationService
+          .replaceWithLoginView(); // Kullanıcıyı giriş ekranına yönlendirir
+    } catch (e) {
+      _snackbarService.showSnackbar(
+        title: 'Çıkış Başarısız',
+        message: 'Çıkış yaparken bir hata oluştu: $e',
+        duration: const Duration(milliseconds: snackbarDuration),
+      );
     }
   }
 }
