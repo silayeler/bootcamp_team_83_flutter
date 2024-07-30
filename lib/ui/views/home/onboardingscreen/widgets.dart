@@ -54,6 +54,7 @@ class _TypewriterEffectState extends State<TypewriterEffect> {
     return Text(
       _displayedText,
       style: widget.textStyle,
+      textAlign: TextAlign.center,
     );
   }
 }

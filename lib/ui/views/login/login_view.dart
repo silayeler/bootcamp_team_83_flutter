@@ -16,7 +16,7 @@ class LoginView extends StackedView<LoginViewModel> {
       child: Scaffold(
         backgroundColor: Colors.black,
         body: Container(
-          padding: const EdgeInsets.all(16.0),
+          //padding: const EdgeInsets.all(16.0),
           width: screenWidth(context),
           height: screenHeight(context),
           decoration: const BoxDecoration(
@@ -30,7 +30,7 @@ class LoginView extends StackedView<LoginViewModel> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 15),
-                Text(
+                const Text(
                   "HOŞ  GELDİN!",
                   style: TextStyle(
                     color: Color(0xFFD7EAF8),

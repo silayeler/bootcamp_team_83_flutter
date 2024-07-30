@@ -7,6 +7,8 @@ import 'package:highlight/languages/dart.dart';
 import 'IkinciSoru.dart';
 
 class BirinciSayfa extends StatefulWidget {
+  const BirinciSayfa({super.key});
+
   @override
   _BirinciSayfaState createState() => _BirinciSayfaState();
 }
@@ -21,7 +23,7 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
   // FocusNode oluşturun
   final FocusNode _focusNode = FocusNode();
 
-  int _currentQuestionIndex = 1; // Başlangıçta 1. sorudayız
+  final int _currentQuestionIndex = 1; // Başlangıçta 1. sorudayız
   final int _totalQuestions = 3;
 
   @override
@@ -48,6 +50,7 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
         _output = output;
       });
 
+
       if (_output == 'Merhaba Ben Maria') {
         _showAlertDialog();
       }
@@ -64,11 +67,11 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
+              SizedBox(
                 width: 400,
                 height: 270,
                 child: Image.asset(
@@ -80,11 +83,11 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Devam', style: TextStyle(fontSize: 20)),
+              child: const Text('Devam', style: TextStyle(fontSize: 20)),
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => IkinciSoru()), // Bu satırı güncelleyin
+                  MaterialPageRoute(builder: (context) => const IkinciSoru()), // Bu satırı güncelleyin
                 );
               },
             ),
@@ -121,7 +124,7 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
                   );
                 },
               ),
-              Positioned(
+              const Positioned(
                 right: 0,
                 child: Icon(
                   Icons.bolt,
@@ -131,10 +134,10 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             'Soru $_currentQuestionIndex / $_totalQuestions',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -149,17 +152,17 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Icons.play_arrow),
+            icon: const Icon(Icons.play_arrow),
             onPressed: _runCode,
             iconSize: 60, // İkon boyutunu burada da ayarla
             color: Colors.black, // İkon rengini siyah yap
           ),
         ],
-        title: Text('Kod Düzenleyici'),
+        title: const Text('Kod Düzenleyici'),
         backgroundColor: Colors.transparent, // AppBar arka plan rengini şeffaf yap
         elevation: 0, // Gölgeyi kaldır
         shadowColor: Colors.transparent, // Gölge rengini şeffaf yap
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black, // İkon rengini siyah yap
           size: 30, // İkon boyutunu büyüt
         ),
@@ -172,7 +175,7 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('images/arkaplan.png'),
               fit: BoxFit.cover,
@@ -185,18 +188,18 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 100),
+                  const SizedBox(height: 100),
                   _buildProgressBar(),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
                     child: Text(
                       'merhaba ben maria',
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Container(
+                  const SizedBox(height: 20),
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8, // Genişliği sınırlama
                     height: MediaQuery.of(context).size.height * 0.4, // Yüksekliği sınırlama
                     child: CodeTheme(
@@ -207,12 +210,12 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
                       'Kod Çıktısı:\n$_output',
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                       textAlign: TextAlign.center,
                     ),
                   ),

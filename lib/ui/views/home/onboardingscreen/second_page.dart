@@ -34,10 +34,10 @@ class _SecondPageState extends State<SecondPage> {
       _audioPlayer.resume();
       _isSoundPlaying = true;
 
-      await Future.delayed(Duration(seconds: 3)); // Sesin azalması için bekle
+      await Future.delayed(const Duration(seconds: 3)); // Sesin azalması için bekle
 
       // Ses yavaşça azalacak
-      final decreaseDuration = Duration(seconds: 1);
+      final decreaseDuration = const Duration(seconds: 1);
       final decreaseStep =
           decreaseDuration.inMilliseconds ~/ 20; // 20 adımda azaltma
 
@@ -58,6 +58,7 @@ class _SecondPageState extends State<SecondPage> {
       _isSoundPlaying = false;
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -81,46 +82,49 @@ class _SecondPageState extends State<SecondPage> {
                   child: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: TypewriterEffect(
+                      child:  TypewriterEffect(
                         text: "CodeMania Beyond the Space",
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
-                        duration: Duration(milliseconds: 100),
+                        duration: const Duration(milliseconds: 100),
                         onTypingStart: () {},
                         onTypingComplete: () {},
                       ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: CustomProgressBar(currentPage: 2),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     _stopSound(); // Ses durduruluyor
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ThirdPage()),
+                      MaterialPageRoute(builder: (context) =>  ThirdPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.transparent,
-                    side: BorderSide(
-                      color: Colors.white,
-                      width: 2,
+
+                    backgroundColor:
+                        Colors.transparent, // Butonun arka plan rengi
+                    side: const BorderSide(
+                      color: Colors.white, // Şerit rengi
+                      width: 2, // Şerit kalınlığı
+
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'DEVAM',
                     style: TextStyle(
                       fontSize: 20,

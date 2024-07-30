@@ -4,6 +4,8 @@ import 'package:bootcamp_team_83_flutter/ui/views/home/onboardingscreen/widgets.
 import 'package:audioplayers/audioplayers.dart';
 
 class FirstPage extends StatefulWidget {
+  const FirstPage({super.key});
+
   @override
   _FirstPageState createState() => _FirstPageState();
 }
@@ -34,11 +36,11 @@ class _FirstPageState extends State<FirstPage> {
       _audioPlayer.resume();
       _isSoundPlaying = true;
 
-      await Future.delayed(Duration(seconds: 10)); // Sesin azalması için bekle
+      await Future.delayed(const Duration(seconds: 10)); // Sesin azalması için bekle
 
       // Ses yavaşça azalacak
       for (double i = _volume; i >= 0; i -= 0.05) {
-        await Future.delayed(Duration(milliseconds: 100));
+        await Future.delayed(const Duration(milliseconds: 100));
         if (!_isSoundPlaying) break;
         _audioPlayer.setVolume(i);
       }
@@ -77,28 +79,28 @@ class _FirstPageState extends State<FirstPage> {
                   child: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: TypewriterEffect(
+                      child:  TypewriterEffect(
                         text:
                             '\t Yıl 2249. İnsanlık, uzayın sırrını çözmek ve yeni gezegenler keşfetmek için “Uzay Keşfi Akademisi”ni kurdu.\n\n'
                             'Sen de bu akademiye kabul edilen seçilmiş zihinlerden birisin.\n\n'
                             'Akademide, kodlama becerilerini kullanarak uzayı keşfedeceksin.',
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
-                        duration: Duration(milliseconds: 50),
+                        duration: const Duration(milliseconds: 50),
                         onTypingStart: () {},
                         onTypingComplete: () {},
                       ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: CustomProgressBar(currentPage: 1),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     _stopSound(); // Ses durduruluyor
@@ -109,17 +111,21 @@ class _FirstPageState extends State<FirstPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.transparent,
-                    side: BorderSide(
-                      color: Colors.white,
-                      width: 2,
+
+                    backgroundColor:
+                        Colors.transparent, // Butonun arka plan rengi
+                    side: const BorderSide(
+                      color: Colors.white, // Şerit rengi
+                      width: 2, // Şerit kalınlığı
+
+
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'DEVAM',
                     style: TextStyle(
                       fontSize: 20,
