@@ -11,7 +11,7 @@ class TypewriterEffect extends StatefulWidget {
     Key? key,
     required this.text,
     required this.textStyle,
-    required this.duration,
+    required this.duration, required void Function() onTypingStart, required void Function() onTypingComplete,
   }) : super(key: key);
 
   @override

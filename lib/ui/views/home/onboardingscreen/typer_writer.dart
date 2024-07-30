@@ -5,12 +5,14 @@ class TypewriterEffect extends StatefulWidget {
   final String text;
   final TextStyle textStyle;
   final Duration duration;
+  final VoidCallback onTypingStart;
 
   const TypewriterEffect({
     Key? key,
     required this.text,
     required this.textStyle,
     required this.duration,
+    required this.onTypingStart,
   }) : super(key: key);
 
   @override
@@ -18,39 +20,37 @@ class TypewriterEffect extends StatefulWidget {
 }
 
 class _TypewriterEffectState extends State<TypewriterEffect> {
-  late String _displayedText = '';
+  String _displayedText = '';
   late AudioPlayer _audioPlayer;
-  late Duration _duration;
-  late int _currentCharIndex = 0;
+  int _currentCharIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _audioPlayer = AudioPlayer();
-    _duration = widget.duration;
     _playAudio();
+    widget.onTypingStart(); // onTypingStart fonksiyonunu çağır
     _typeText();
   }
 
   void _playAudio() async {
     try {
-      await _audioPlayer.setSource(AssetSource('assets/ses_klavye.mp3'));
-      _audioPlayer.setReleaseMode(ReleaseMode.loop);
-      _audioPlayer.resume();
+      await _audioPlayer.setSource(AssetSource('ses_klavye.mp3'));
+      await _audioPlayer.setReleaseMode(ReleaseMode.loop);
+      await _audioPlayer.resume();
     } catch (e) {
       print("Error playing audio: $e");
     }
   }
 
   void _typeText() {
-    Future.delayed(_duration, () {
+    Future.delayed(widget.duration, () {
       if (_currentCharIndex < widget.text.length) {
         setState(() {
           _displayedText += widget.text[_currentCharIndex];
           _currentCharIndex++;
         });
-        _playAudio(); // Continue playing the audio
-        _typeText();
+        _typeText(); // Continue typing
       } else {
         _audioPlayer.stop(); // Stop the audio when typing is done
       }
