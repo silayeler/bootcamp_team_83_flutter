@@ -30,13 +30,24 @@ class _AccountScreenState extends State<AccountScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 40),
-              const Text(
-                'Hesabım',
-                style: TextStyle(
-                  color: drawerTextColor,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back, color: drawerTextColor),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  const Text(
+                    'Hesabım',
+                    style: TextStyle(
+                      color: drawerTextColor,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               AccountItem(
@@ -306,14 +317,14 @@ class AccountItem extends StatelessWidget {
             child: TextField(
               controller: controller,
               decoration: null,
-              style: const TextStyle(
-                color: drawerTextColor,
-                fontSize: 18,
-              ),
-              readOnly: !isEditing,
+              style: const TextStyle(color: drawerTextColor),
+              enabled: isEditing,
             ),
           ),
-          const Icon(Icons.edit, color: drawerTextColor),
+          Icon(
+            isEditing ? Icons.check : Icons.edit,
+            color: drawerTextColor,
+          ),
         ],
       ),
     );

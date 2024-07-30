@@ -6,7 +6,7 @@ class UserModel {
   final String name;
   final String surname;
   final String email;
-  final String? profileImageUrl ;
+  final String? profileImageUrl;
   final DateTime? createdAt;
 
   UserModel({
@@ -24,7 +24,7 @@ class UserModel {
       name: data['name'] ?? '',
       surname: data['surname'] ?? '',
       email: data['email'] ?? '',
-      profileImageUrl: data['profileImageUrl'] ,
+      profileImageUrl: data['profileImageUrl'],
       createdAt: (data['createdAt'] as Timestamp?)?.toDate(),
     );
   }
@@ -35,7 +35,9 @@ class UserModel {
       'surname': surname,
       'email': email,
       'profileImageUrl': profileImageUrl ?? "assets/astronot_signup.png",
-      'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : FieldValue.serverTimestamp(),
+      'createdAt': createdAt != null
+          ? Timestamp.fromDate(createdAt!)
+          : FieldValue.serverTimestamp(),
     };
   }
 }

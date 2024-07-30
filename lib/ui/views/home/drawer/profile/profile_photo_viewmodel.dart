@@ -13,62 +13,63 @@ class ProfilePhotoViewModel extends BaseViewModel {
   String _profileImageUrl = "";
   String get profileImageUrl => _profileImageUrl;
 
-  bool _isGuestLogin = false;
-  bool get isGuestLogin => _isGuestLogin;
-
-  Future<void> initialize() async {
-    setBusy(true);
-    _isGuestLogin = await _userService.isGuestLogin();
-    if (!_isGuestLogin) {
-      await fetchUserProfileImage();
-    }
-    setBusy(false);
-  }
-
   Future<void> fetchUserProfileImage() async {
-    if (_isGuestLogin) return;
-    _profileImageUrl = await _userService.getUserProfileImageUrl();
-    rebuildUi();
+    setBusy(true);
+    try {
+      if (FirebaseAuth.instance.currentUser != null) {
+        _profileImageUrl = await _userService.getUserProfileImageUrl() ?? '';
+      } else {
+        _profileImageUrl =
+            'https://firebasestorage.googleapis.com/v0/b/bootcamp-760bf.appspot.com/o/profile_images%2Fguest_pp.png?alt=media&token=206dc128-8257-4346-b75a-70d80373a68b'; // Misafir için varsayılan fotoğraf
+      }
+    } catch (e) {
+      print('Hata: $e');
+      _profileImageUrl =
+          'https://firebasestorage.googleapis.com/v0/b/bootcamp-760bf.appspot.com/o/profile_images%2Fguest_pp.png?alt=media&token=206dc128-8257-4346-b75a-70d80373a68b'; // Hata durumunda varsayılan fotoğraf
+    } finally {
+      setBusy(false);
+      notifyListeners(); // UI'yi yeniden oluşturun
+    }
   }
 
   Future<void> pickAndUploadImage() async {
-    if (_isGuestLogin) return;
-
     final pickedFile =
-    await _imagePicker.pickImage(source: ImageSource.gallery);
+        await _imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       File imageFile = File(pickedFile.path);
-
-      String downloadUrl = await _uploadImageToFirebase(imageFile);
-
-      await _userService.updateUserProfileImageUrl(downloadUrl);
-
-      _profileImageUrl = downloadUrl;
-      notifyListeners();
+      try {
+        setBusy(true);
+        String fileName =
+            'profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.png';
+        Reference storageRef = FirebaseStorage.instance.ref().child(fileName);
+        await storageRef.putFile(imageFile);
+        String downloadUrl = await storageRef.getDownloadURL();
+        await _userService.updateUserProfileImageUrl(downloadUrl);
+        _profileImageUrl = downloadUrl;
+      } catch (e) {
+        print('Hata: $e');
+      } finally {
+        setBusy(false);
+        notifyListeners(); // UI'yi yeniden oluşturun
+      }
     }
   }
 
   Future<void> removeProfileImage() async {
-    if (_isGuestLogin) return;
-
-    String userId = FirebaseAuth.instance.currentUser!.uid;
-    Reference storageReference =
-    FirebaseStorage.instance.ref().child("profile_images/$userId");
-
-    await storageReference.delete();
-    await _userService.updateUserProfileImageUrl("");
-
-    _profileImageUrl = "";
-    notifyListeners();
-  }
-
-  Future<String> _uploadImageToFirebase(File imageFile) async {
-    String userId = FirebaseAuth.instance.currentUser!.uid;
-    Reference storageReference =
-    FirebaseStorage.instance.ref().child("profile_images/$userId");
-    UploadTask uploadTask = storageReference.putFile(imageFile);
-    TaskSnapshot taskSnapshot = await uploadTask;
-    return await taskSnapshot.ref.getDownloadURL();
+    try {
+      setBusy(true);
+      String fileName =
+          'profile_pictures/${FirebaseAuth.instance.currentUser!.uid}.png';
+      Reference storageRef = FirebaseStorage.instance.ref().child(fileName);
+      await storageRef.delete();
+      await _userService.updateUserProfileImageUrl('');
+      _profileImageUrl = 'assets/guest_pp.png'; // Varsayılan fotoğraf
+    } catch (e) {
+      print('Hata: $e');
+    } finally {
+      setBusy(false);
+      notifyListeners(); // UI'yi yeniden oluşturun
+    }
   }
 }

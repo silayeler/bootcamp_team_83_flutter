@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/chapter/chapter_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/form/general_form_page.dart';
@@ -5,8 +7,6 @@ import 'package:bootcamp_team_83_flutter/ui/views/home/drawer/account/account_sc
 import 'package:bootcamp_team_83_flutter/ui/views/home/drawer/profile/profile_photo_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/drawer/success/success_screen.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/home_viewmodel.dart';
-import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/app_colors.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
@@ -14,10 +14,10 @@ class HomeView extends StackedView<HomeViewModel> {
 
   @override
   Widget builder(
-      BuildContext context,
-      HomeViewModel viewModel,
-      Widget? child,
-      ) {
+    BuildContext context,
+    HomeViewModel viewModel,
+    Widget? child,
+  ) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -49,18 +49,21 @@ class HomeView extends StackedView<HomeViewModel> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                       Flexible(child: ProfilePhotoView()),
+                      Flexible(
+                          child: ProfilePhotoView(
+                        photoUrl: '',
+                      )),
                       Flexible(
                         child: viewModel.isBusy
                             ? const CircularProgressIndicator()
                             : Text(
-                          viewModel.userName,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: drawerTextColor,
-                            fontSize: 24,
-                          ),
-                        ),
+                                viewModel.userName,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: drawerTextColor,
+                                  fontSize: 24,
+                                ),
+                              ),
                       ),
                     ],
                   ),
@@ -91,7 +94,6 @@ class HomeView extends StackedView<HomeViewModel> {
                   );
                 },
               ),
-
               buildCustomListTile(
                 color: Colors.lightGreen,
                 icon: Icons.logout,
@@ -104,17 +106,18 @@ class HomeView extends StackedView<HomeViewModel> {
           ),
         ),
         body: Container(
-            width: screenWidth(context),
-            height: screenHeight(context),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/anasayfa_arkaplan.png'),
-                fit: BoxFit.cover,
-              ),
+          width: screenWidth(context),
+          height: screenHeight(context),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/anasayfa_arkaplan.png'),
+              fit: BoxFit.cover,
             ),
-            child: ChapterView(
-              userId: viewModel.userId ?? "",
-            )),
+          ),
+          child: ChapterView(
+            userId: viewModel.userId ?? "",
+          ),
+        ),
       ),
     );
   }
@@ -127,16 +130,17 @@ class HomeView extends StackedView<HomeViewModel> {
     viewModel.initialize();
   }
 
-  Widget buildCustomListTile(
-      {required Color color,
-        required IconData icon,
-        required String text,
-        required VoidCallback onTap}) {
+  Widget buildCustomListTile({
+    required Color color,
+    required IconData icon,
+    required String text,
+    required VoidCallback onTap,
+  }) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(50.0),
       ),
       child: ListTile(
         leading: Icon(icon, color: drawerTextColor),

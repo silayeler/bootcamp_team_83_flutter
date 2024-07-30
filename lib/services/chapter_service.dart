@@ -14,7 +14,8 @@ class ChapterService {
   }
 
   // Görev Yolu sayfası oluşturma
-  Future<DocumentReference> createPathway(String sectionId, Map<String, dynamic> pathwayData) async {
+  Future<DocumentReference> createPathway(
+      String sectionId, Map<String, dynamic> pathwayData) async {
     try {
       var pathwayRef = await _firestore
           .collection('sections')
@@ -29,7 +30,8 @@ class ChapterService {
   }
 
   // Pathway item oluşturma
-  Future<void> createPathwayItem(String sectionId, String pathwayId, Map<String, dynamic> itemData) async {
+  Future<void> createPathwayItem(
+      String sectionId, String pathwayId, Map<String, dynamic> itemData) async {
     try {
       await _firestore
           .collection('sections')
@@ -44,7 +46,8 @@ class ChapterService {
   }
 
   // Soru oluşturma
-  Future<void> createQuestion(String sectionId, String pathwayId, String itemId, Map<String, dynamic> questionData) async {
+  Future<void> createQuestion(String sectionId, String pathwayId, String itemId,
+      Map<String, dynamic> questionData) async {
     try {
       await _firestore
           .collection('sections')
@@ -60,11 +63,11 @@ class ChapterService {
     }
   }
 
-
   // Tüm bölümleri alma
   Future<QuerySnapshot> getSections() async {
     try {
-      QuerySnapshot querySnapshot = await _firestore.collection('sections').get();
+      QuerySnapshot querySnapshot =
+          await _firestore.collection('sections').get();
       return querySnapshot;
     } catch (e) {
       print('Error getting sections: $e');
@@ -88,7 +91,8 @@ class ChapterService {
   }
 
   // Belirli bir görev yolundaki tüm itemleri alma
-  Future<QuerySnapshot> getPathwayItems(String sectionId, String pathwayId) async {
+  Future<QuerySnapshot> getPathwayItems(
+      String sectionId, String pathwayId) async {
     try {
       QuerySnapshot querySnapshot = await _firestore
           .collection('sections')

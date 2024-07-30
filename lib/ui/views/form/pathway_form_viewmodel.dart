@@ -42,7 +42,8 @@ class PathwayFormViewModel extends BaseViewModel {
 
       int numberOfItems = int.parse(itemController.text);
       for (int i = 0; i < numberOfItems; i++) {
-        await _chapterService.createPathwayItem(selectedSectionId!, pathwayRef.id, {
+        await _chapterService
+            .createPathwayItem(selectedSectionId!, pathwayRef.id, {
           'title': 'Star ${i + 1}',
         });
       }

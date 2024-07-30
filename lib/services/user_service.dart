@@ -3,7 +3,7 @@ import 'package:bootcamp_team_83_flutter/models/user_progress_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class UserService{
+class UserService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -12,7 +12,7 @@ class UserService{
   Future<String> getUserNameSurname() async {
     if (user != null) {
       DocumentSnapshot doc =
-      await _firestore.collection('users').doc(user!.uid).get();
+          await _firestore.collection('users').doc(user!.uid).get();
       return doc['name'] + " " + doc['surname'];
     }
     return "User not found";
@@ -21,14 +21,11 @@ class UserService{
   Future<String> getUserProfileImageUrl() async {
     if (user != null) {
       DocumentSnapshot doc =
-      await _firestore.collection('users').doc(user!.uid).get();
+          await _firestore.collection('users').doc(user!.uid).get();
       return doc['profileImageUrl'];
-    }else {
-
+    } else {
       return "User not found";
-
     }
-
   }
 
   Future<void> updateUserProfileImageUrl(String imageUrl) async {
@@ -52,12 +49,11 @@ class UserService{
     return user == null || user!.isAnonymous;
   }
 
-
-
   // Kullanıcı ilerlemesini alma
   Future<UserProgress?> getUserProgress(String userId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('userProgress').doc(userId).get();
+      DocumentSnapshot doc =
+          await _firestore.collection('userProgress').doc(userId).get();
       if (doc.exists) {
         return UserProgress.fromMap(doc.data() as Map<String, dynamic>);
       }
@@ -69,12 +65,15 @@ class UserService{
   }
 
   // Kullanıcı ilerlemesini güncelleme
-  Future<void> updateUserProgress(String userId, UserProgress userProgress) async {
+  Future<void> updateUserProgress(
+      String userId, UserProgress userProgress) async {
     try {
-      await _firestore.collection('userProgress').doc(userId).set(userProgress.toMap());
+      await _firestore
+          .collection('userProgress')
+          .doc(userId)
+          .set(userProgress.toMap());
     } catch (e) {
       print('Error updating user progress: $e');
     }
   }
-
 }

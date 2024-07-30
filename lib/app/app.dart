@@ -21,7 +21,7 @@ import 'package:bootcamp_team_83_flutter/ui/views/signup/signup_view.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: HomeView,initial: true),
+    MaterialRoute(page: HomeView, initial: true),
     MaterialRoute(page: StartupView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: SignupView),
@@ -36,7 +36,6 @@ import 'package:bootcamp_team_83_flutter/ui/views/signup/signup_view.dart';
     MaterialRoute(page: QuestionFormView),
 
     MaterialRoute(page: ProfilePhotoView),
-
 
     // @stacked-route
   ],
