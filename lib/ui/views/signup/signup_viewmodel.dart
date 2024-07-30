@@ -26,7 +26,7 @@ class SignupViewModel extends BaseViewModel {
         surname,
       );
       if (user != null) {
-        _navigationService.replaceWithLoginView();
+        goToLogin();
       }
     } catch (e) {
       print('Beklenmedik bir hata oluştu: $e');

@@ -1,19 +1,16 @@
 import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/chapter/chapter_view.dart';
-import 'package:bootcamp_team_83_flutter/ui/views/forms/chapter_form_view.dart';
-import 'package:bootcamp_team_83_flutter/ui/views/forms/pathway_form_view.dart';
-import 'package:bootcamp_team_83_flutter/ui/views/home/account/account_screen.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/form/general_form_page.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/home/drawer/account/account_screen.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/home/drawer/profile/profile_photo_view.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/home/drawer/success/success_screen.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/home_viewmodel.dart';
-import 'package:bootcamp_team_83_flutter/ui/views/home/profile/profile_photo_view.dart';
-import 'package:bootcamp_team_83_flutter/ui/views/home/success/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/app_colors.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
-  final bool isGuestLogin;
-
-  const HomeView({Key? key, required this.isGuestLogin}) : super(key: key);
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
@@ -23,9 +20,20 @@ class HomeView extends StackedView<HomeViewModel> {
       ) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: acikMavi,
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: acikMavi,
+          backgroundColor: Colors.black,
+          leading: IconButton(
+            color: Colors.grey,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const GeneralFormPage()),
+              );
+            },
+            icon: const Icon(Icons.add_box_outlined),
+          ),
         ),
         endDrawer: Drawer(
           width: screenWidth(context) / 1.75,
@@ -39,16 +47,19 @@ class HomeView extends StackedView<HomeViewModel> {
                   decoration: const BoxDecoration(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const ProfilePhotoView(),
-                      viewModel.isBusy
-                          ? const CircularProgressIndicator()
-                          : Text(
-                        viewModel.userName,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: drawerTextColor,
-                          fontSize: 24,
+                       Flexible(child: ProfilePhotoView()),
+                      Flexible(
+                        child: viewModel.isBusy
+                            ? const CircularProgressIndicator()
+                            : Text(
+                          viewModel.userName,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: drawerTextColor,
+                            fontSize: 24,
+                          ),
                         ),
                       ),
                     ],
@@ -63,7 +74,8 @@ class HomeView extends StackedView<HomeViewModel> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AccountScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const AccountScreen()),
                   );
                 },
               ),
@@ -75,31 +87,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  SuccessScreen()),
-                  );
-                },
-              ),
-              buildCustomListTile(
-                color: drawerContainerColor,
-                icon: Icons.task_alt_sharp,
-                text: 'Bölüm Formu',
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ChapterFormView()),
-                  );
-                },
-              ),
-              buildCustomListTile(
-                color: drawerContainerColor,
-                icon: Icons.task,
-                text: 'Görev Yolu Formu',
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const PathWayFormView(sectionId: "sectionId")),
+                    MaterialPageRoute(builder: (context) => SuccessScreen()),
                   );
                 },
               ),
@@ -115,9 +103,18 @@ class HomeView extends StackedView<HomeViewModel> {
             ],
           ),
         ),
-        body: const Center(
-          child: ChapterView(userId: 'userId',),
-        ),
+        body: Container(
+            width: screenWidth(context),
+            height: screenHeight(context),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/anasayfa_arkaplan.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: ChapterView(
+              userId: viewModel.userId ?? "",
+            )),
       ),
     );
   }
@@ -127,11 +124,7 @@ class HomeView extends StackedView<HomeViewModel> {
 
   @override
   void onViewModelReady(HomeViewModel viewModel) {
-    if (isGuestLogin) {
-      viewModel.loginAsGuest();
-    } else {
-      viewModel.fetchUserName();
-    }
+    viewModel.initialize();
   }
 
   Widget buildCustomListTile(

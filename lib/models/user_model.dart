@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 class UserModel {
   final String id;
   final String name;
   final String surname;
   final String email;
-  final String? profilePicture;
+  final String? profileImageUrl ;
   final DateTime? createdAt;
 
   UserModel({
@@ -13,7 +14,7 @@ class UserModel {
     required this.name,
     required this.surname,
     required this.email,
-    this.profilePicture,
+    this.profileImageUrl,
     this.createdAt,
   });
 
@@ -23,7 +24,7 @@ class UserModel {
       name: data['name'] ?? '',
       surname: data['surname'] ?? '',
       email: data['email'] ?? '',
-      profilePicture: data['profilePicture'],
+      profileImageUrl: data['profileImageUrl'] ,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate(),
     );
   }
@@ -33,7 +34,7 @@ class UserModel {
       'name': name,
       'surname': surname,
       'email': email,
-      'profilePicture': profilePicture,
+      'profileImageUrl': profileImageUrl ?? "assets/astronot_signup.png",
       'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : FieldValue.serverTimestamp(),
     };
   }

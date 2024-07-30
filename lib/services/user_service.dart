@@ -22,8 +22,12 @@ class UserService{
       DocumentSnapshot doc =
       await _firestore.collection('users').doc(user!.uid).get();
       return doc['profileImageUrl'];
+    }else {
+
+      return "User not found";
+
     }
-    return "User not found";
+
   }
 
   Future<void> updateUserProfileImageUrl(String imageUrl) async {
@@ -40,5 +44,10 @@ class UserService{
         .collection('users')
         .doc(userModel.id)
         .set(userModel.toMap());
+  }
+
+  // Misafir girişi kontrolü
+  Future<bool> isGuestLogin() async {
+    return user == null || user!.isAnonymous;
   }
 }

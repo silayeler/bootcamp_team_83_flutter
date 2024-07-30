@@ -9,23 +9,37 @@ class HomeViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
 
-  String _userName = "";
-  bool isGuest = false;
+  String? userId;
 
-  String get userName => isGuest ? 'Misafir' : _userName;
+  String _userName = "";
+
+  bool isGuestLogin = false;
+
+  String get userName => isGuestLogin ? 'Misafir' : _userName;
+
+  // Initialize the ViewModel
+  Future<void> initialize() async {
+    userId = FirebaseAuth.instance.currentUser?.uid;
+
+    if (isGuestLogin || userId == null) {
+      loginAsGuest();
+    } else {
+      await fetchUserName();
+    }
+  }
 
   Future<void> fetchUserName() async {
-    if (isGuest) return; // Eğer misafir girişiyse veritabanına sorgu yapma
+    if (isGuestLogin || userId == null) return;
     setBusy(true);
-    await _userService.getUserNameSurname();
+    _userName = await _userService.getUserNameSurname() ?? "";
     setBusy(false);
-    rebuildUi();
+    notifyListeners();
   }
 
   void loginAsGuest() {
-    isGuest = true;
-    _userName = 'Misafir'; // Misafir adı hemen belirlenir
-    rebuildUi();
+    isGuestLogin = true;
+    _userName = 'Misafir';
+    notifyListeners();
   }
 
   Future<void> signOut() async {

@@ -13,25 +13,57 @@ class ChapterService {
     }
   }
 
-  // Yıldız sayfası oluşturma
-  Future<void> createStarPage(String sectionId,
-      Map<String, dynamic> starPageData) async {
+  // Görev Yolu sayfası oluşturma
+  Future<DocumentReference> createPathway(String sectionId, Map<String, dynamic> pathwayData) async {
+    try {
+      var pathwayRef = await _firestore
+          .collection('sections')
+          .doc(sectionId)
+          .collection('pathways')
+          .add(pathwayData);
+      return pathwayRef;
+    } catch (e) {
+      print('Error creating pathway: $e');
+      rethrow;
+    }
+  }
+
+  // Pathway item oluşturma
+  Future<void> createPathwayItem(String sectionId, String pathwayId, Map<String, dynamic> itemData) async {
     try {
       await _firestore
           .collection('sections')
           .doc(sectionId)
-          .collection('starPages')
-          .add(starPageData);
+          .collection('pathways')
+          .doc(pathwayId)
+          .collection('items')
+          .add(itemData);
     } catch (e) {
-      print('Error creating star page: $e');
+      print('Error creating pathway item: $e');
+    }
+  }
+
+  // Soru oluşturma
+  Future<void> createQuestion(String sectionId, String pathwayId, String itemId, Map<String, dynamic> questionData) async {
+    try {
+      await _firestore
+          .collection('sections')
+          .doc(sectionId)
+          .collection('pathways')
+          .doc(pathwayId)
+          .collection('items')
+          .doc(itemId)
+          .collection('questions')
+          .add(questionData);
+    } catch (e) {
+      print('Error creating question: $e');
     }
   }
 
   // Kullanıcı ilerlemesini alma
   Future<UserProgress?> getUserProgress(String userId) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection('userProgress').doc(
-          userId).get();
+      DocumentSnapshot doc = await _firestore.collection('userProgress').doc(userId).get();
       if (doc.exists) {
         return UserProgress.fromMap(doc.data() as Map<String, dynamic>);
       }
@@ -43,11 +75,9 @@ class ChapterService {
   }
 
   // Kullanıcı ilerlemesini güncelleme
-  Future<void> updateUserProgress(String userId,
-      UserProgress userProgress) async {
+  Future<void> updateUserProgress(String userId, UserProgress userProgress) async {
     try {
-      await _firestore.collection('userProgress').doc(userId).set(
-          userProgress.toMap());
+      await _firestore.collection('userProgress').doc(userId).set(userProgress.toMap());
     } catch (e) {
       print('Error updating user progress: $e');
     }
@@ -60,6 +90,38 @@ class ChapterService {
       return querySnapshot;
     } catch (e) {
       print('Error getting sections: $e');
+      rethrow;
+    }
+  }
+
+  // Belirli bir bölümdeki tüm görev yollarını alma
+  Future<QuerySnapshot> getPathways(String sectionId) async {
+    try {
+      QuerySnapshot querySnapshot = await _firestore
+          .collection('sections')
+          .doc(sectionId)
+          .collection('pathways')
+          .get();
+      return querySnapshot;
+    } catch (e) {
+      print('Error getting pathways: $e');
+      rethrow;
+    }
+  }
+
+  // Belirli bir görev yolundaki tüm itemleri alma
+  Future<QuerySnapshot> getPathwayItems(String sectionId, String pathwayId) async {
+    try {
+      QuerySnapshot querySnapshot = await _firestore
+          .collection('sections')
+          .doc(sectionId)
+          .collection('pathways')
+          .doc(pathwayId)
+          .collection('items')
+          .get();
+      return querySnapshot;
+    } catch (e) {
+      print('Error getting pathway items: $e');
       rethrow;
     }
   }
