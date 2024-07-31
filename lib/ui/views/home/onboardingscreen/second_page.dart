@@ -16,7 +16,7 @@ class _SecondPageState extends State<SecondPage> {
   @override
   void initState() {
     super.initState();
-    _playBackgroundSoundForDuration();
+    _preloadAndPlayBackgroundSound();
   }
 
   @override
@@ -26,15 +26,25 @@ class _SecondPageState extends State<SecondPage> {
     super.dispose();
   }
 
-  void _playBackgroundSoundForDuration() async {
+  Future<void> _preloadAndPlayBackgroundSound() async {
     try {
-      await _audioPlayer.setSource(AssetSource('ses_klavye.mp3'));
+      await _audioPlayer.setSource(AssetSource('second.mp3'));
+      _playBackgroundSound();
+    } catch (e) {
+      print("Error preloading audio: $e");
+    }
+  }
+
+  void _playBackgroundSound() async {
+    try {
       _audioPlayer.setReleaseMode(ReleaseMode.loop);
       _audioPlayer.setVolume(_volume);
       _audioPlayer.resume();
       _isSoundPlaying = true;
 
-      await Future.delayed(const Duration(seconds: 3)); // Sesin azalması için bekle
+      // Sesin azalmasını bir saniye erken başlat
+      await Future.delayed(
+          const Duration(seconds: 2)); // 3 saniye yerine 2 saniye bekle
 
       // Ses yavaşça azalacak
       final decreaseDuration = const Duration(seconds: 1);
@@ -59,7 +69,6 @@ class _SecondPageState extends State<SecondPage> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +91,7 @@ class _SecondPageState extends State<SecondPage> {
                   child: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child:  TypewriterEffect(
+                      child: TypewriterEffect(
                         text: "CodeMania Beyond the Space",
                         textStyle: const TextStyle(
                           fontSize: 25,
@@ -106,20 +115,19 @@ class _SecondPageState extends State<SecondPage> {
                     _stopSound(); // Ses durduruluyor
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  ThirdPage()),
+                      MaterialPageRoute(builder: (context) => ThirdPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-
                     backgroundColor:
                         Colors.transparent, // Butonun arka plan rengi
                     side: const BorderSide(
                       color: Colors.white, // Şerit rengi
                       width: 2, // Şerit kalınlığı
-
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),

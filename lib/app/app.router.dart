@@ -14,8 +14,10 @@ import 'package:bootcamp_team_83_flutter/ui/views/form/pathway_form_view.dart'
 import 'package:bootcamp_team_83_flutter/ui/views/form/question_form_view.dart'
     as _i12;
 import 'package:bootcamp_team_83_flutter/ui/views/home/drawer/profile/profile_photo_view.dart'
-    as _i13;
+    as _i14;
 import 'package:bootcamp_team_83_flutter/ui/views/home/home_view.dart' as _i2;
+import 'package:bootcamp_team_83_flutter/ui/views/home/onboardingscreen/first_page.dart'
+    as _i13;
 import 'package:bootcamp_team_83_flutter/ui/views/login/login_view.dart' as _i4;
 import 'package:bootcamp_team_83_flutter/ui/views/pathway/pathway_view.dart'
     as _i8;
@@ -26,10 +28,10 @@ import 'package:bootcamp_team_83_flutter/ui/views/signup/signup_view.dart'
 import 'package:bootcamp_team_83_flutter/ui/views/startup/startup_view.dart'
     as _i3;
 import 'package:bootcamp_team_83_flutter/ui/views/story/story_view.dart' as _i6;
-import 'package:flutter/material.dart' as _i14;
+import 'package:flutter/material.dart' as _i15;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i15;
+import 'package:stacked_services/stacked_services.dart' as _i16;
 
 class Routes {
   static const homeView = '/';
@@ -54,6 +56,8 @@ class Routes {
 
   static const questionFormView = '/question-form-view';
 
+  static const firstPage = '/first-page';
+
   static const profilePhotoView = '/profile-photo-view';
 
   static const all = <String>{
@@ -68,6 +72,7 @@ class Routes {
     chapterFormView,
     pathwayFormView,
     questionFormView,
+    firstPage,
     profilePhotoView,
   };
 }
@@ -119,20 +124,24 @@ class StackedRouter extends _i1.RouterBase {
       page: _i12.QuestionFormView,
     ),
     _i1.RouteDef(
+      Routes.firstPage,
+      page: _i13.FirstPage,
+    ),
+    _i1.RouteDef(
       Routes.profilePhotoView,
-      page: _i13.ProfilePhotoView,
+      page: _i14.ProfilePhotoView,
     ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
@@ -141,7 +150,7 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<LoginViewArguments>(
         orElse: () => const LoginViewArguments(),
       );
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => _i4.LoginView(key: args.key),
         settings: data,
       );
@@ -150,20 +159,20 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<SignupViewArguments>(
         orElse: () => const SignupViewArguments(),
       );
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => _i5.SignupView(key: args.key),
         settings: data,
       );
     },
     _i6.StoryView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.StoryView(),
         settings: data,
       );
     },
     _i7.ChapterView: (data) {
       final args = data.getArgs<ChapterViewArguments>(nullOk: false);
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i7.ChapterView(key: args.key, userId: args.userId),
         settings: data,
@@ -171,7 +180,7 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i8.PathwayView: (data) {
       final args = data.getArgs<PathwayViewArguments>(nullOk: false);
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => _i8.PathwayView(
             key: args.key, sectionId: args.sectionId, userId: args.userId),
         settings: data,
@@ -179,35 +188,41 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i9.QuestionView: (data) {
       final args = data.getArgs<QuestionViewArguments>(nullOk: false);
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i9.QuestionView(key: args.key, questions: args.questions),
         settings: data,
       );
     },
     _i10.ChapterFormView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.ChapterFormView(),
         settings: data,
       );
     },
     _i11.PathwayFormView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.PathwayFormView(),
         settings: data,
       );
     },
     _i12.QuestionFormView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.QuestionFormView(),
         settings: data,
       );
     },
-    _i13.ProfilePhotoView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i13.ProfilePhotoView(
-          photoUrl: '',
-        ),
+    _i13.FirstPage: (data) {
+      return _i15.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i13.FirstPage(),
+        settings: data,
+      );
+    },
+    _i14.ProfilePhotoView: (data) {
+      final args = data.getArgs<ProfilePhotoViewArguments>(nullOk: false);
+      return _i15.MaterialPageRoute<dynamic>(
+        builder: (context) =>
+            _i14.ProfilePhotoView(key: args.key, photoUrl: args.photoUrl),
         settings: data,
       );
     },
@@ -223,7 +238,7 @@ class StackedRouter extends _i1.RouterBase {
 class LoginViewArguments {
   const LoginViewArguments({this.key});
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   @override
   String toString() {
@@ -245,7 +260,7 @@ class LoginViewArguments {
 class SignupViewArguments {
   const SignupViewArguments({this.key});
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   @override
   String toString() {
@@ -270,7 +285,7 @@ class ChapterViewArguments {
     required this.userId,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final String userId;
 
@@ -298,7 +313,7 @@ class PathwayViewArguments {
     required this.userId,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final String sectionId;
 
@@ -329,7 +344,7 @@ class QuestionViewArguments {
     required this.questions,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final List<Map<String, dynamic>> questions;
 
@@ -350,7 +365,34 @@ class QuestionViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i15.NavigationService {
+class ProfilePhotoViewArguments {
+  const ProfilePhotoViewArguments({
+    this.key,
+    required this.photoUrl,
+  });
+
+  final _i15.Key? key;
+
+  final String photoUrl;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "photoUrl": "$photoUrl"}';
+  }
+
+  @override
+  bool operator ==(covariant ProfilePhotoViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.photoUrl == photoUrl;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ photoUrl.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i16.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -380,7 +422,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToLoginView({
-    _i14.Key? key,
+    _i15.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -396,7 +438,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToSignupView({
-    _i14.Key? key,
+    _i15.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -426,7 +468,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToChapterView({
-    _i14.Key? key,
+    _i15.Key? key,
     required String userId,
     int? routerId,
     bool preventDuplicates = true,
@@ -443,7 +485,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToPathwayView({
-    _i14.Key? key,
+    _i15.Key? key,
     required String sectionId,
     required String userId,
     int? routerId,
@@ -462,7 +504,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToQuestionView({
-    _i14.Key? key,
+    _i15.Key? key,
     required List<Map<String, dynamic>> questions,
     int? routerId,
     bool preventDuplicates = true,
@@ -520,14 +562,31 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToProfilePhotoView([
+  Future<dynamic> navigateToFirstPage([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
+    return navigateTo<dynamic>(Routes.firstPage,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToProfilePhotoView({
+    _i15.Key? key,
+    required String photoUrl,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
     return navigateTo<dynamic>(Routes.profilePhotoView,
+        arguments: ProfilePhotoViewArguments(key: key, photoUrl: photoUrl),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -563,7 +622,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithLoginView({
-    _i14.Key? key,
+    _i15.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -579,7 +638,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithSignupView({
-    _i14.Key? key,
+    _i15.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -609,7 +668,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithChapterView({
-    _i14.Key? key,
+    _i15.Key? key,
     required String userId,
     int? routerId,
     bool preventDuplicates = true,
@@ -626,7 +685,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithPathwayView({
-    _i14.Key? key,
+    _i15.Key? key,
     required String sectionId,
     required String userId,
     int? routerId,
@@ -645,7 +704,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithQuestionView({
-    _i14.Key? key,
+    _i15.Key? key,
     required List<Map<String, dynamic>> questions,
     int? routerId,
     bool preventDuplicates = true,
@@ -703,14 +762,31 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithProfilePhotoView([
+  Future<dynamic> replaceWithFirstPage([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
+    return replaceWith<dynamic>(Routes.firstPage,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithProfilePhotoView({
+    _i15.Key? key,
+    required String photoUrl,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
     return replaceWith<dynamic>(Routes.profilePhotoView,
+        arguments: ProfilePhotoViewArguments(key: key, photoUrl: photoUrl),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

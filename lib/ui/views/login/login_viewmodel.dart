@@ -20,18 +20,32 @@ class LoginViewModel extends BaseViewModel {
       User? user = await _authenticationService.signInWithEmailAndPassword(
           email, password);
       bool hasSeenStory = await _storageService.hasSeenStory();
-      if (hasSeenStory && user != null) {
+      if (user != null) {
+        if (hasSeenStory) {
+          _snackbarService.showSnackbar(
+            title: 'Giriş Başarılı',
+            message: 'Hoşgeldin',
+            duration: const Duration(milliseconds: snackbarDuration),
+          );
+          _navigationService.replaceWithHomeView();
+        } else {
+          _navigationService.replaceWithStoryView();
+        }
+      } else {
+        // Kullanıcı objesi null ise, giriş başarısızdır.
         _snackbarService.showSnackbar(
-          title: 'Giriş Başarılı',
-          message: 'Hoşgeldin',
+          title: 'Giriş Hatası',
+          message: 'Email veya şifre yanlış. Lütfen tekrar deneyin.',
           duration: const Duration(milliseconds: snackbarDuration),
         );
-        _navigationService.replaceWithHomeView();
-      } else {
-        _navigationService.replaceWithStoryView();
       }
     } catch (e) {
-      print('Beklenmedik bir hata oluştu: $e');
+      // Hata durumunda kullanıcıyı bilgilendirmek için Snackbar göster
+      _snackbarService.showSnackbar(
+        title: 'Giriş Hatası',
+        message: 'Bir hata oluştu. Lütfen tekrar deneyin.',
+        duration: const Duration(milliseconds: snackbarDuration),
+      );
     } finally {
       setBusy(false);
     }

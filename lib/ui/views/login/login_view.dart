@@ -12,103 +12,108 @@ class LoginView extends StackedView<LoginViewModel> {
   @override
   Widget builder(
       BuildContext context, LoginViewModel viewModel, Widget? child) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: Container(
-          //padding: const EdgeInsets.all(16.0),
-          width: screenWidth(context),
-          height: screenHeight(context),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/arka_plan.png'),
-              fit: BoxFit.cover,
+    return WillPopScope(
+      onWillPop: () async {
+        return false; // Geri tuşuna basıldığında önceki sayfaya gitmeyi engeller
+      },
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          body: Container(
+            width: screenWidth(context),
+            height: screenHeight(context),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/arka_plan.png'),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 15),
-                const Text(
-                  "HOŞ  GELDİN!",
-                  style: TextStyle(
-                    color: Color(0xFFD7EAF8),
-                    letterSpacing: .5,
-                    fontSize: 35,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                // Resim
-                Image.asset(
-                  'assets/login.png',
-                  fit: BoxFit.cover,
-                  height: 350,
-                  width: 370,
-                ),
-                const SizedBox(height: 20),
-                // Email
-                _buildTextField(
-                  controller: emailController,
-                  hintText: 'Email',
-                  icon: Icons.email,
-                ),
-                const SizedBox(height: 20),
-                // Şifre
-                _buildTextField(
-                  controller: passwordController,
-                  hintText: 'Şifre',
-                  icon: Icons.lock,
-                  obscureText: true,
-                ),
-                const SizedBox(height: 20),
-                // Giriş Butonu
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: _buildElevatedButton(
-                    onPressed: () async {
-                      await viewModel.signIn(
-                        emailController.text,
-                        passwordController.text,
-                      );
-                    },
-                    text: 'Giriş',
-                  ),
-                ),
-                const SizedBox(height: 20),
-                // Misafir Girişi Butonu
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: _buildElevatedButton(
-                    onPressed: () async {
-                      await viewModel.guestSignIn();
-                    },
-                    text: 'Misafir Girişi',
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Aramızda yeni misin?',
-                      style: TextStyle(color: Color(0xFFAAACAF), fontSize: 18),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 15),
+                  const Text(
+                    "HOŞ  GELDİN!",
+                    style: TextStyle(
+                      color: Color(0xFFD7EAF8),
+                      letterSpacing: .5,
+                      fontSize: 35,
                     ),
-                    TextButton(
-                      onPressed: () {
-                        viewModel.goToRegister();
+                  ),
+                  const SizedBox(height: 20),
+                  // Resim
+                  Image.asset(
+                    'assets/login.png',
+                    fit: BoxFit.cover,
+                    height: 350,
+                    width: 370,
+                  ),
+                  const SizedBox(height: 20),
+                  // Email
+                  _buildTextField(
+                    controller: emailController,
+                    hintText: 'Email',
+                    icon: Icons.email,
+                  ),
+                  const SizedBox(height: 20),
+                  // Şifre
+                  _buildTextField(
+                    controller: passwordController,
+                    hintText: 'Şifre',
+                    icon: Icons.lock,
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 20),
+                  // Giriş Butonu
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: _buildElevatedButton(
+                      onPressed: () async {
+                        await viewModel.signIn(
+                          emailController.text,
+                          passwordController.text,
+                        );
                       },
-                      child: const Text(
-                        'Kayıt Ol',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      text: 'Giriş',
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                  const SizedBox(height: 20),
+                  // Misafir Girişi Butonu
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: _buildElevatedButton(
+                      onPressed: () async {
+                        await viewModel.guestSignIn();
+                      },
+                      text: 'Misafir Girişi',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Aramızda yeni misin?',
+                        style:
+                            TextStyle(color: Color(0xFFAAACAF), fontSize: 18),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          viewModel.goToRegister();
+                        },
+                        child: const Text(
+                          'Kayıt Ol',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
