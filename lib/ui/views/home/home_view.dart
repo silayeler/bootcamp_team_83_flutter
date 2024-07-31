@@ -95,11 +95,16 @@ class HomeView extends StackedView<HomeViewModel> {
                 },
               ),
               buildCustomListTile(
-                color: Colors.lightGreen,
-                icon: Icons.logout,
-                text: 'Çıkış Yap',
+                color: viewModel.isGuest ? Colors.lightBlue : Colors.lightGreen,
+                icon: viewModel.isGuest ? Icons.login : Icons.logout,
+                text: viewModel.isGuest ? 'Giriş Yap' : 'Çıkış Yap',
                 onTap: () {
-                  viewModel.signOut();
+                  if (viewModel.isGuest) {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login-view');
+                  } else {
+                    viewModel.signOut();
+                  }
                 },
               ),
             ],
