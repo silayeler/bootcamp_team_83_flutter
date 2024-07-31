@@ -13,10 +13,12 @@ class ProfilePhotoViewModel extends BaseViewModel {
   String _profileImageUrl = "";
   String get profileImageUrl => _profileImageUrl;
 
+  bool get isGuest => FirebaseAuth.instance.currentUser?.isAnonymous ?? false;
+
   Future<void> fetchUserProfileImage() async {
     setBusy(true);
     try {
-      if (FirebaseAuth.instance.currentUser != null) {
+      if (FirebaseAuth.instance.currentUser != null && !isGuest) {
         _profileImageUrl = await _userService.getUserProfileImageUrl() ?? '';
       } else {
         _profileImageUrl =
