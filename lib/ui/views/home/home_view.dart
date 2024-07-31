@@ -18,22 +18,35 @@ class HomeView extends StackedView<HomeViewModel> {
     HomeViewModel viewModel,
     Widget? child,
   ) {
+    // Admin kullanıcı ID'leri listesi
+    final adminIds = [
+      'GRKAewXcmUaEUgmLcxhK648sXdy2',
+      'MRv1TmXnrIRD6iSieR71Q1pypK32',
+      'DHDn7aCCXrNRT8Nb7TZeVHIx6BI2',
+      'pgHv0eQ1jlXoIDTGtPxgKpMDY6o2'
+    ];
+
+    // Kullanıcının ID'sini al
+    final currentUserId = viewModel.userId;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          leading: IconButton(
-            color: Colors.grey,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const GeneralFormPage()),
-              );
-            },
-            icon: const Icon(Icons.add_box_outlined),
-          ),
+          leading: adminIds.contains(currentUserId)
+              ? IconButton(
+                  color: Colors.grey,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GeneralFormPage()),
+                    );
+                  },
+                  icon: const Icon(Icons.add_box_outlined),
+                )
+              : null, // Eğer kullanıcı admin değilse, leading kısmı null yapılır
         ),
         endDrawer: Drawer(
           width: screenWidth(context) / 1.75,
@@ -74,12 +87,16 @@ class HomeView extends StackedView<HomeViewModel> {
                 icon: Icons.home,
                 text: 'Hesabım',
                 onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AccountScreen()),
-                  );
+                  if (viewModel.isGuest) {
+                    _showLoginAlert(context);
+                  } else {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AccountScreen()),
+                    );
+                  }
                 },
               ),
               buildCustomListTile(
@@ -133,6 +150,54 @@ class HomeView extends StackedView<HomeViewModel> {
   @override
   void onViewModelReady(HomeViewModel viewModel) {
     viewModel.initialize();
+  }
+
+  void _showLoginAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: drawerContainerColor,
+          title: const Text(
+            'Uyarı',
+            style: TextStyle(
+              color: drawerTextColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: const Text(
+            'Hesap bilgileri için lütfen giriş yapınız.',
+            style: TextStyle(color: drawerTextColor),
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  child: const Text(
+                    'Giriş Yap',
+                    style: TextStyle(color: drawerTextColor),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.pushNamed(context, '/login-view');
+                  },
+                ),
+                TextButton(
+                  child: const Text(
+                    'Tamam',
+                    style: TextStyle(color: drawerTextColor),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Widget buildCustomListTile({

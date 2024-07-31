@@ -36,7 +36,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.homeView, // İlk sayfa olarak FirstPage ayarlandı
+      initialRoute: Routes.firstPage, // İlk sayfa olarak FirstPage ayarlandı
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
       navigatorObservers: [

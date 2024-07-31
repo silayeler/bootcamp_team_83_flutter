@@ -9,6 +9,7 @@ import 'package:bootcamp_team_83_flutter/ui/views/form/pathway_form_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/form/question_form_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/drawer/profile/profile_photo_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/home_view.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/home/onboardingscreen/first_page.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/pathway/pathway_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/question/question_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/startup/startup_view.dart';
@@ -34,7 +35,7 @@ import 'package:bootcamp_team_83_flutter/ui/views/signup/signup_view.dart';
     MaterialRoute(page: ChapterFormView),
     MaterialRoute(page: PathwayFormView),
     MaterialRoute(page: QuestionFormView),
-
+    MaterialRoute(page: FirstPage),
     MaterialRoute(page: ProfilePhotoView),
 
     // @stacked-route
