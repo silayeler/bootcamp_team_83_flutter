@@ -15,59 +15,108 @@ class ProfilePhotoView extends StackedView<ProfilePhotoViewModel> {
   ) {
     return GestureDetector(
       onTap: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          builder: (BuildContext context) {
-            return Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16.0),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'Profil Resmini Yönet',
-                    style: TextStyle(
-                        color: drawerTextColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
+        if (viewModel.isGuest) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: drawerContainerColor,
+                title: const Text(
+                  'Uyarı',
+                  style: TextStyle(
+                    color: drawerTextColor,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 20),
-                  _buildTransparentButton(
-                    onPressed: () {
-                      viewModel.pickAndUploadImage();
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icons.edit,
-                    label: 'Profil Resmini Değiştir',
-                  ),
-                  const SizedBox(height: 10),
-                  _buildTransparentButton(
-                    onPressed: () {
-                      viewModel.removeProfileImage();
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icons.delete,
-                    label: 'Profil Resmini Kaldır',
-                  ),
-                  const SizedBox(height: 10),
-                  _buildTransparentButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icons.cancel,
-                    label: 'İptal',
+                ),
+                content: const Text(
+                  'Profil resminizi değiştirmek için lütfen giriş yapınız.',
+                  style: TextStyle(color: drawerTextColor),
+                ),
+                actions: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        child: const Text(
+                          'Giriş Yap',
+                          style: TextStyle(color: drawerTextColor),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          // Burada login sayfasına yönlendirme kodunu ekleyin
+                          Navigator.pushNamed(context, '/login-view'); // Örnek
+                        },
+                      ),
+                      TextButton(
+                        child: const Text(
+                          'Tamam',
+                          style: TextStyle(color: drawerTextColor),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
                   ),
                 ],
-              ),
-            );
-          },
-        );
+              );
+            },
+          );
+        } else {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (BuildContext context) {
+              return Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16.0),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Profil Resmini Yönet',
+                      style: TextStyle(
+                          color: drawerTextColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 20),
+                    _buildTransparentButton(
+                      onPressed: () {
+                        viewModel.pickAndUploadImage();
+                        Navigator.of(context).pop();
+                      },
+                      icon: Icons.edit,
+                      label: 'Profil Resmini Değiştir',
+                    ),
+                    const SizedBox(height: 10),
+                    _buildTransparentButton(
+                      onPressed: () {
+                        viewModel.removeProfileImage();
+                        Navigator.of(context).pop();
+                      },
+                      icon: Icons.delete,
+                      label: 'Profil Resmini Kaldır',
+                    ),
+                    const SizedBox(height: 10),
+                    _buildTransparentButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: Icons.cancel,
+                      label: 'İptal',
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        }
       },
       child: CircleAvatar(
         radius: 40,
