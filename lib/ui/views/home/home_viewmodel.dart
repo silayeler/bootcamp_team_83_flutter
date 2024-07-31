@@ -11,6 +11,7 @@ class HomeViewModel extends BaseViewModel {
   String get userName => _userName;
 
   String? get userId => _authenticationService.currentUser?.uid;
+  bool get isGuest => _authenticationService.currentUser?.isAnonymous ?? false;
 
   Future<void> initialize() async {
     await fetchUserName();
@@ -20,7 +21,7 @@ class HomeViewModel extends BaseViewModel {
     if (userId == null) return;
     setBusy(true);
     try {
-      _userName = await _userService.getUserNameSurname() ?? '';
+      _userName = await _userService.getUserNameSurname() ?? 'Misafir';
     } catch (e) {
       print('Hata: $e');
       _userName = 'Misafir'; // Hata durumunda boş bir isim
@@ -32,5 +33,7 @@ class HomeViewModel extends BaseViewModel {
 
   void signOut() async {
     await _authenticationService.signOut();
+    // Giriş yapıldıktan sonra UI'yi güncellemek için gerekli işlemleri yapın
+    notifyListeners();
   }
 }
