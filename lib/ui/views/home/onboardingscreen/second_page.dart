@@ -28,7 +28,7 @@ class _SecondPageState extends State<SecondPage> {
 
   Future<void> _preloadAndPlayBackgroundSound() async {
     try {
-      await _audioPlayer.setSource(AssetSource('second.mp3'));
+      await _audioPlayer.setSource(AssetSource('ses_klavye.mp3'));
       _playBackgroundSound();
     } catch (e) {
       print("Error preloading audio: $e");
