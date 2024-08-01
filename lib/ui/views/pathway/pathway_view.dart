@@ -107,6 +107,7 @@ class PathwayView extends StackedView<PathwayViewModel> {
               .collection('items')
               .doc(itemDoc.id)
               .collection('questions')
+              .orderBy('questionIndex')
               .get();
 
           if (starSnapshot.docs.isNotEmpty) {
@@ -124,7 +125,7 @@ class PathwayView extends StackedView<PathwayViewModel> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset('$itemImageUrl', width: 100, height: 100),
+            Image.asset(itemImageUrl, width: 100, height: 100),
             Text(
               '$itemNumber',
               style: const TextStyle(

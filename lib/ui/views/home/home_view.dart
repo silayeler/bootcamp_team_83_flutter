@@ -62,7 +62,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Flexible(
+                      const Flexible(
                           child: ProfilePhotoView(
                         photoUrl: '',
                       )),

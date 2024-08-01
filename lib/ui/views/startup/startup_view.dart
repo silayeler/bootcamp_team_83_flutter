@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/startup/startup_viewmodel.dart';

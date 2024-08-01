@@ -1,24 +1,33 @@
+import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class QuestionViewModel extends BaseViewModel {
+
+  BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+
+
+  String _codingAnswer = '';
   String _selectedOption = '';
   String get selectedOption => _selectedOption;
 
   List<String?> _blankAnswers = [];
   List<String?> get blankAnswers => _blankAnswers;
-  String _codingAnswer = '';
 
   int _currentQuestionIndex = 0;
   int get currentQuestionIndex => _currentQuestionIndex;
 
-  final List<Map<String, dynamic>> questions;
+  int get questionCount => _questions.length;
 
-  QuestionViewModel(this.questions) {
+  final List<Map<String, dynamic>> _questions;
+
+  QuestionViewModel(this._questions) {
     _initializeBlankAnswers();
   }
 
   void _initializeBlankAnswers() {
-    var currentQuestion = questions[_currentQuestionIndex];
+    var currentQuestion = _questions[_currentQuestionIndex];
     if (currentQuestion['questionType'] == 'fill_in_blank') {
       int blankCount = currentQuestion['question'].split('___').length - 1;
       _blankAnswers = List.filled(blankCount, null);
@@ -43,7 +52,7 @@ class QuestionViewModel extends BaseViewModel {
   }
 
   bool checkAnswer() {
-    var currentQuestion = questions[_currentQuestionIndex];
+    var currentQuestion = _questions[_currentQuestionIndex];
     bool isCorrect = false;
 
     switch (currentQuestion['questionType']) {
@@ -64,7 +73,7 @@ class QuestionViewModel extends BaseViewModel {
   }
 
   void moveToNextQuestion() {
-    if (_currentQuestionIndex < questions.length - 1) {
+    if (_currentQuestionIndex < _questions.length - 1) {
       _currentQuestionIndex++;
       clearAnswers();
       _initializeBlankAnswers();
@@ -78,12 +87,26 @@ class QuestionViewModel extends BaseViewModel {
     _codingAnswer = '';
   }
 
-  bool get isLastQuestion => _currentQuestionIndex == questions.length - 1;
+  bool get isLastQuestion => _currentQuestionIndex == _questions.length - 1;
 
   List<String> getOptions() {
-    var currentQuestion = questions[_currentQuestionIndex];
+    var currentQuestion = _questions[_currentQuestionIndex];
     return currentQuestion['questionType'] == 'fill_in_blank'
         ? List<String>.from(currentQuestion['options'])
         : [];
   }
+
+  Map<String, dynamic> getCurrentQuestion() {
+    return _questions[_currentQuestionIndex];
+  }
+
+  void congratulate(){
+    _bottomSheetService.showCustomSheet(
+
+      title: "Deneme"
+    );
+
+  }
+
+
 }

@@ -1,4 +1,3 @@
-import 'package:bootcamp_team_83_flutter/models/user_progress_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChapterService {
