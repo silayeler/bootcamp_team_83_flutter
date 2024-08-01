@@ -9,8 +9,8 @@ class QuestionView extends StackedView<QuestionViewModel> {
   const QuestionView({Key? key, required this.questions}) : super(key: key);
 
   @override
-  Widget builder(BuildContext context, QuestionViewModel viewModel,
-      Widget? child) {
+  Widget builder(
+      BuildContext context, QuestionViewModel viewModel, Widget? child) {
     return SafeArea(
       child: Scaffold(
         body: PageView.builder(
@@ -64,8 +64,8 @@ class QuestionView extends StackedView<QuestionViewModel> {
                               backgroundColor: const Color(0xFF404142),
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.lightGreenAccent[700]!),
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(20)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20)),
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -77,7 +77,7 @@ class QuestionView extends StackedView<QuestionViewModel> {
                             ),
                           ),
                           if (questionData['questionType'] ==
-                              'multiple_choice' ||
+                                  'multiple_choice' ||
                               questionData['questionType'] == 'fill_in_blank')
                             Column(
                               children: [
@@ -107,6 +107,18 @@ class QuestionView extends StackedView<QuestionViewModel> {
                           const SizedBox(height: 20),
                           _buildQuestionContent(
                               context, questionData, viewModel),
+                          // Sıfırlama Butonu
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: () async {
+                              await viewModel.resetProgress();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('İlerleme sıfırlandı.')),
+                              );
+                            },
+                            child: null,
+                          )
                         ],
                       ),
                     ),
@@ -152,11 +164,11 @@ class QuestionView extends StackedView<QuestionViewModel> {
                 elevation: 4,
                 side: const BorderSide(width: 2.5),
                 backgroundColor:
-                viewModel.selectedOption == questionData[option]
-                    ? Colors.red
-                    : Colors.white,
+                    viewModel.selectedOption == questionData[option]
+                        ? Colors.red
+                        : Colors.white,
                 padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
@@ -250,7 +262,8 @@ class QuestionView extends StackedView<QuestionViewModel> {
     if (isCorrect) {
       if (viewModel.isLastQuestion) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Tebrikler! Tüm soruları tamamladınız.')),
+          const SnackBar(
+              content: Text('Tebrikler! Tüm soruları tamamladınız.')),
         );
         Navigator.pop(context);
       } else {
@@ -266,5 +279,4 @@ class QuestionView extends StackedView<QuestionViewModel> {
   @override
   QuestionViewModel viewModelBuilder(BuildContext context) =>
       QuestionViewModel(questions);
-
 }
