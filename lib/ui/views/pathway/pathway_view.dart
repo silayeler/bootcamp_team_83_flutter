@@ -36,35 +36,52 @@ class PathwayView extends StackedView<PathwayViewModel> {
           var pathwayData = pathwayDocs.first.data() as Map<String, dynamic>;
           var numberOfStars = pathwayData['numberOfStars'] ?? 0;
           var backgroundUrl = pathwayData['backgroundUrl'] ?? '';
+          var itemImageUrl = pathwayData['itemImageUrl'] ?? '';
 
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(backgroundUrl),
-                fit: BoxFit.cover,
+          return Stack(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(backgroundUrl),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Stack(
+                  children: List.generate(numberOfStars, (index) {
+                    var pathwayDocId = pathwayDocs.first.id; // pathway doc id
+                    return _buildStar(
+                      context,
+                      pathwayDocId,
+                      index + 1,
+                      itemImageUrl,
+                      top: 700 - (index * 70),
+                      left: 90 + (index % 2) * 150,
+                    );
+                  }),
+                ),
               ),
-            ),
-            child: Stack(
-              children: List.generate(numberOfStars, (index) {
-                var pathwayDocId = pathwayDocs.first.id; // pathway doc id
-                return _buildStar(
-                  context,
-                  pathwayDocId,
-                  index + 1,
-                  top: 700 - (index * 70),
-                  left: 90 + (index % 2) * 150,
-                );
-              }),
-            ),
+              Positioned(
+                top: 30,
+                left: 10,
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ],
           );
         },
       ),
     );
   }
 
-  Widget _buildStar(BuildContext context, String pathwayId, int itemNumber, {required double top, required double left}) {
+  Widget _buildStar(BuildContext context, String pathwayId, int itemNumber, String itemImageUrl,
+      {required double top, required double left}) {
     return Positioned(
       top: top,
       left: left,
@@ -107,7 +124,7 @@ class PathwayView extends StackedView<PathwayViewModel> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset('assets/pathway_items/star.png', width: 100, height: 100),
+            Image.asset('$itemImageUrl', width: 100, height: 100),
             Text(
               '$itemNumber',
               style: const TextStyle(

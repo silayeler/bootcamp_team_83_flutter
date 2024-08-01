@@ -8,6 +8,7 @@ class QuestionFormViewModel extends BaseViewModel {
   String? selectedSectionId;
   String? selectedPathwayId;
   String? selectedItemId;
+  String? selectedQuestionType;
   List<DropdownMenuItem<String>> sectionItems = [];
   List<DropdownMenuItem<String>> pathwayItems = [];
   List<DropdownMenuItem<String>> itemItems = [];
@@ -18,6 +19,12 @@ class QuestionFormViewModel extends BaseViewModel {
   TextEditingController optionCController = TextEditingController();
   TextEditingController optionDController = TextEditingController();
   TextEditingController answerController = TextEditingController();
+  TextEditingController initialCodeController = TextEditingController();
+  TextEditingController expectedOutputController = TextEditingController();
+  TextEditingController fillInBlankOptionsController = TextEditingController();
+  TextEditingController fillInBlankAnswersController = TextEditingController();
+
+
 
   QuestionFormViewModel() {
     _loadSections();
@@ -61,18 +68,18 @@ class QuestionFormViewModel extends BaseViewModel {
 
   void setSelectedSectionId(String value) {
     selectedSectionId = value;
-    selectedPathwayId = null; // Reset selected pathway
-    selectedItemId = null; // Reset selected item
-    pathwayItems = []; // Clear pathway items
-    itemItems = []; // Clear item items
+    selectedPathwayId = null;
+    selectedItemId = null;
+    pathwayItems = [];
+    itemItems = [];
     notifyListeners();
     _loadPathways(value);
   }
 
   void setSelectedPathwayId(String value) {
     selectedPathwayId = value;
-    selectedItemId = null; // Reset selected item
-    itemItems = []; // Clear item items
+    selectedItemId = null;
+    itemItems = [];
     notifyListeners();
     _loadItems(selectedSectionId!, value);
   }
@@ -82,22 +89,48 @@ class QuestionFormViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void setSelectedQuestionType(String value) {
+    selectedQuestionType = value;
+    notifyListeners();
+  }
+
   Future<void> createQuestion() async {
     if (selectedSectionId != null &&
         selectedPathwayId != null &&
-        selectedItemId != null) {
+        selectedItemId != null &&
+        selectedQuestionType != null) {
+      Map<String, dynamic> questionData = {
+        'question': questionController.text,
+        'questionType': selectedQuestionType,
+      };
+
+      switch (selectedQuestionType) {
+        case 'multiple_choice':
+          questionData.addAll({
+            'optionA': optionAController.text,
+            'optionB': optionBController.text,
+            'optionC': optionCController.text,
+            'optionD': optionDController.text,
+            'answer': answerController.text,
+          });
+          break;
+        case 'fill_in_blank':
+          questionData['options'] = fillInBlankOptionsController.text.split('\n');
+          questionData['correctAnswer'] = fillInBlankAnswersController.text.split('\n');
+          break;
+        case 'coding':
+          questionData.addAll({
+            'initialCode': initialCodeController.text,
+            'expectedOutput': expectedOutputController.text,
+          });
+          break;
+      }
+
       await _chapterService.createQuestion(
         selectedSectionId!,
         selectedPathwayId!,
         selectedItemId!,
-        {
-          'question': questionController.text,
-          'optionA': optionAController.text,
-          'optionB': optionBController.text,
-          'optionC': optionCController.text,
-          'optionD': optionDController.text,
-          'answer': answerController.text, // Doğru cevap ekleniyor
-        },
+        questionData,
       );
     }
   }
