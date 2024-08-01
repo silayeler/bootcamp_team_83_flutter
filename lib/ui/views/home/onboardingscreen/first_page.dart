@@ -13,7 +13,7 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isSoundPlaying = false;
-  double _volume = 1.0; // Ses seviyesi
+  final double _volume = 1.0; // Ses seviyesi
 
   @override
   void initState() {

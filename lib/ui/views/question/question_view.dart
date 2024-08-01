@@ -9,87 +9,119 @@ class QuestionView extends StackedView<QuestionViewModel> {
   const QuestionView({Key? key, required this.questions}) : super(key: key);
 
   @override
-  Widget builder(BuildContext context, QuestionViewModel viewModel, Widget? child) {
-    return Scaffold(
-      body: PageView.builder(
-        itemCount: questions.length,
-        controller: PageController(initialPage: viewModel.currentQuestionIndex),
-        physics: NeverScrollableScrollPhysics(), // Kaydırmayı devre dışı bırak
-        itemBuilder: (context, index) {
-          var questionData = questions[index];
-          return Stack(
-            children: [
-              Container(
-                width: screenWidth(context),
-                height: screenHeight(context),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/sorusayfasi_arkaplani.png'),
-                    fit: BoxFit.cover,
+  Widget builder(BuildContext context, QuestionViewModel viewModel,
+      Widget? child) {
+    return SafeArea(
+      child: Scaffold(
+        body: PageView.builder(
+          itemCount: viewModel.questionCount,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            var questionData = viewModel.getCurrentQuestion();
+            return Stack(
+              children: [
+                Container(
+                  width: screenWidth(context),
+                  height: screenHeight(context),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                          'assets/pathway_backgrounds/pathway1.1.png'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              Column(
-                children: [
-                  const SizedBox(height: 30),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
-                  const SizedBox(height: 30),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if(questionData['questionType']=='multiple_choice' ||questionData['questionType']=='fill_in_blank')
-                        Container(
-                          padding: const EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Soru ${index + 1}',
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Card(
+                    color: Colors.white30.withOpacity(0.75),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                    child: SizedBox(
+                      width: screenWidth(context) / 1.1,
+                      height: screenHeight(context) / 1.15,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 15),
 
-                              Text(
-                                questionData['question'],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
+                          // İlerleme Çubuğu
+                          SizedBox(
+                            width: screenWidth(context) / 1.25,
+                            height: 15,
+                            child: LinearProgressIndicator(
+                              value: (viewModel.currentQuestionIndex) /
+                                  viewModel.questionCount,
+                              backgroundColor: const Color(0xFF404142),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.lightGreenAccent[700]!),
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(20)),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        _buildQuestionContent(context, questionData, viewModel),
-                      ],
+                          const SizedBox(height: 10),
+                          Text(
+                            'Soru ${questionData['questionIndex'] + 1}',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          if (questionData['questionType'] ==
+                              'multiple_choice' ||
+                              questionData['questionType'] == 'fill_in_blank')
+                            Column(
+                              children: [
+                                Card(
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    side: const BorderSide(width: 5),
+                                  ),
+                                  child: SizedBox(
+                                    width: screenWidth(context) / 1.2,
+                                    height: screenHeight(context) / 4,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        questionData['question'],
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          const SizedBox(height: 20),
+                          _buildQuestionContent(
+                              context, questionData, viewModel),
+                        ],
+                      ),
                     ),
                   ),
-                ],
-              ),
-            ],
-          );
-        },
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
 
-  Widget _buildQuestionContent(BuildContext context, Map<String, dynamic> questionData, QuestionViewModel viewModel) {
+  Widget _buildQuestionContent(BuildContext context,
+      Map<String, dynamic> questionData, QuestionViewModel viewModel) {
     switch (questionData['questionType']) {
       case 'multiple_choice':
         return _buildMultipleChoiceQuestion(context, questionData, viewModel);
@@ -102,7 +134,8 @@ class QuestionView extends StackedView<QuestionViewModel> {
     }
   }
 
-  Widget _buildMultipleChoiceQuestion(BuildContext context, Map<String, dynamic> questionData, QuestionViewModel viewModel) {
+  Widget _buildMultipleChoiceQuestion(BuildContext context,
+      Map<String, dynamic> questionData, QuestionViewModel viewModel) {
     return Column(
       children: [
         ...['optionA', 'optionB', 'optionC', 'optionD'].map((option) {
@@ -114,14 +147,18 @@ class QuestionView extends StackedView<QuestionViewModel> {
                 _checkAndProceed(viewModel, context);
               },
               style: ElevatedButton.styleFrom(
-                maximumSize: Size(150, 300),
-                backgroundColor: viewModel.selectedOption == questionData[option]
-                    ? Colors.blueAccent
+                fixedSize: Size(
+                    screenWidth(context) / 1.2, screenHeight(context) / 16),
+                elevation: 4,
+                side: const BorderSide(width: 2.5),
+                backgroundColor:
+                viewModel.selectedOption == questionData[option]
+                    ? Colors.red
                     : Colors.white,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(25),
                 ),
               ),
               child: Text(
@@ -140,17 +177,18 @@ class QuestionView extends StackedView<QuestionViewModel> {
     );
   }
 
-  Widget _buildFillInBlankQuestion(BuildContext context, Map<String, dynamic> questionData, QuestionViewModel viewModel) {
+  Widget _buildFillInBlankQuestion(BuildContext context,
+      Map<String, dynamic> questionData, QuestionViewModel viewModel) {
     List<String> parts = questionData['question'].split('___');
     return Column(
       children: [
         for (int i = 0; i < parts.length; i++) ...[
-          Text(parts[i], style: TextStyle(fontSize: 18)),
+          Text(parts[i], style: const TextStyle(fontSize: 18)),
           if (i < parts.length - 1)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Boşluğu doldurun',
                   border: OutlineInputBorder(),
                 ),
@@ -160,45 +198,48 @@ class QuestionView extends StackedView<QuestionViewModel> {
         ],
         ElevatedButton(
           onPressed: () => _checkAndProceed(viewModel, context),
-          child: Text('Kontrol Et'),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blueAccent,
             foregroundColor: Colors.white,
           ),
+          child: const Text('Kontrol Et'),
         ),
       ],
     );
   }
 
-  Widget _buildCodingQuestion(BuildContext context, Map<String, dynamic> questionData, QuestionViewModel viewModel) {
+  Widget _buildCodingQuestion(BuildContext context,
+      Map<String, dynamic> questionData, QuestionViewModel viewModel) {
     return Column(
       children: [
-        Text('Başlangıç Kodu:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        const Text('Başlangıç Kodu:',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.grey[200],
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Text(questionData['initialCode'], style: TextStyle(fontFamily: 'Courier')),
+          child: Text(questionData['initialCode'],
+              style: const TextStyle(fontFamily: 'Courier')),
         ),
         TextField(
           maxLines: 10,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Kodunuzu buraya yazın',
             border: OutlineInputBorder(),
           ),
           onChanged: (value) => viewModel.updateCodingAnswer(value),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () => _checkAndProceed(viewModel, context),
-          child: Text('Çalıştır ve Kontrol Et'),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blueAccent,
             foregroundColor: Colors.white,
           ),
+          child: const Text('Çalıştır ve Kontrol Et'),
         ),
       ],
     );
@@ -209,18 +250,21 @@ class QuestionView extends StackedView<QuestionViewModel> {
     if (isCorrect) {
       if (viewModel.isLastQuestion) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Tebrikler! Tüm soruları tamamladınız.')),
+          const SnackBar(content: Text('Tebrikler! Tüm soruları tamamladınız.')),
         );
+        Navigator.pop(context);
       } else {
         viewModel.moveToNextQuestion();
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Yanlış cevap. Lütfen tekrar deneyin.')),
+        const SnackBar(content: Text('Yanlış cevap. Lütfen tekrar deneyin.')),
       );
     }
   }
 
   @override
-  QuestionViewModel viewModelBuilder(BuildContext context) => QuestionViewModel(questions);
+  QuestionViewModel viewModelBuilder(BuildContext context) =>
+      QuestionViewModel(questions);
+
 }

@@ -52,14 +52,14 @@ class AccountScreenViewModel {
   }
 
   void editFeedback(BuildContext context) {
-    TextEditingController _controller = TextEditingController();
+    TextEditingController controller = TextEditingController();
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: const Text('Görüş/Öneri'),
           content: TextField(
-            controller: _controller,
+            controller: controller,
             decoration:
                 const InputDecoration(hintText: "Görüş veya önerinizi yazınız"),
             maxLines: 4,

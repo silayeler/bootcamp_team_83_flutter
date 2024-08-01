@@ -1,3 +1,4 @@
+import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
 import 'package:bootcamp_team_83_flutter/models/user_progress_model.dart';
 import 'package:bootcamp_team_83_flutter/services/chapter_service.dart';
 import 'package:bootcamp_team_83_flutter/services/user_service.dart';
@@ -8,8 +9,8 @@ class PathwayViewModel extends BaseViewModel {
    late String sectionId;
    late String pathwayId;
 
-   final ChapterService _chapterService = ChapterService();
-   final UserService _userService = UserService();
+   final  _chapterService = locator<ChapterService>();
+   final  _userService = locator<UserService>();
 
    Future isSectionCompleted(String userId, String sectionId) async {
      UserProgress? userProgress =

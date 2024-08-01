@@ -12,10 +12,8 @@ class LoginView extends StackedView<LoginViewModel> {
   @override
   Widget builder(
       BuildContext context, LoginViewModel viewModel, Widget? child) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false; // Geri tuşuna basıldığında önceki sayfaya gitmeyi engeller
-      },
+    return PopScope(
+      canPop: false,
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.black,

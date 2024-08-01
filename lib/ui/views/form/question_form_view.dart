@@ -41,6 +41,14 @@ class QuestionFormView extends StackedView<QuestionFormViewModel> {
                   onChanged: (value) => viewModel.setSelectedItemId(value!),
                   validator: (value) => value == null ? 'Item is required' : null,
                 ),
+                DropdownButtonFormField<int>(
+                  isExpanded: true,
+                  hint:  const Text('Write Question Index (0 ile 2 arasında)'),
+                  value: viewModel.selectedQuestionIndex,
+                  items: viewModel.questionIndexItem,
+                  onChanged: (value) => viewModel.setSelectedQuestionIndex(value!),
+                  validator: (value) => value == null ? 'Index is required' : null,
+                ),
                 DropdownButtonFormField<String>(
                   hint: const Text('Select Question Type'),
                   value: viewModel.selectedQuestionType,

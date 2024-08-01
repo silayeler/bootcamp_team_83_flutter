@@ -1,5 +1,4 @@
 import 'package:bootcamp_team_83_flutter/services/chapter_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
