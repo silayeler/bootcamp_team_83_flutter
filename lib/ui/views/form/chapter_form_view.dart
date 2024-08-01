@@ -18,42 +18,45 @@ class ChapterFormView extends StackedView<ChapterFormViewmodel> {
           ? const Center(child: CircularProgressIndicator())
           : Form(
         key: chapterFormKey,
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Title'),
-              onChanged: (value) {
-                title = value;
-              },
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a title';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Description'),
-              onChanged: (value) {
-                description = value;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Image URL'),
-              onChanged: (value) {
-                imageUrl = value;
-              },
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                if (chapterFormKey.currentState?.validate() ?? false) {
-                  await viewModel.createSection(title, description, imageUrl);
-                  Navigator.pop(context);
-                }
-              },
-              child: const Text('Create Section'),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Title'),
+                onChanged: (value) {
+                  title = value;
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a title';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Description'),
+                onChanged: (value) {
+                  description = value;
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Image URL'),
+                onChanged: (value) {
+                  imageUrl = value;
+                },
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  if (chapterFormKey.currentState?.validate() ?? false) {
+                    await viewModel.createSection(title, description, imageUrl);
+                    Navigator.pop(context);
+                  }
+                },
+                child: const Text('Create Section'),
+              ),
+            ],
+          ),
         ),
       ),
     );

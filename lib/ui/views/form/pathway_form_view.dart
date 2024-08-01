@@ -39,7 +39,7 @@ class PathwayFormView extends StackedView<PathwayFormViewModel> {
                 },
               ),
               TextFormField(
-                controller: viewModel.itemController,
+                controller: viewModel.itemNumberController,
                 decoration: const InputDecoration(labelText: 'Number of Items'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
@@ -50,8 +50,12 @@ class PathwayFormView extends StackedView<PathwayFormViewModel> {
                 },
               ),
               TextFormField(
-                controller: viewModel.imageUrlController,
+                controller: viewModel.backgroundUrlController,
                 decoration: const InputDecoration(labelText: 'Background Image URL'),
+              ),
+              TextFormField(
+                controller: viewModel.itemImageUrlController,
+                decoration: const InputDecoration(labelText: 'Item Image URL'),
               ),
               const SizedBox(height: 20),
               ElevatedButton(

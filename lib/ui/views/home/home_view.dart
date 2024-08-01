@@ -62,7 +62,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Flexible(
+                      const Flexible(
                           child: ProfilePhotoView(
                         photoUrl: '',
                       )),
@@ -127,17 +127,19 @@ class HomeView extends StackedView<HomeViewModel> {
             ],
           ),
         ),
-        body: Container(
-          width: screenWidth(context),
-          height: screenHeight(context),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/anasayfa_arkaplan.png'),
-              fit: BoxFit.cover,
+        body: SingleChildScrollView(
+          child: Container(
+            width: screenWidth(context),
+            height: screenHeight(context),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/anasayfa_arkaplan.png'),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          child: ChapterView(
-            userId: viewModel.userId ?? "",
+            child: ChapterView(
+              userId: viewModel.userId ?? "",
+            ),
           ),
         ),
       ),

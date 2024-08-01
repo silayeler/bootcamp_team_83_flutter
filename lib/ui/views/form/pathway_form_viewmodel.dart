@@ -1,5 +1,4 @@
 import 'package:bootcamp_team_83_flutter/services/chapter_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -8,8 +7,9 @@ class PathwayFormViewModel extends BaseViewModel {
   String? selectedSectionId;
   List<DropdownMenuItem<String>> sectionItems = [];
   TextEditingController titleController = TextEditingController();
-  TextEditingController itemController = TextEditingController();
-  TextEditingController imageUrlController = TextEditingController();
+  TextEditingController itemNumberController = TextEditingController();
+  TextEditingController backgroundUrlController = TextEditingController();
+  TextEditingController itemImageUrlController = TextEditingController();
 
   PathwayFormViewModel() {
     _loadSections();
@@ -36,11 +36,12 @@ class PathwayFormViewModel extends BaseViewModel {
     if (selectedSectionId != null) {
       var pathwayRef = await _chapterService.createPathway(selectedSectionId!, {
         'title': titleController.text,
-        'numberOfStars': int.parse(itemController.text),
-        'backgroundUrl': imageUrlController.text,
+        'numberOfStars': int.parse(itemNumberController.text),
+        'backgroundUrl': backgroundUrlController.text,
+        'itemImageUrl': itemImageUrlController.text,
       });
 
-      int numberOfItems = int.parse(itemController.text);
+      int numberOfItems = int.parse(itemNumberController.text);
       for (int i = 0; i < numberOfItems; i++) {
         await _chapterService
             .createPathwayItem(selectedSectionId!, pathwayRef.id, {

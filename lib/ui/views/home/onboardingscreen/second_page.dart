@@ -47,7 +47,7 @@ class _SecondPageState extends State<SecondPage> {
           const Duration(seconds: 2)); // 3 saniye yerine 2 saniye bekle
 
       // Ses yavaşça azalacak
-      final decreaseDuration = const Duration(seconds: 1);
+      const decreaseDuration = Duration(seconds: 1);
       final decreaseStep =
           decreaseDuration.inMilliseconds ~/ 20; // 20 adımda azaltma
 

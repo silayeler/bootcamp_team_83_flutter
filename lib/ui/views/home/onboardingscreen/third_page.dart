@@ -11,7 +11,7 @@ class ThirdPage extends StatefulWidget {
 class _ThirdPageState extends State<ThirdPage> {
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isSoundPlaying = false;
-  double _volume = 1.0; // Ses seviyesi
+  final double _volume = 1.0; // Ses seviyesi
 
   @override
   void initState() {
@@ -34,10 +34,10 @@ class _ThirdPageState extends State<ThirdPage> {
       _audioPlayer.resume();
       _isSoundPlaying = true;
 
-      await Future.delayed(Duration(seconds: 11)); // Sesin azalması için bekle
+      await Future.delayed(const Duration(seconds: 11)); // Sesin azalması için bekle
 
       // Ses yavaşça azalacak
-      final decreaseDuration = Duration(seconds: 1);
+      const decreaseDuration = Duration(seconds: 1);
       final decreaseStep =
           decreaseDuration.inMilliseconds ~/ 20; // 20 adımda azaltma
 
@@ -91,7 +91,7 @@ class _ThirdPageState extends State<ThirdPage> {
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
-                        duration: Duration(milliseconds: 50),
+                        duration: const Duration(milliseconds: 50),
                         onTypingStart: () {},
                         onTypingComplete: () {},
                       ),

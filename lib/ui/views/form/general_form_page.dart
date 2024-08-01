@@ -9,6 +9,7 @@ class GeneralFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -21,7 +22,7 @@ class GeneralFormPage extends StatelessWidget {
                         builder: (context) => const ChapterFormView()),
                   );
                 },
-                child: Text("Bölüm Ekle")),
+                child: const Text("Bölüm Ekle")),
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -30,7 +31,7 @@ class GeneralFormPage extends StatelessWidget {
                         builder: (context) => const PathwayFormView()),
                   );
                 },
-                child: Text("Görev Yolu Ekle")),
+                child: const Text("Görev Yolu Ekle")),
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -40,7 +41,7 @@ class GeneralFormPage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text("Soru Ekle")),
+                child: const Text("Soru Ekle")),
           ],
         ),
       ),
