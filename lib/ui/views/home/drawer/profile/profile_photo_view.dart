@@ -122,7 +122,7 @@ class ProfilePhotoView extends StackedView<ProfilePhotoViewModel> {
         radius: 40,
         backgroundImage: viewModel.profileImageUrl.isNotEmpty
             ? NetworkImage(viewModel.profileImageUrl)
-            : AssetImage('assets/guest_pp.png') as ImageProvider,
+            : const AssetImage('assets/guest_pp.png') as ImageProvider,
         child: viewModel.profileImageUrl.isEmpty
             ? const Icon(Icons.add_a_photo, size: 40, color: Colors.grey)
             : null,

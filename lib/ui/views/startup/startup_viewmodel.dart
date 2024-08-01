@@ -20,7 +20,7 @@ class StartupViewModel extends BaseViewModel {
       _navigationService.replaceWith(Routes.homeView);
     } else {
       // LoginView'e yönlendir
-      _navigationService.replaceWith(Routes.loginView);
+      _navigationService.replaceWith(Routes.firstPage);
     }
   }
 }

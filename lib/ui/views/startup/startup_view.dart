@@ -14,17 +14,16 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Lottie.asset('assets/splash.json'),
-            const Text(
+            Text(
               'KOD CANAVARI',
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
             ),
-            const Row(
+            Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text('Loading ...', style: TextStyle(fontSize: 16)),
