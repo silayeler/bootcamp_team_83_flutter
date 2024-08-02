@@ -107,6 +107,7 @@ class QuestionView extends StackedView<QuestionViewModel> {
                           const SizedBox(height: 20),
                           _buildQuestionContent(
                               context, questionData, viewModel),
+
                           const SizedBox(
                             height: 60,
                           ),
@@ -118,6 +119,19 @@ class QuestionView extends StackedView<QuestionViewModel> {
                                 width: 20,
                               ),
                             ],
+
+                          // Sıfırlama Butonu
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: () async {
+                              await viewModel.resetProgress();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('İlerleme sıfırlandı.')),
+                              );
+                            },
+                            child: null,
+
                           )
                         ],
                       ),
@@ -170,6 +184,7 @@ class QuestionView extends StackedView<QuestionViewModel> {
                   color: viewModel.isAnswerChecked && isCorrect
                       ? Colors.green
                       : (isSelected ? Colors.blueAccent : Colors.white) ,
+
                 ),
                 backgroundColor: viewModel.isAnswerChecked && isCorrect
                     ? Colors.green
