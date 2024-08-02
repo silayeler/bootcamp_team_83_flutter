@@ -1,3 +1,4 @@
+import 'package:bootcamp_team_83_flutter/services/ai_service.dart';
 import 'package:bootcamp_team_83_flutter/services/chapter_service.dart';
 import 'package:bootcamp_team_83_flutter/services/storage_service.dart';
 import 'package:bootcamp_team_83_flutter/services/user_service.dart';
@@ -12,6 +13,7 @@ import 'package:bootcamp_team_83_flutter/ui/views/home/home_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/onboardingscreen/first_page.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/pathway/pathway_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/question/question_view.dart';
+import 'package:bootcamp_team_83_flutter/ui/views/question/question_viewmodel.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/startup/startup_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/story/story_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -49,6 +51,8 @@ import 'package:bootcamp_team_83_flutter/ui/views/signup/signup_view.dart';
     LazySingleton(classType: UserService),
     LazySingleton(classType: ChapterService),
     LazySingleton(classType: StorageService),
+    LazySingleton(classType: AIService),
+
     // @stacked-service
   ],
   bottomsheets: [

@@ -9,8 +9,8 @@ class QuestionView extends StackedView<QuestionViewModel> {
   const QuestionView({Key? key, required this.questions}) : super(key: key);
 
   @override
-  Widget builder(BuildContext context, QuestionViewModel viewModel,
-      Widget? child) {
+  Widget builder(
+      BuildContext context, QuestionViewModel viewModel, Widget? child) {
     return SafeArea(
       child: Scaffold(
         body: PageView.builder(
@@ -64,8 +64,8 @@ class QuestionView extends StackedView<QuestionViewModel> {
                               backgroundColor: const Color(0xFF404142),
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.lightGreenAccent[700]!),
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(20)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20)),
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -77,7 +77,7 @@ class QuestionView extends StackedView<QuestionViewModel> {
                             ),
                           ),
                           if (questionData['questionType'] ==
-                              'multiple_choice' ||
+                                  'multiple_choice' ||
                               questionData['questionType'] == 'fill_in_blank')
                             Column(
                               children: [
@@ -91,7 +91,7 @@ class QuestionView extends StackedView<QuestionViewModel> {
                                     width: screenWidth(context) / 1.2,
                                     height: screenHeight(context) / 4,
                                     child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(16.0),
                                       child: Text(
                                         questionData['question'],
                                         style: const TextStyle(
@@ -107,6 +107,18 @@ class QuestionView extends StackedView<QuestionViewModel> {
                           const SizedBox(height: 20),
                           _buildQuestionContent(
                               context, questionData, viewModel),
+                          const SizedBox(
+                            height: 60,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              _buildCheckButton(context, viewModel),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -138,35 +150,42 @@ class QuestionView extends StackedView<QuestionViewModel> {
       Map<String, dynamic> questionData, QuestionViewModel viewModel) {
     return Column(
       children: [
-        ...['optionA', 'optionB', 'optionC', 'optionD'].map((option) {
+       ...['optionA', 'optionB', 'optionC', 'optionD'].map((option) {
+          bool isCorrect = questionData['answer'] == questionData[option];
+          bool isSelected = viewModel.selectedOption == questionData[option];
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: ElevatedButton(
               onPressed: () {
                 viewModel.selectOption(questionData[option]);
-                _checkAndProceed(viewModel, context);
               },
               style: ElevatedButton.styleFrom(
+                elevation: 4,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 fixedSize: Size(
                     screenWidth(context) / 1.2, screenHeight(context) / 16),
-                elevation: 4,
-                side: const BorderSide(width: 2.5),
-                backgroundColor:
-                viewModel.selectedOption == questionData[option]
-                    ? Colors.red
-                    : Colors.white,
-                padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                side: BorderSide(
+                  width: 2.5,
+                  color: viewModel.isAnswerChecked && isCorrect
+                      ? Colors.green
+                      : (isSelected ? Colors.blueAccent : Colors.white) ,
                 ),
+                backgroundColor: viewModel.isAnswerChecked && isCorrect
+                    ? Colors.green
+                    : (isSelected ? Colors.blue[100] : Colors.white),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                    side: BorderSide(
+                      color: isSelected ? Colors.blueAccent : Colors.white,
+                    )),
               ),
               child: Text(
                 questionData[option],
                 style: TextStyle(
-                  color: viewModel.selectedOption == questionData[option]
+                  color: viewModel.isAnswerChecked && isCorrect
                       ? Colors.white
-                      : Colors.black,
+                      : (isSelected ? Colors.white : Colors.black),
                   fontSize: 16,
                 ),
               ),
@@ -196,14 +215,6 @@ class QuestionView extends StackedView<QuestionViewModel> {
               ),
             ),
         ],
-        ElevatedButton(
-          onPressed: () => _checkAndProceed(viewModel, context),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blueAccent,
-            foregroundColor: Colors.white,
-          ),
-          child: const Text('Kontrol Et'),
-        ),
       ],
     );
   }
@@ -233,38 +244,48 @@ class QuestionView extends StackedView<QuestionViewModel> {
           onChanged: (value) => viewModel.updateCodingAnswer(value),
         ),
         const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () => _checkAndProceed(viewModel, context),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blueAccent,
-            foregroundColor: Colors.white,
-          ),
-          child: const Text('Çalıştır ve Kontrol Et'),
-        ),
       ],
     );
   }
 
-  void _checkAndProceed(QuestionViewModel viewModel, BuildContext context) {
+  Widget _buildCheckButton(BuildContext context, QuestionViewModel viewModel) {
+    return ElevatedButton(
+      onPressed: () {
+        _checkAndProceed(viewModel, context);
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.blueAccent,
+        foregroundColor: Colors.white,
+      ),
+      child: const Text(
+        'KONTROL',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  void _checkAndProceed(
+    QuestionViewModel viewModel,
+    BuildContext context,
+  ) {
     bool isCorrect = viewModel.checkAnswer();
     if (isCorrect) {
       if (viewModel.isLastQuestion) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Tebrikler! Tüm soruları tamamladınız.')),
+          const SnackBar(
+              content: Text('Tebrikler! Tüm soruları tamamladınız.')),
         );
         Navigator.pop(context);
       } else {
-        viewModel.moveToNextQuestion();
+        viewModel.showCorrectAnswerSheet();
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Yanlış cevap. Lütfen tekrar deneyin.')),
-      );
+      String correctAnswer = viewModel.getCorrectAnswer();
+      viewModel.showIncorrectAnswerSheet(correctAnswer);
     }
   }
 
   @override
   QuestionViewModel viewModelBuilder(BuildContext context) =>
       QuestionViewModel(questions);
-
 }

@@ -24,6 +24,7 @@ dependencies:
   shared_preferences: ^2.2.3
   stacked: ^3.4.0
   stacked_services: ^0.9.7
+  google_generative_ai: ^0.4.4
 
 dev_dependencies:
   build_runner: ^2.4.5

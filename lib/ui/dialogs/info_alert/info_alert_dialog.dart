@@ -20,10 +20,10 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
 
   @override
   Widget builder(
-    BuildContext context,
-    InfoAlertDialogModel viewModel,
-    Widget? child,
-  ) {
+      BuildContext context,
+      InfoAlertDialogModel viewModel,
+      Widget? child,
+      ) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: Colors.white,
@@ -46,12 +46,13 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                             fontSize: 16, fontWeight: FontWeight.w900),
                       ),
                       verticalSpaceTiny,
-                      Text(
-                        request.description!,
-                        style:
-                            const TextStyle(fontSize: 14, color: kcMediumGrey),
-                        maxLines: 3,
-                        softWrap: true,
+                      Flexible(
+                        child: Text(
+                          request.description!,
+                          style:
+                          const TextStyle(fontSize: 14, color: kcMediumGrey),
+                          softWrap: true,
+                        ),
                       ),
                     ],
                   ),
@@ -70,7 +71,7 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                     '⭐️',
                     style: TextStyle(fontSize: 30),
                   ),
-                )
+                ),
               ],
             ),
             verticalSpaceMedium,
@@ -87,7 +88,7 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Text(
-                  'Got it',
+                  'Anladım',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -95,7 +96,7 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
