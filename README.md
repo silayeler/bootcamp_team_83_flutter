@@ -1,4 +1,4 @@
-# Bootcamp-Team-83-Flutter
+![Uygulama (3)](https://github.com/user-attachments/assets/277a43bc-f456-4dc2-bf32-fcc6162e13df)![Uygulama (3)](https://github.com/user-attachments/assets/518cf343-5cdd-4af4-8f3c-2e7db4f4cddd)# Bootcamp-Team-83-Flutter
 ## ÜRÜN BİLGİLERİ 
 
 
@@ -221,3 +221,106 @@ State Management: Uygulama için stacked state management kütüphanesi kullanı
 </details>
 
   
+# Sprint 3
+
+# Sprint 3
+
+<details>
+<summary>Sprint Planlama</summary>
+Tamamlanması Tahmin Edilen Puan: 50 Puan<br>
+Takım Üyeleri İçin Puan Dağılımı: Her kişi toplamda 10 puan
+</details>
+
+<details>
+<summary>Daily Scrum</summary>
+Günlük Scrumlar: Daily Scrumlarımız Discord ve WhatsApp kanalı üzerinden sesli ve yazılı olarak gerçekleştirilmiştir.<br>
+Toplantı İçerikleri:<br>
+- Uygulamanın gidişatı
+- Bitirme adımları
+- Son kez üstünden geçilmesi
+- Fikir değişiklikleri ve yeni ekleyeceğimiz şeyler üzerine konuşulmuştur.
+- Toplantıdan görsel: 
+</details>
+![WhatsApp Görsel 2024-07-31 saat 21 16 23_2234e8d0](https://github.com/user-attachments/assets/9f53cb14-abf0-4d51-9309-2285a6d6535f)
+-Whatsapp konuşmalarından kesitler:![WhatsApp Görsel 2024-08-02 saat 21 29 09_17b07994](https://github.com/user-attachments/assets/6032f2e1-c3cd-41da-a1dc-cafee4ebdb87)
+- ![WhatsApp Görsel 2024-08-02 saat 21 29 09_1fd4a294](https://github.com/user-attachments/assets/eb3d421f-7f99-4b11-80a5-ece26678ed4b)
+
+
+<details>
+<summary>Uygulama Görselleri ve Hazırlanan Tasarımlar</summary>
+- Yeni hikayeler eklendi.
+- Uygulamanın son tasarımları yapıldı.
+  Tasarımdan görseller: 
+  - ![Uygulama (3)](https://github.com/user-attachments/assets/b7dde1b5-9723-4d83-bc89-1cd72bca5993)
+  - ![Uygulama (2)](https://github.com/user-attachments/assets/80faf24c-d958-4a78-8f0a-62803b246c9e)
+  - ![Uygulama (1)](https://github.com/user-attachments/assets/21cc98f9-5459-422d-993a-38d3f6263480)
+
+</details>
+
+<details>
+<summary>Sprint Review</summary>
+İyi Gidenler:<br>
+- Uygulamanın son tasarımları yapıldı.
+- Yeni hikayeler eklendi.<br>
+Konuşulanlar:<br>
+- Uygulamada yetiştirilip yetiştirilemeyecek özellikler üzerine konuşuldu.
+- Uygulamanın son kısımlarının görev dağılımı yapıldı,fikir alışverişinde bulunuldu.
+- Takım üyeleri birlikte kod yazdı, tasarım konusunda yeni fikirler sunuldu.
+</details>
+
+<details>
+<summary>Sprint Retrospective</summary>
+İyi Gidenler:<br>
+- Ekip zaman yönetimi konusunda ustalaştı.
+- Ekip iş birliği içinde çalışmayı tecrübe edindi.
+- Ekip farklı fikirlere saygı duymayı ve bunları nasıl geliştirip ürün çıkartabileceğini tecrübe etti.
+- GitHub, Android Studio, emülatör, Canva, Visual Studio Code gibi araçları kullanarak kendine yeni şeyler kattı.
+- Takım olarak proje yönetim sürecine şahitlik etti.<br>
+Geliştirilmesi Gerekenler:<br>
+- Ekip üyelerinin yetersiz interneti ve internet bağlantı hızının düşüklüğü yüzünden Discord toplantılarında kesiklikler yaşanması.
+</details>
+
+<details>
+<summary>3 Sprint Değerlendirmesi</summary>
+Bu sprint bizim bootcampimizin son sprintiydi. 3 sprintin genel değerlendirmesi:<br>
+- **Sprint 1:** Takımın ilk sprinti, bazı eksiklikler olmasına rağmen iyi geçti. Hedeflenen işlerin bir kısmına ulaşıldı, yapılan işler hedeflenen işlere yaklaştı.
+- **Sprint 2:** İkinci sprintimiz gayet iyi geçti. Hedeflenen işlerin çoğuna ulaşıldı ve yapılan işler hedeflenen işlerle neredeyse aynı seviyede.
+- **Sprint 3:** Üçüncü sprintte bazı yetiştirilemeyen işler olsa da, uygulama tamamlanıyor. Hedeflenen işler yüksek seviyede olmasına rağmen, yapılan işler de oldukça yakın bir yerde kaldı.
+</details>
+
+- Sprint puan tabloları:
+
+  ### Sprint Puanlama Tablosu
+| Sprint No | Üye Adı     | Puan   |
+|-----------|-------------|--------|
+| Sprint 1  | Sıla        | 8      |
+| Sprint 1  | Oğuzhan     | 8     |
+| Sprint 1  | Sevim Büşra | 8      |
+| Sprint 1  | Sıla Buse   | 8      |
+| Sprint 1  | İkbal       | 8      |
+| Sprint 2  | Sıla        | 10     |
+| Sprint 2  | Oğuzhan     | 9      |
+| Sprint 2  | Sevim Büşra | 7      |
+| Sprint 2  | Sıla Buse   |  10     |
+| Sprint 2  | İkbal       | 9      |
+| Sprint 3  | Sıla        | 9      |
+| Sprint 3  | Oğuzhan     | 9      |
+| Sprint 3  | Sevim Büşra | 9      |
+| Sprint 3  | Sıla Buse   | 7      |
+| Sprint 2  | İkbal       | 7      |
+
+
+
+### Toplam Puan Tablosu
+| Üye Adı     | Sprint 1 Puanı | Sprint 2 Puanı | Sprint 3 Puanı | Toplam Puan |
+|-------------|----------------|----------------|----------------|-------------|
+| Sıla        | 8              | 10             | 9              | 27          |
+| Oğuzhan     | 8              | 9              | 9              | 26          |
+| Sevim Büşra | 8              | 7              | 9             | 24           |
+| Sıla Buse   | 8              | 10             | 7              | 25          |
+| İkbal       | 8              | 9              | 7              | 24          |
+
+- 150 puandan tamamlanan 126 puan
+
+  Sprint Burndown chart tablosu:
+![WhatsApp Görsel 2024-08-01 saat 22 35 19_55c36b65](https://github.com/user-attachments/assets/f18566a1-bb42-4f6d-982f-a364514864e2)
