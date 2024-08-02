@@ -46,11 +46,12 @@ class ChapterView extends StackedView<ChapterViewModel> {
                 }
                 bool isCompleted = completedSnapshot.data ?? false;
                 bool isFirstSection = index == 0;
+                bool isSecondSection = index ==1;
 
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
-                    onTap: isCompleted || isFirstSection
+                    onTap: isCompleted || isFirstSection || isSecondSection
                         ? () {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => PathwayView(
@@ -68,7 +69,7 @@ class ChapterView extends StackedView<ChapterViewModel> {
                             image: DecorationImage(
                               image: AssetImage(section['imageUrl']),
                               fit: BoxFit.cover,
-                              colorFilter: isCompleted || isFirstSection
+                              colorFilter: isCompleted || isFirstSection || isSecondSection
                                   ? null
                                   : ColorFilter.mode(
                                       Colors.white.withOpacity(0.7),
@@ -82,7 +83,7 @@ class ChapterView extends StackedView<ChapterViewModel> {
                           bottom: 10,
                           child: Column(
                             children: [
-                              if (!isCompleted && !isFirstSection)
+                              if (!isCompleted && !isFirstSection && !isSecondSection)
                                 Icon(Icons.lock,
                                     color: Colors.grey.shade700, size: 50),
                               Card(

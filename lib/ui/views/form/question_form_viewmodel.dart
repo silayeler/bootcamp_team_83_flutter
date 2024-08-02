@@ -134,13 +134,13 @@ class QuestionFormViewModel extends BaseViewModel {
           case 'fill_in_blank':
             questionData['options'] =
                 fillInBlankOptionsController.text.split('\n');
-            questionData['correctAnswer'] =
+            questionData['answer'] =
                 fillInBlankAnswersController.text.split('\n');
             break;
           case 'coding':
             questionData.addAll({
               'initialCode': initialCodeController.text,
-              'expectedOutput': expectedOutputController.text,
+              'answer': expectedOutputController.text,
             });
             break;
         }

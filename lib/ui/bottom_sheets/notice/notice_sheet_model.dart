@@ -6,7 +6,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class NoticeSheetModel extends BaseViewModel {
   final DialogService _dialogService = locator<DialogService>();
-  final AIService _aiService = locator<AIService>(); // AIService'i ekledik
+  final AIService _aiService = locator<AIService>();
   final List<Map<String, dynamic>> questions;
   final int currentQuestionIndex;
 
@@ -19,7 +19,7 @@ class NoticeSheetModel extends BaseViewModel {
     setBusy(true);
     var currentQuestion = questions[currentQuestionIndex];
     var response =
-        await _aiService.askAI(currentQuestion); // AIService'i kullanıyoruz
+        await _aiService.askAI(currentQuestion);
 
     if (response != null) {
       await _dialogService.showCustomDialog(

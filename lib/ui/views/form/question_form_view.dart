@@ -43,102 +43,114 @@ class QuestionFormView extends StackedView<QuestionFormViewModel> {
                 ),
                 DropdownButtonFormField<int>(
                   isExpanded: true,
-                  hint:  const Text('Write Question Index (0 ile 2 arasında)'),
+                  hint:  const Text('Soru indexini seç (0 ile 2 arasında)'),
                   value: viewModel.selectedQuestionIndex,
                   items: viewModel.questionIndexItem,
                   onChanged: (value) => viewModel.setSelectedQuestionIndex(value!),
                   validator: (value) => value == null ? 'Index is required' : null,
                 ),
                 DropdownButtonFormField<String>(
-                  hint: const Text('Select Question Type'),
+                  hint: const Text('Soru Tipini Seç'),
                   value: viewModel.selectedQuestionType,
                   items: const [
-                    DropdownMenuItem(value: 'multiple_choice', child: Text('Multiple Choice')),
-                    DropdownMenuItem(value: 'fill_in_blank', child: Text('Fill in the Blank')),
-                    DropdownMenuItem(value: 'coding', child: Text('Coding')),
+                    DropdownMenuItem(value: 'multiple_choice', child: Text('Şıklı')),
+                    DropdownMenuItem(value: 'fill_in_blank', child: Text('Boşluk Doldurmalı')),
+                    DropdownMenuItem(value: 'coding', child: Text('kodlama')),
                   ],
                   onChanged: (value) => viewModel.setSelectedQuestionType(value!),
-                  validator: (value) => value == null ? 'Question type is required' : null,
+                  validator: (value) => value == null ? 'Soru tipi seçmek zorunlu' : null,
                 ),
 
+
+                //Çok Şıklı
                 if (viewModel.selectedQuestionType == 'multiple_choice') ...[
                   TextFormField(
                     controller: viewModel.questionController,
-                    decoration: const InputDecoration(labelText: 'Question'),
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter a question' : null,
+                    decoration: const InputDecoration(labelText: 'Soru'),
+                    validator: (value) => value?.isEmpty ?? true ? 'Bir soru giriniz' : null,
                   ),
                   TextFormField(
                     controller: viewModel.optionAController,
-                    decoration: const InputDecoration(labelText: 'Option A'),
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter option A' : null,
+                    decoration: const InputDecoration(labelText: 'A şıkkı'),
+                    validator: (value) => value?.isEmpty ?? true ? 'A şıkkını giriniz' : null,
                   ),
                   TextFormField(
                     controller: viewModel.optionBController,
-                    decoration: const InputDecoration(labelText: 'Option B'),
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter option B' : null,
+                    decoration: const InputDecoration(labelText: 'B şıkkı'),
+                    validator: (value) => value?.isEmpty ?? true ? 'B şıkkını giriniz' : null,
                   ),
                   TextFormField(
                     controller: viewModel.optionCController,
-                    decoration: const InputDecoration(labelText: 'Option C'),
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter option C' : null,
+                    decoration: const InputDecoration(labelText: 'C şıkkı'),
+                    validator: (value) => value?.isEmpty ?? true ? 'C şıkkını giriniz' : null,
                   ),
                   TextFormField(
                     controller: viewModel.optionDController,
-                    decoration: const InputDecoration(labelText: 'Option D'),
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter option D' : null,
+                    decoration: const InputDecoration(labelText: 'D şıkkı'),
+                    validator: (value) => value?.isEmpty ?? true ? 'D şıkkını giriniz' : null,
                   ),
                   TextFormField(
                     controller: viewModel.answerController,
-                    decoration: const InputDecoration(labelText: 'Answer'),
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter the answer' : null,
+                    decoration: const InputDecoration(labelText: 'Cevap'),
+                    validator: (value) => value?.isEmpty ?? true ? 'Cevabı giriniz' : null,
                   ),
+
+                  // Boşluk Doldurma
                 ] else  if (viewModel.selectedQuestionType == 'fill_in_blank') ...[
                   TextFormField(
                     controller: viewModel.questionController,
-                    decoration: const InputDecoration(labelText: 'Question (Use ___ for blanks)'),
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter a question' : null,
+                    decoration: const InputDecoration(labelText: 'Soru (boşluklar için ___ kullanın)'),
+                    validator: (value) => value?.isEmpty ?? true ? 'Lütfen soruyu giriniz' : null,
                   ),
                   const SizedBox(height: 10),
-                  const Text('Options (one per line):'),
+                  const Text('Şıklar (satır başı):'),
                   TextFormField(
                     controller: viewModel.fillInBlankOptionsController,
-                    decoration: const InputDecoration(hintText: 'Enter options, one per line'),
+                    decoration: const InputDecoration(hintText: 'Şıkları her satır başına girin'),
                     maxLines: 4,
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter options' : null,
+                    validator: (value) => value?.isEmpty ?? true ? 'lütfen şıkları giriniz' : null,
                   ),
                   const SizedBox(height: 10),
-                  const Text('Correct Answers (in order, one per line):'),
+                  const Text('Her satır başına doğru cevabı giriniz:'),
                   TextFormField(
                     controller: viewModel.fillInBlankAnswersController,
-                    decoration: const InputDecoration(hintText: 'Enter correct answers, one per line'),
+                    decoration: const InputDecoration(hintText: 'her satır başına doğru cevabı giriniz'),
                     maxLines: 4,
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter correct answers' : null,
+                    validator: (value) => value?.isEmpty ?? true ? 'Lütfen doğru cevabı giriniz' : null,
                   ),
+
+                  // Kodlama
                 ] else if (viewModel.selectedQuestionType == 'coding') ...[
                   TextFormField(
+                    controller: viewModel.questionController,
+                    decoration: const InputDecoration(labelText: 'Soru '),
+                    validator: (value) => value?.isEmpty ?? true ? 'Lütfen soruyu giriniz' : null,
+                  ),
+                  TextFormField(
                     controller: viewModel.initialCodeController,
-                    decoration: const InputDecoration(labelText: 'Initial Code'),
+                    decoration: const InputDecoration(labelText: 'Başlangıç Kodu'),
                     maxLines: 5,
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter the initial code' : null,
+                    validator: (value) => value?.isEmpty ?? true ? 'Lütfen başlangıç kodunu yazınız' : null,
                   ),
                   const SizedBox(height: 10),
-                  const Text('Expected Output:'),
+                  const Text('Çıktı:'),
                   TextFormField(
                     controller: viewModel.expectedOutputController,
-                    decoration: const InputDecoration(labelText: 'Expected Output'),
+                    decoration: const InputDecoration(labelText: 'Beklenen Çıktı'),
                     maxLines: 3,
-                    validator: (value) => value?.isEmpty ?? true ? 'Please enter the expected output' : null,
+                    validator: (value) => value?.isEmpty ?? true ? 'Lütfen beklenen çıktıyı yazınız' : null,
                   ),
                 ],
                 const SizedBox(height: 20),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.cyan),
                   onPressed: () async {
                     if (questionFormKey.currentState?.validate() ?? false) {
                       await viewModel.createQuestion();
                       Navigator.pop(context);
                     }
                   },
-                  child: const Text('Create Question'),
+                  child: const Text('Soru Oluştur',style: TextStyle(color: Colors.white),),
                 ),
               ],
             ),

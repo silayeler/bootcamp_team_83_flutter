@@ -20,6 +20,7 @@ class HomeView extends StackedView<HomeViewModel> {
   ) {
     // Admin kullanıcı ID'leri listesi
     final adminIds = [
+      'o616O2jBxHg2hnAeIwvCYwlTHgo1'
       'GRKAewXcmUaEUgmLcxhK648sXdy2',
       'MRv1TmXnrIRD6iSieR71Q1pypK32',
       'DHDn7aCCXrNRT8Nb7TZeVHIx6BI2',

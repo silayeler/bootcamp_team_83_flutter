@@ -30,7 +30,7 @@ class ProfilePhotoViewModel extends BaseViewModel {
           'https://firebasestorage.googleapis.com/v0/b/bootcamp-760bf.appspot.com/o/profile_images%2Fguest_pp.png?alt=media&token=206dc128-8257-4346-b75a-70d80373a68b'; // Hata durumunda varsayılan fotoğraf
     } finally {
       setBusy(false);
-      notifyListeners(); // UI'yi yeniden oluşturun
+      rebuildUi();
     }
   }
 
@@ -53,7 +53,7 @@ class ProfilePhotoViewModel extends BaseViewModel {
         print('Hata: $e');
       } finally {
         setBusy(false);
-        notifyListeners(); // UI'yi yeniden oluşturun
+        rebuildUi();
       }
     }
   }
@@ -71,7 +71,7 @@ class ProfilePhotoViewModel extends BaseViewModel {
       print('Hata: $e');
     } finally {
       setBusy(false);
-      notifyListeners(); // UI'yi yeniden oluşturun
+      rebuildUi();
     }
   }
 }

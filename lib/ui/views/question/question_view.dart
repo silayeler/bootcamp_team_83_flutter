@@ -1,5 +1,7 @@
 import 'package:bootcamp_team_83_flutter/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_code_editor/flutter_code_editor.dart';
+import 'package:flutter_highlight/themes/monokai-sublime.dart';
 import 'package:stacked/stacked.dart';
 import 'question_viewmodel.dart';
 
@@ -17,6 +19,7 @@ class QuestionView extends StackedView<QuestionViewModel> {
           itemCount: viewModel.questionCount,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
+
             var questionData = viewModel.getCurrentQuestion();
             return Stack(
               children: [
@@ -47,39 +50,41 @@ class QuestionView extends StackedView<QuestionViewModel> {
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
                     ),
-                    child: SizedBox(
+                    child: Container(
                       width: screenWidth(context) / 1.1,
-                      height: screenHeight(context) / 1.15,
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 15),
+                      padding: const EdgeInsets.all(16.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(height: 15),
 
-                          // İlerleme Çubuğu
-                          SizedBox(
-                            width: screenWidth(context) / 1.25,
-                            height: 15,
-                            child: LinearProgressIndicator(
-                              value: (viewModel.currentQuestionIndex) /
-                                  viewModel.questionCount,
-                              backgroundColor: const Color(0xFF404142),
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.lightGreenAccent[700]!),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(20)),
+                            // İlerleme Çubuğu
+                            SizedBox(
+                              width: screenWidth(context) / 1.25,
+                              height: 15,
+                              child: LinearProgressIndicator(
+                                value: (viewModel.currentQuestionIndex) /
+                                    viewModel.questionCount,
+                                backgroundColor: const Color(0xFF404142),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.lightGreenAccent[700]!),
+                                borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Soru ${questionData['questionIndex'] + 1}',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                            const SizedBox(height: 10),
+                            Text(
+                              'Soru ${questionData['questionIndex'] + 1}',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          if (questionData['questionType'] ==
-                                  'multiple_choice' ||
-                              questionData['questionType'] == 'fill_in_blank')
-                            Column(
+                            if (questionData['questionType'] != 'fill_in_blank' ||
+                                (questionData['multiple_choice'] == false &&
+                                    questionData['coding'] == false))
+                              Column(
                               children: [
                                 Card(
                                   elevation: 5,
@@ -87,53 +92,36 @@ class QuestionView extends StackedView<QuestionViewModel> {
                                     borderRadius: BorderRadius.circular(30.0),
                                     side: const BorderSide(width: 5),
                                   ),
-                                  child: SizedBox(
-                                    width: screenWidth(context) / 1.2,
-                                    height: screenHeight(context) / 4,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Text(
-                                        questionData['question'],
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                        textAlign: TextAlign.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      questionData['question'],
+                                      style: const TextStyle(
+                                        fontSize: 18,
                                       ),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                          const SizedBox(height: 20),
-                          _buildQuestionContent(
-                              context, questionData, viewModel),
+                            const SizedBox(height: 20),
+                            _buildQuestionContent(
+                                context, questionData, viewModel),
+                            const SizedBox(height: 20),
 
-                          const SizedBox(
-                            height: 60,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              _buildCheckButton(context, viewModel),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                            ],
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                _buildCheckButton(context, viewModel),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                              ],
+                            ),
 
-                          // Sıfırlama Butonu
-                          const SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: () async {
-                              await viewModel.resetProgress();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('İlerleme sıfırlandı.')),
-                              );
-                            },
-                            child: null,
-
-                          )
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -164,7 +152,7 @@ class QuestionView extends StackedView<QuestionViewModel> {
       Map<String, dynamic> questionData, QuestionViewModel viewModel) {
     return Column(
       children: [
-       ...['optionA', 'optionB', 'optionC', 'optionD'].map((option) {
+        ...['optionA', 'optionB', 'optionC', 'optionD'].map((option) {
           bool isCorrect = questionData['answer'] == questionData[option];
           bool isSelected = viewModel.selectedOption == questionData[option];
           return Padding(
@@ -176,15 +164,14 @@ class QuestionView extends StackedView<QuestionViewModel> {
               style: ElevatedButton.styleFrom(
                 elevation: 4,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 fixedSize: Size(
                     screenWidth(context) / 1.2, screenHeight(context) / 16),
                 side: BorderSide(
                   width: 2.5,
                   color: viewModel.isAnswerChecked && isCorrect
                       ? Colors.green
-                      : (isSelected ? Colors.blueAccent : Colors.white) ,
-
+                      : (isSelected ? Colors.blueAccent : Colors.white),
                 ),
                 backgroundColor: viewModel.isAnswerChecked && isCorrect
                     ? Colors.green
@@ -226,7 +213,7 @@ class QuestionView extends StackedView<QuestionViewModel> {
                   hintText: 'Boşluğu doldurun',
                   border: OutlineInputBorder(),
                 ),
-                onChanged: (value) => viewModel.updateBlankAnswer(i, value),
+                onChanged: (value) => viewModel.updateBlankAnswer(value),
               ),
             ),
         ],
@@ -238,25 +225,17 @@ class QuestionView extends StackedView<QuestionViewModel> {
       Map<String, dynamic> questionData, QuestionViewModel viewModel) {
     return Column(
       children: [
-        const Text('Başlangıç Kodu:',
+        const Text('Kodu düzenleyin:',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(10),
+        const SizedBox(height: 10),
+        SizedBox(
+          height: 300, // Yüksekliği ayarlayabilirsiniz
+          child: CodeTheme(
+            data: CodeThemeData(styles: monokaiSublimeTheme),
+            child: CodeField(
+              controller: viewModel.codeController,
+            ),
           ),
-          child: Text(questionData['initialCode'],
-              style: const TextStyle(fontFamily: 'Courier')),
-        ),
-        TextField(
-          maxLines: 10,
-          decoration: const InputDecoration(
-            hintText: 'Kodunuzu buraya yazın',
-            border: OutlineInputBorder(),
-          ),
-          onChanged: (value) => viewModel.updateCodingAnswer(value),
         ),
         const SizedBox(height: 10),
       ],
@@ -273,16 +252,16 @@ class QuestionView extends StackedView<QuestionViewModel> {
         foregroundColor: Colors.white,
       ),
       child: const Text(
-        'KONTROL',
-        style: TextStyle(fontWeight: FontWeight.bold),
+        'Kontrol Et',
+        style: TextStyle(fontWeight: FontWeight.w900),
       ),
     );
   }
 
   void _checkAndProceed(
-    QuestionViewModel viewModel,
-    BuildContext context,
-  ) {
+      QuestionViewModel viewModel,
+      BuildContext context,
+      ) {
     bool isCorrect = viewModel.checkAnswer();
     if (isCorrect) {
       if (viewModel.isLastQuestion) {

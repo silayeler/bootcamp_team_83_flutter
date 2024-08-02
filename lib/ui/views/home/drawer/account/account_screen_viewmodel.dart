@@ -25,7 +25,7 @@ class AccountScreenViewModel {
     surnameController = TextEditingController(text: surname);
     emailController = TextEditingController(text: email);
 
-    // Firebase'den kullanıcı bilgilerini yükle
+    // Firebase'den kullanıcı bilgileri yükleme
     _loadUserData();
   }
 

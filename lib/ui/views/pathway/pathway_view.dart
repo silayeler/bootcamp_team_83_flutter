@@ -14,11 +14,11 @@ class PathwayView extends StackedView<PathwayViewModel> {
   Widget builder(
       BuildContext context, PathwayViewModel viewModel, Widget? child) {
     final List<Offset> starPositions = [
-      Offset(MediaQuery.of(context).size.width / 2 + 40,
-          MediaQuery.of(context).size.height - 210),
-      Offset(MediaQuery.of(context).size.width / 2 + 130,
+      Offset(MediaQuery.of(context).size.width / 2 + 20,
+          MediaQuery.of(context).size.height - 200),
+      Offset(MediaQuery.of(context).size.width / 2 + 100,
           MediaQuery.of(context).size.height - 280),
-      Offset(MediaQuery.of(context).size.width / 2 + 140,
+      Offset(MediaQuery.of(context).size.width / 2 + 110,
           MediaQuery.of(context).size.height - 400),
       Offset(MediaQuery.of(context).size.width / 2 + 5,
           MediaQuery.of(context).size.height - 380),
@@ -87,7 +87,7 @@ class PathwayView extends StackedView<PathwayViewModel> {
                             starPositions[index],
                             index ==
                                 numberOfStars -
-                                    1, // Check if it's the last star
+                                    1,
                           );
                         }),
                       ),

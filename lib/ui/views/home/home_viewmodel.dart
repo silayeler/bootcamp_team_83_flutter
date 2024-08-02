@@ -27,13 +27,12 @@ class HomeViewModel extends BaseViewModel {
       _userName = 'Misafir'; // Hata durumunda boş bir isim
     } finally {
       setBusy(false);
-      notifyListeners(); // UI'yi yeniden oluşturun
+     rebuildUi();
     }
   }
 
   void signOut() async {
     await _authenticationService.signOut();
-    // Giriş yapıldıktan sonra UI'yi güncellemek için gerekli işlemleri yapın
-    notifyListeners();
+   rebuildUi();
   }
 }

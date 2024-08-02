@@ -13,8 +13,6 @@ import 'package:bootcamp_team_83_flutter/ui/views/home/home_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/home/onboardingscreen/first_page.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/pathway/pathway_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/question/question_view.dart';
-import 'package:bootcamp_team_83_flutter/ui/views/question/question_viewmodel.dart';
-import 'package:bootcamp_team_83_flutter/ui/views/startup/startup_view.dart';
 import 'package:bootcamp_team_83_flutter/ui/views/story/story_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -25,7 +23,6 @@ import 'package:bootcamp_team_83_flutter/ui/views/signup/signup_view.dart';
 @StackedApp(
   routes: [
     MaterialRoute(page: HomeView, initial: true),
-    MaterialRoute(page: StartupView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: SignupView),
     MaterialRoute(page: StoryView),

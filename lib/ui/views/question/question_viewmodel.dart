@@ -1,89 +1,94 @@
-import 'dart:io';
-
 import 'package:bootcamp_team_83_flutter/app/app.bottomsheets.dart';
-import 'package:bootcamp_team_83_flutter/app/app.dialogs.dart';
 import 'package:bootcamp_team_83_flutter/app/app.locator.dart';
 import 'package:bootcamp_team_83_flutter/services/ai_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:flutter_code_editor/flutter_code_editor.dart';
+import 'package:highlight/languages/dart.dart';
 
 class QuestionViewModel extends BaseViewModel {
-
   final _aiService = locator<AIService>();
   final _bottomSheetService = locator<BottomSheetService>();
-  final _dialogService = locator<DialogService>();
 
+  final userId = FirebaseAuth.instance.currentUser!.uid;
   final String? _apiKey = dotenv.env['Google_Gemini_Api_Key'];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  late CodeController codeController;
 
   String? get apiKey => _apiKey;
 
-  
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-
-  String _codingAnswer = '';
-  String _selectedOption = '';
-
   bool get isLastQuestion => _currentQuestionIndex == _questions.length - 1;
+  bool get isFirstQuestion => _currentQuestionIndex == 0;
 
   String get selectedOption => _selectedOption;
-
-  List<String?> _blankAnswers = [];
-
-  List<String?> get blankAnswers => _blankAnswers;
-
-  int _currentQuestionIndex = 0;
+  String get blankAnswer => _blankAnswer;
 
   int get currentQuestionIndex => _currentQuestionIndex;
-
   int get questionCount => _questions.length;
-
-  final List<Map<String, dynamic>> _questions;
-
-  bool _isAnswerChecked = false;
 
   bool get isAnswerChecked => _isAnswerChecked;
 
+  final List<Map<String, dynamic>> _questions;
+  var _currentQuestionIndex = 0;
+  String _selectedOption = '';
+  String _blankAnswer = '';
+  bool _isAnswerChecked = false;
+
   QuestionViewModel(this._questions) {
+    codeController = CodeController(
+      text: '',
+      language: dart,
+    );
     _initialize();
   }
 
   Future<void> _initialize() async {
     await _loadProgress();
+    _initializeCodeController();
   }
 
-  void _initializeBlankAnswers() {
-    var currentQuestion = _questions[_currentQuestionIndex];
-    if (currentQuestion['questionType'] == 'fill_in_blank') {
-      int blankCount = currentQuestion['question'].split('___').length - 1;
-      _blankAnswers = List.filled(blankCount, null);
+  void _initializeCodeController() {
+    var currentQuestion = getCurrentQuestion();
+    if (currentQuestion['questionType'] == 'coding') {
+      codeController.text = currentQuestion['initialCode'] ?? '';
+    } else {
+      codeController.text = '';
+    }
+    notifyListeners();
+  }
+
+  void moveToNextQuestion() {
+    if (_currentQuestionIndex < _questions.length - 1) {
+      _currentQuestionIndex++;
+      clearAnswers();
+      _initializeCodeController();
+      notifyListeners();
+      _saveProgress();
     }
   }
+
 
   void selectOption(String option) {
     _selectedOption = option;
     notifyListeners();
   }
 
-  void updateBlankAnswer(int index, String value) {
-    if (index < _blankAnswers.length) {
-      _blankAnswers[index] = value;
-      notifyListeners();
-    }
+  void updateBlankAnswer(String value) {
+    _blankAnswer = value;
+    notifyListeners();
   }
 
   void updateCodingAnswer(String value) {
-    _codingAnswer = value;
+    codeController.text = value;
     notifyListeners();
   }
 
   bool checkAnswer() {
-    var currentQuestion = _questions[_currentQuestionIndex];
+    var currentQuestion = getCurrentQuestion();
     bool isCorrect = false;
 
     switch (currentQuestion['questionType']) {
@@ -91,15 +96,10 @@ class QuestionViewModel extends BaseViewModel {
         isCorrect = _selectedOption == currentQuestion['answer'];
         break;
       case 'fill_in_blank':
-        List<String> correctAnswers =
-            List<String>.from(currentQuestion['correctAnswer']);
-        isCorrect = _blankAnswers.length == correctAnswers.length &&
-            _blankAnswers.every((answer) =>
-                answer != null && correctAnswers.contains(answer.trim()));
+        isCorrect = _blankAnswer == currentQuestion['answer'];
         break;
       case 'coding':
-        isCorrect =
-            _codingAnswer.trim() == currentQuestion['expectedOutput'].trim();
+        isCorrect = _checkCodingAnswer(codeController.text, currentQuestion['expectedOutput']);
         break;
     }
 
@@ -108,32 +108,15 @@ class QuestionViewModel extends BaseViewModel {
     return isCorrect;
   }
 
-  void moveToNextQuestion() {
-    if (_currentQuestionIndex < _questions.length - 1) {
-      _currentQuestionIndex++;
-      clearAnswers();
-      _initializeBlankAnswers();
-      notifyListeners();
-      _saveProgress(); // Firebase'e ilerlemeyi kaydet
-    }
-  }
-
-  void moveToPreviousQuestion() {
-    if (_currentQuestionIndex > 0) {
-      _currentQuestionIndex--;
-      clearAnswers();
-      _initializeBlankAnswers();
-      notifyListeners();
-    }
+  bool _checkCodingAnswer(String code, String expectedOutput) {
+    return code.contains(expectedOutput);
   }
 
   void clearAnswers() {
     _selectedOption = '';
-    _blankAnswers.clear();
-    _codingAnswer = '';
+    _blankAnswer = '';
     rebuildUi();
   }
-
 
   void resetQuestion() {
     _isAnswerChecked = false;
@@ -142,16 +125,21 @@ class QuestionViewModel extends BaseViewModel {
   }
 
   String getCorrectAnswer() {
-    var currentQuestion = _questions[_currentQuestionIndex];
-    return currentQuestion['answer'];
+    var currentQuestion = getCurrentQuestion();
+    switch (currentQuestion['questionType']) {
+      case 'multiple_choice':
+        return currentQuestion['answer'];
+      case 'fill_in_blank':
+        return currentQuestion['answer'];
+      case 'coding':
+        return currentQuestion['expectedOutput'];
+      default:
+        return 'Bilinmeyen soru tipi: ${currentQuestion['questionType']}';
+    }
   }
 
-  bool get isLastQuestion => _currentQuestionIndex == _questions.length - 1;
-  bool get isFirstQuestion => _currentQuestionIndex == 0;
-
-
   List<String> getOptions() {
-    var currentQuestion = _questions[_currentQuestionIndex];
+    var currentQuestion = getCurrentQuestion();
     return currentQuestion['questionType'] == 'fill_in_blank'
         ? List<String>.from(currentQuestion['options'])
         : [];
@@ -160,7 +148,6 @@ class QuestionViewModel extends BaseViewModel {
   Map<String, dynamic> getCurrentQuestion() {
     return _questions[_currentQuestionIndex];
   }
-
 
   void showCorrectAnswerSheet() {
     _bottomSheetService.showCustomSheet(
@@ -176,10 +163,8 @@ class QuestionViewModel extends BaseViewModel {
       },
     ).then((value) {
       if (value != null && value.confirmed) {
-        if (value.confirmed) {
-          moveToNextQuestion();
-          resetQuestion();
-        }
+        moveToNextQuestion();
+        resetQuestion();
       }
     });
   }
@@ -198,66 +183,52 @@ class QuestionViewModel extends BaseViewModel {
       },
     ).then((value) {
       if (value != null && value.confirmed) {
-        if (value.confirmed) {
-          resetQuestion();
-        }
+        resetQuestion();
       }
     });
   }
 
-  void done() {
-    _dialogService.showCustomDialog(variant: DialogType.infoAlert);
-  }
 
   Future<void> askAI(Map<String, dynamic> questionData) async {
     await _aiService.askAI(questionData);
+  }
 
   void congratulate() {
     _bottomSheetService.showCustomSheet(title: "Tebrikler!");
   }
 
   Future<void> _saveProgress() async {
-    // Firebase Firestore'da ilerlemeyi saklama
-    final userId =
-        'user_id'; // Burada oturum açmış kullanıcı kimliğinizi kullanmalısınız
     await _firestore.collection('users').doc(userId).set({
       'currentQuestionIndex': _currentQuestionIndex,
       'selectedOption': _selectedOption,
-      'blankAnswers': _blankAnswers,
-      'codingAnswer': _codingAnswer,
+      'blankAnswer': _blankAnswer,
+      'codingAnswer': codeController.text,
     }, SetOptions(merge: true));
   }
 
   Future<void> _loadProgress() async {
-    // Firebase Firestore'dan ilerlemeyi yükleme
-    final userId =
-        'user_id'; // Burada oturum açmış kullanıcı kimliğinizi kullanmalısınız
     final doc = await _firestore.collection('users').doc(userId).get();
     if (doc.exists) {
       final data = doc.data();
-      _currentQuestionIndex = data?['currentQuestionIndex'] ?? 0;
       _selectedOption = data?['selectedOption'] ?? '';
-      _blankAnswers = List<String?>.from(data?['blankAnswers'] ?? []);
-      _codingAnswer = data?['codingAnswer'] ?? '';
+      _blankAnswer = data?['blankAnswer'] ?? '';
+      codeController.text = data?['codingAnswer'] ?? '';
       notifyListeners();
     }
   }
 
   Future<void> resetProgress() async {
-    final userId =
-        'user_id'; // Burada oturum açmış kullanıcı kimliğinizi kullanmalısınız
     await _firestore.collection('users').doc(userId).set({
       'currentQuestionIndex': 0,
       'selectedOption': '',
-      'blankAnswers': [],
+      'blankAnswer': '',
       'codingAnswer': '',
     }, SetOptions(merge: true));
 
     _currentQuestionIndex = 0;
     _selectedOption = '';
-    _blankAnswers = [];
-    _codingAnswer = '';
+    _blankAnswer = '';
+    codeController.text = '';
     notifyListeners();
-
   }
 }

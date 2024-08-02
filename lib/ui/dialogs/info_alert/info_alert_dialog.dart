@@ -27,6 +27,7 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: Colors.white,
+      elevation: 10,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
@@ -36,25 +37,33 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        request.title!,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w900),
+                  child: Card(
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(width: 2),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            request.title!,
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w900),
+                          ),
+                          verticalSpaceTiny,
+                          Flexible(
+                            child: Text(
+                              request.description!,
+                              style:
+                              const TextStyle(fontSize: 14, color: kcMediumGrey),
+                              softWrap: true,
+                            ),
+                          ),
+                        ],
                       ),
-                      verticalSpaceTiny,
-                      Flexible(
-                        child: Text(
-                          request.description!,
-                          style:
-                          const TextStyle(fontSize: 14, color: kcMediumGrey),
-                          softWrap: true,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
                 Container(

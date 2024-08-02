@@ -88,7 +88,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   });
                 },
               ),
-              const SizedBox(height: 30), // Daha fazla boşluk bırakıldı
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
                   _showChangePasswordDialog(context);

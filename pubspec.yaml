@@ -19,12 +19,16 @@ dependencies:
   flutter_code_editor: ^0.3.2
   flutter_dotenv: ^5.1.0
   google_fonts: ^6.2.1
+  flutter_highlight: ^0.7.0
+  highlight: ^0.7.0
   image_picker: ^0.8.5+3  
   lottie: ^3.0.1
   shared_preferences: ^2.2.3
   stacked: ^3.4.0
   stacked_services: ^0.9.7
   google_generative_ai: ^0.4.4
+  flutter_svg: ^2.0.10+1
+  gif: ^2.3.0
 
 dev_dependencies:
   build_runner: ^2.4.5

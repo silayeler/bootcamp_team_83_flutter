@@ -32,7 +32,7 @@ class LoginViewModel extends BaseViewModel {
           _navigationService.replaceWithStoryView();
         }
       } else {
-        // Kullanıcı objesi null ise, giriş başarısızdır.
+
         _snackbarService.showSnackbar(
           title: 'Giriş Hatası',
           message: 'Email veya şifre yanlış. Lütfen tekrar deneyin.',
@@ -40,7 +40,7 @@ class LoginViewModel extends BaseViewModel {
         );
       }
     } catch (e) {
-      // Hata durumunda kullanıcıyı bilgilendirmek için Snackbar göster
+
       _snackbarService.showSnackbar(
         title: 'Giriş Hatası',
         message: 'Bir hata oluştu. Lütfen tekrar deneyin.',
@@ -56,7 +56,7 @@ class LoginViewModel extends BaseViewModel {
     try {
       UserCredential? userCredential =
           await _authenticationService.signInAnonymously();
-      User? user = userCredential?.user; // UserCredential'dan User'a erişim
+      User? user = userCredential?.user;
 
       // Misafir kullanıcının belirli bir ekrana yönlendirilmesi
       bool hasSeenStory = await _storageService.hasSeenStory();

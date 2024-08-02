@@ -48,7 +48,7 @@ class AchievementCard extends StatelessWidget {
           achievement.imageAsset,
           width: 50, // Resmin genişliği
           height: 50, // Resmin yüksekliği
-          fit: BoxFit.cover, // Resmi kutuya uyacak şekilde ölçeklendir
+          fit: BoxFit.cover, // Resmi kutuya uyacak şekilde ölçeklendirme
         ),
         title: Text(
           achievement.title,
