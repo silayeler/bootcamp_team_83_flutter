@@ -6,6 +6,7 @@ const Color drawerIconColor = Color(0xFF404142);
 const Color drawerContainerColor = Color(0xFFD7DADD);
 const Color chapterTextContainerColor = Color(0xFFC9CACE);
 const Color chapterTextColor = Color(0xFF404142);
+const Color duzBeyaz = Colors.white;
 
 const Color kcMediumGrey = Color(0xFF474A54);
 const Color kcLightGrey = Color.fromARGB(255, 187, 187, 187);
