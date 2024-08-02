@@ -1,4 +1,4 @@
-![Uygulama (3)](https://github.com/user-attachments/assets/277a43bc-f456-4dc2-bf32-fcc6162e13df)![Uygulama (3)](https://github.com/user-attachments/assets/518cf343-5cdd-4af4-8f3c-2e7db4f4cddd)# Bootcamp-Team-83-Flutter
+# Bootcamp-Team-83-Flutter
 ## ÜRÜN BİLGİLERİ 
 
 
@@ -220,73 +220,113 @@ State Management: Uygulama için stacked state management kütüphanesi kullanı
   
 </details>
 
+  # Sprint 3
+
+<details>
+  <summary><h2>Sprint Planlama</h2></summary>
+
+  - **Tamamlanması Tahmin Edilen Puan:** 50 Puan
+  - **Takım Üyeleri İçin Puan Dağılımı:** Her kişi toplamda 10 puan
+</details>
+
+<details>
+  <summary><h2>Daily Scrum</h2></summary>
+
+  ### Toplantı Formatı:
+  - Daily Scrumlarımız Discord ve WhatsApp kanalı üzerinden sesli ve yazılı olarak gerçekleştirilmiştir.
+  - Toplantılarda uygulamanın gidişatı, bitirme adımları, son kez üstünden geçilmesi, fikir değişiklikleri ve yeni ekleyeceğimiz şeyler üzerine konuşulmuştur.
   
-# Sprint 3
+  ### Daily Scrum toplantılarından görseller:
+  - Trello:![WhatsApp Görsel 2024-07-31 saat 21 16 02_79f17475](https://github.com/user-attachments/assets/ed361a01-a9af-413d-a961-625f13c20cc5)
+  - Trello: ![WhatsApp Görsel 2024-08-01 saat 18 12 43_46a16bb2](https://github.com/user-attachments/assets/e2128a8e-55af-44bc-b358-7b6acd243086)
+  - Discord :![WhatsApp Görsel 2024-07-31 saat 21 16 23_4d990772](https://github.com/user-attachments/assets/91bda20e-7d72-4b60-8aed-bd23fe7399a2)
+  - Discord : ![WhatsApp Görsel 2024-08-02 saat 22 24 21_190d747a](https://github.com/user-attachments/assets/630f72f0-b0aa-46b0-835e-c91acd57c871)
+  - Whatsapp: ![WhatsApp Görsel 2024-08-02 saat 21 29 09_e8576c6b](https://github.com/user-attachments/assets/c64c27c9-0452-45f1-927e-482cd58c3e8d)
+  - Whatsapp: ![WhatsApp Görsel 2024-08-02 saat 21 32 25_e4c3eda1](https://github.com/user-attachments/assets/b945cb05-edde-438d-8604-cd8d11fef862)
 
-# Sprint 3
-
-<details>
-<summary>Sprint Planlama</summary>
-Tamamlanması Tahmin Edilen Puan: 50 Puan<br>
-Takım Üyeleri İçin Puan Dağılımı: Her kişi toplamda 10 puan
+ 
 </details>
 
 <details>
-<summary>Daily Scrum</summary>
-Günlük Scrumlar: Daily Scrumlarımız Discord ve WhatsApp kanalı üzerinden sesli ve yazılı olarak gerçekleştirilmiştir.<br>
-Toplantı İçerikleri:<br>
-- Uygulamanın gidişatı
-- Bitirme adımları
-- Son kez üstünden geçilmesi
-- Fikir değişiklikleri ve yeni ekleyeceğimiz şeyler üzerine konuşulmuştur.
-- Toplantıdan görsel: 
-</details>
-![WhatsApp Görsel 2024-07-31 saat 21 16 23_2234e8d0](https://github.com/user-attachments/assets/9f53cb14-abf0-4d51-9309-2285a6d6535f)
--Whatsapp konuşmalarından kesitler:![WhatsApp Görsel 2024-08-02 saat 21 29 09_17b07994](https://github.com/user-attachments/assets/6032f2e1-c3cd-41da-a1dc-cafee4ebdb87)
-- ![WhatsApp Görsel 2024-08-02 saat 21 29 09_1fd4a294](https://github.com/user-attachments/assets/eb3d421f-7f99-4b11-80a5-ece26678ed4b)
+  <summary><h2>Hazırlanan Tasarımlardan Bazıları</h2></summary>
 
+- Bölüm2 Ay Kolonisi: ![WhatsApp Görsel 2024-08-02 saat 22 15 53_63e6297f](https://github.com/user-attachments/assets/bf5f119c-bb46-4e9e-9113-fc52c66d53e4)
+- Soru Taslak Ekranı : ![WhatsApp Görsel 2024-08-02 saat 22 15 50_2e771653](https://github.com/user-attachments/assets/4cf62a73-fb69-4edb-8ace-90a373826011)
+- Tebrikler Ödül: ![WhatsApp Görsel 2024-08-02 saat 22 15 56_e50a7945](https://github.com/user-attachments/assets/41b4b60e-5cd9-475b-bcf6-5757bb4fa59c)
+
+
+  ### Projemizin Canva tasarımları için [buraya tıklayın](https://www.canva.com/design/DAGKdM0RhcI/x22FwtBlt2O1hlOweNXbYQ/edit).
+</details>
 
 <details>
-<summary>Uygulama Görselleri ve Hazırlanan Tasarımlar</summary>
+  <summary><h2>Sprint Review</h2></summary>
+  
+  ### Alınan Kararlar:
+  - Uygulamanın son tasarımları yapıldı.
+  - Yeni hikayeler eklendi.
+  - Ekibin fikir birliğiyle belirlenen yeni özellikler tartışıldı ve kararlaştırıldı.
+  
+  ### Sprint Review Katılımcıları
+  - Sıla YELER
+  - Sıla Buse CAN
+  - Sevim Büşra GÜL
+  - Muhammet İkbal SAĞDIÇ
+  - Oğuzhan DOĞDU
+</details>
+ <summary><h3>İyi Gidenler</h3></summary>
+ 
+- Uygulamanın son tasarımları yapıldı.
 - Yeni hikayeler eklendi.
-- Uygulamanın son tasarımları yapıldı.
-  Tasarımdan görseller: 
-  - ![Uygulama (3)](https://github.com/user-attachments/assets/b7dde1b5-9723-4d83-bc89-1cd72bca5993)
-  - ![Uygulama (2)](https://github.com/user-attachments/assets/80faf24c-d958-4a78-8f0a-62803b246c9e)
-  - ![Uygulama (1)](https://github.com/user-attachments/assets/21cc98f9-5459-422d-993a-38d3f6263480)
 
-</details>
+<summary><h3>Konuşulanlar</h3></summary>
 
-<details>
-<summary>Sprint Review</summary>
-İyi Gidenler:<br>
-- Uygulamanın son tasarımları yapıldı.
-- Yeni hikayeler eklendi.<br>
-Konuşulanlar:<br>
 - Uygulamada yetiştirilip yetiştirilemeyecek özellikler üzerine konuşuldu.
 - Uygulamanın son kısımlarının görev dağılımı yapıldı,fikir alışverişinde bulunuldu.
-- Takım üyeleri birlikte kod yazdı, tasarım konusunda yeni fikirler sunuldu.
+- Takım üyeleri birlikte kod yazdı, tasarım konusunda yeni fikirler sunuldu
+<details>
+  <summary><h2>Sprint Retrospective</h2></summary>
+  
+  ### Katılımcılar
+  - Sıla YELER
+  - Sıla Buse CAN
+  - Sevim Büşra GÜL
+  - Muhammet İkbal SAĞDIÇ
+  - Oğuzhan DOĞDU
+  
+  ### Geçmiş Sprintin Değerlendirilmesi ve Sprint Notları
+  **İyi Gidenler**
+  - Ekip zaman yönetimi konusunda ustalaştı.
+  - Ekip iş birliği içinde çalışmayı tecrübe edindi.
+  - Ekip farklı fikirlere saygı duymayı ve bunları nasıl geliştirip ürün çıkartabileceğini tecrübe etti.
+  - GitHub, Android Studio, emülatör, Canva, Visual Studio Code gibi araçları kullanarak kendine yeni şeyler kattı.
+  - Takım olarak proje yönetim sürecine şahitlik etti.
+  
+  **Sorunlar ve Engeller**
+  - Takım üyelerimizden stajda olanlar, yaz okulunda olanlar olduğu için ayırılan zamanın kısaltılması
+  - İnternet yetersizliği problemi
+  
+  **Veri Toplama ve Analiz**
+  - Sprint boyunca takım üyelerince toplanan veriler takım içinde paylaşılıp beyin fırtınası yapılarak üzerine konuşuldu.
+  
+  **Geliştirme Alanlarının Belirlenmesi**
+  - İletişim süreçlerini geliştirme
+  - Zaman yönetimi ve planlama iyileştirmeleri
+  - Takım bu süreçten sonra nasıl zaman ayırması gerektiğine daha iyi karar verdi.
+  
+  **Kapanış ve Özet**
+  - Sprint 3, uygulamanın son haline getirilmesi ve ekibin birlikte çalışma becerilerini geliştirmesi açısından çok verimli geçti. Ekip olarak elde edilen deneyimler ve yapılan işler, projenin başarıya ulaşmasında büyük rol oynadı. Gelecek projelerde bu deneyimlerden faydalanarak daha etkili ve verimli bir çalışma süreci oluşturulabilecektir.Codemani uygulamasını geliştirirken ekip dart,flutter,tasarım,git,github ve kullanılan çeşitli ideler üzerinde yeni bilgiler edindi.Kullanıcıya uzay temalı bir kodlama pratiği uygulaması sunmayı hedefledi ve bu amaç doğrultusunda çalışmalarını yürüttü.
+ 
 </details>
 
 <details>
-<summary>Sprint Retrospective</summary>
-İyi Gidenler:<br>
-- Ekip zaman yönetimi konusunda ustalaştı.
-- Ekip iş birliği içinde çalışmayı tecrübe edindi.
-- Ekip farklı fikirlere saygı duymayı ve bunları nasıl geliştirip ürün çıkartabileceğini tecrübe etti.
-- GitHub, Android Studio, emülatör, Canva, Visual Studio Code gibi araçları kullanarak kendine yeni şeyler kattı.
-- Takım olarak proje yönetim sürecine şahitlik etti.<br>
-Geliştirilmesi Gerekenler:<br>
-- Ekip üyelerinin yetersiz interneti ve internet bağlantı hızının düşüklüğü yüzünden Discord toplantılarında kesiklikler yaşanması.
+  <summary><h2>3 Sprint Değerlendirmesi</h2></summary>
+  Bu sprint bizim bootcampimizin son sprintiydi. 3 sprintin genel değerlendirmesi:
+
+  - **Sprint 1:** Takımın ilk sprinti, bazı eksiklikler olmasına rağmen iyi geçti. Hedeflenen işlerin bir kısmına ulaşıldı, yapılan işler hedeflenen işlere yaklaştı.
+  - **Sprint 2:** İkinci sprintimiz gayet iyi geçti. Hedeflenen işlerin çoğuna ulaşıldı ve yapılan işler hedeflenen işlerle neredeyse aynı seviyede.
+  - **Sprint 3:** Üçüncü sprintte bazı yetiştirilemeyen işler olsa da, uygulama tamamlanıyor. Hedeflenen işler yüksek seviyede olmasına rağmen, yapılan işler de oldukça yakın bir yerde kaldı.
 </details>
 
-<details>
-<summary>3 Sprint Değerlendirmesi</summary>
-Bu sprint bizim bootcampimizin son sprintiydi. 3 sprintin genel değerlendirmesi:<br>
-- **Sprint 1:** Takımın ilk sprinti, bazı eksiklikler olmasına rağmen iyi geçti. Hedeflenen işlerin bir kısmına ulaşıldı, yapılan işler hedeflenen işlere yaklaştı.
-- **Sprint 2:** İkinci sprintimiz gayet iyi geçti. Hedeflenen işlerin çoğuna ulaşıldı ve yapılan işler hedeflenen işlerle neredeyse aynı seviyede.
-- **Sprint 3:** Üçüncü sprintte bazı yetiştirilemeyen işler olsa da, uygulama tamamlanıyor. Hedeflenen işler yüksek seviyede olmasına rağmen, yapılan işler de oldukça yakın bir yerde kaldı.
-</details>
 
 - Sprint puan tabloları:
 
@@ -324,3 +364,20 @@ Bu sprint bizim bootcampimizin son sprintiydi. 3 sprintin genel değerlendirmesi
 
   Sprint Burndown chart tablosu:
 ![WhatsApp Görsel 2024-08-01 saat 22 35 19_55c36b65](https://github.com/user-attachments/assets/f18566a1-bb42-4f6d-982f-a364514864e2)
+
+ <details>
+   <summary><h2>Uygulamaya Eklenmesi Planlanan Fakat Yetişmeyen Özellikler</h2></summary>
+   
+  - Başka karakter ekleyeyip uygulamaya hikayesi farklı şekilde devam ettirme
+  - Liderlik tablosu hem rakipleşme hem de öğrenme tarzında
+  -  Farklı dil seçeneği desteği
+  -  Yapay zekanın daha ileri seviyelerde kullanılması
+  - Tasarımı yapılan ama yetişitirilemeyen tasarımlar :
+  - ![WhatsApp Görsel 2024-08-02 saat 22 48 14_d99e54a1](https://github.com/user-attachments/assets/44e8a8a0-adc8-41dc-aae1-bafc6310cee2)
+  -  ![WhatsApp Görsel 2024-08-02 saat 22 38 12_d29bf793](https://github.com/user-attachments/assets/8f16da22-2bd5-4dfa-b28c-c9de5bac7e62)
+  -  ![WhatsApp Görsel 2024-08-02 saat 22 48 19_2af886e8](https://github.com/user-attachments/assets/150bd2b3-91cb-4f18-a68b-d1e31d2ebfba)
+  -  ![WhatsApp Görsel 2024-08-02 saat 22 48 23_682b27a1](https://github.com/user-attachments/assets/6842fbca-64d7-41fb-8363-03b49d7fa6d5)
+  -  ![WhatsApp Görsel 2024-08-02 saat 22 48 27_c7575eca](https://github.com/user-attachments/assets/5f387171-ed68-404f-b73e-096b4f63cea9)
+  -  ![WhatsApp Görsel 2024-08-02 saat 22 48 31_6e8517bc](https://github.com/user-attachments/assets/9e810510-00c5-4ec2-ae43-31b95556dfe5)
+
+ </details>
